@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}FitFlix{% endblock %}</title>
+
+    <!-- Google Fonts: Inter (body) + Barlow Condensed (display) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- ======================================================
+             SIDEBAR
+        ======================================================= -->
+
+        <aside class="sidebar">
+
+            <!-- BRAND -->
+
+            <header class="sidebar-header">
+
+                <a href="{% url 'core:avaliacoes' %}" class="brand">
+
+                    <span class="brand-name">
+                        FIT<span class="brand-accent">FLIX</span>
+                    </span>
+
+                </a>
+
+            </header>
+
+
+            <!-- NAVIGATION -->
+
+            {% if user.is_authenticated %}
+
+            <nav class="sidebar-nav" aria-label="Navegação principal">
+
+                <!-- PRINCIPAL -->
+
+                <div class="sidebar-group">
+
+                    <span class="sidebar-group-label">
+                        Principal
+                    </span>
+
+
+                    <a href="{% url 'core:fitflix' %}"
+                       class="sidebar-link {% if request.resolver_match.url_name == 'fitflix' %}active{% endif %}">
+
+                        <span class="sidebar-link-icon" aria-hidden="true">
+                            <i data-lucide="layout-dashboard"></i>
+                        </span>
+
+                        <span>
+                            Dashboard
+                        </span>
+
+                    </a>
+
+
+                    {% if user.aluno %}
+
+                    <a href="{% url 'core:painel_aluno' user.aluno.id %}"
+                       class="sidebar-link">
+
+                        <span class="sidebar-link-icon" aria-hidden="true">
+                            <i data-lucide="dumbbell"></i>
+                        </span>
+
+                        <span>
+                            Meus Treinos
+                        </span>
+
+                    </a>
+
+                    {% else %}
+
+                    <a href="{% url 'core:avaliacoes' %}"
+                       class="sidebar-link {% if request.resolver_match.url_name == 'avaliacoes' %}active{% endif %}">
+
+                        <span class="sidebar-link-icon" aria-hidden="true">
+                            <i data-lucide="clipboard-list"></i>
+                        </span>
+
+                        <span>
+                            Avaliações
+                        </span>
+
+                    </a>
+
+
+                    <a href="{% url 'core:escolher_tipo' %}"
+                       class="sidebar-link {% if request.resolver_match.url_name == 'escolher_tipo' or request.resolver_match.url_name == 'criar_avaliacao' or request.resolver_match.url_name == 'criar_avaliacao_crianca' or request.resolver_match.url_name == 'criar_avaliacao_idoso' %}active{% endif %}">
+
+                        <span class="sidebar-link-icon" aria-hidden="true">
+                            <i data-lucide="plus-circle"></i>
+                        </span>
+
+                        <span>
+                            Nova Avaliação
+                        </span>
+
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- BIBLIOTECA -->
+
+                <div class="sidebar-group">
+
+                    <span class="sidebar-group-label">
+                        Biblioteca
+                    </span>
+
+
+                    <a href="{% url 'core:criar_aluno' %}"
+                       class="sidebar-link {% if request.resolver_match.url_name == 'criar_aluno' %}active{% endif %}">
+
+                        <span class="sidebar-link-icon" aria-hidden="true">
+                            <i data-lucide="user-plus"></i>
+                        </span>
+
+                        <span>
+                            Cadastrar Aluno
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- CONTA -->
+
+                <div class="sidebar-group">
+
+                    <span class="sidebar-group-label">
+                        Conta
+                    </span>
+
+
+                    <a href="{% url 'core:logout' %}"
+                       class="sidebar-link">
+
+                        <span class="sidebar-link-icon" aria-hidden="true">
+                            <i data-lucide="log-out"></i>
+                        </span>
+
+                        <span>
+                            Sair
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </nav>
+
+            {% endif %}
+
+
+            <!-- USER -->
+
+            {% if user.is_authenticated %}
+
+            <footer class="sidebar-footer">
+
+                <div class="sidebar-user">
+
+                    <div class="sidebar-user-avatar"
+                         aria-hidden="true">
+
+                        {{ user.username|first|upper }}
+
+                    </div>
+
+
+                    <div class="sidebar-user-info">
+
+                        <span class="sidebar-user-name">
+                            {{ user.username }}
+                        </span>
+
+                        <span class="sidebar-user-status">
+                            Personal Trainer
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </footer>
+
+            {% endif %}
+
+        </aside>
+
+
+        <!-- ======================================================
+             APPLICATION
+        ======================================================= -->
+
+        <div class="app-main">
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <div class="topbar-start">
+
+                    <button
+                        type="button"
+                        class="sidebar-toggle"
+                        aria-label="Abrir menu"
+                        aria-expanded="false">
+
+                        <i data-lucide="menu" style="width:20px;height:20px;"></i>
+
+                    </button>
+
+                    <div class="topbar-context">
+
+                        <span class="topbar-eyebrow">
+                            FITFLIX
+                        </span>
+
+                        <span class="topbar-title">
+                            {% block page_title %}Dashboard{% endblock %}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="topbar-center">
+                    {% block topbar_center %}
+                    <div class="topbar-search">
+                        <span class="topbar-search-icon">
+                            <i data-lucide="search"></i>
+                        </span>
+                        <input
+                            type="text"
+                            class="topbar-search-input"
+                            placeholder="Buscar alunos, treinos, avaliações..."
+                        >
+                        <span class="topbar-search-shortcut">⌘ K</span>
+                    </div>
+                    {% endblock %}
+                </div>
+
+
+                <div class="topbar-end">
+
+                    {% if user.is_authenticated %}
+
+                    <div class="topbar-user">
+
+                        <div>
+                            <span class="topbar-user-name">
+                                {{ user.username }}
+                            </span>
+                        </div>
+
+                        <div class="topbar-avatar">
+                            {{ user.username|first|upper }}
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </header>
+
+
+            <!-- CONTENT -->
+
+            <main class="page-content">
+
+                {% if messages %}
+
+                <div class="alerts-container">
+
+                    {% for message in messages %}
+
+                    <div class="alert alert-{{ message.tags }}">
+
+                        <div class="alert-content">
+                            {{ message }}
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% endif %}
+
+
+                {% block content %}
+                {% endblock %}
+
+            </main>
+
+
+            <!-- FOOTER -->
+
+            <footer class="app-footer">
+
+                <small>
+                    © 2026 FitFlix — TREINE • EVOLUA • SUPERE
+                </small>
+
+            </footer>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         SCRIPTS
+    ======================================================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script>lucide.createIcons();</script>
+
+    {% block scripts %}
+    {% endblock %}
+
+</body>
+
+</html>

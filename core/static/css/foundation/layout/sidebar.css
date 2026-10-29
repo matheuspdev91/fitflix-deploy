@@ -1,0 +1,288 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   LAYOUT - SIDEBAR
+========================================================== */
+
+/*
+|--------------------------------------------------------------------------
+| SIDEBAR
+|--------------------------------------------------------------------------
+*/
+
+.sidebar {
+
+    width: var(--sidebar-width);
+    height: 100vh;
+
+    position: fixed;
+    inset: 0 auto 0 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    z-index: var(--z-sidebar);
+
+    /* Thin scrollbar for sidebar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.06) transparent;
+
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| HEADER / BRAND
+|--------------------------------------------------------------------------
+*/
+
+.sidebar-header {
+
+    display: flex;
+    align-items: center;
+
+    padding: var(--space-6) var(--space-5);
+
+    border-bottom: 1px solid var(--color-border);
+
+}
+
+.brand {
+    display: flex;
+    align-items: baseline;
+    gap: 1px;
+}
+
+.brand-name {
+    font-family: var(--font-family-display);
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-extrabold);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    color: var(--color-text);
+    line-height: 1;
+}
+
+.brand-accent {
+    color: var(--color-primary);
+    font-style: italic;
+}
+
+/*
+|--------------------------------------------------------------------------
+| NAVIGATION
+|--------------------------------------------------------------------------
+*/
+
+.sidebar-nav {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--space-1);
+
+    padding: var(--space-4) var(--space-3);
+
+    flex: 1;
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| GROUP
+|--------------------------------------------------------------------------
+*/
+
+.sidebar-group {
+    margin-bottom: var(--space-4);
+}
+
+.sidebar-group-label {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    margin-bottom: var(--space-1);
+
+    font-size: var(--font-size-2xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+/*
+|--------------------------------------------------------------------------
+| LINKS
+|--------------------------------------------------------------------------
+*/
+
+.sidebar-link {
+
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+
+    padding: 9px var(--space-3);
+
+    border-radius: var(--radius-sm);
+    border-left: 2px solid transparent;
+
+    color: var(--color-text-secondary);
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+
+    transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast);
+
+}
+
+.sidebar-link:hover {
+
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-text);
+
+}
+
+.sidebar-link.active {
+
+    background: var(--color-primary-soft);
+    border-left-color: var(--color-primary);
+    color: var(--color-primary);
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| LINK ICON
+|--------------------------------------------------------------------------
+*/
+
+.sidebar-link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.sidebar-link:hover .sidebar-link-icon,
+.sidebar-link.active .sidebar-link-icon {
+    opacity: 1;
+}
+
+.sidebar-link-icon > i,
+.sidebar-link-icon > svg {
+    width: 18px;
+    height: 18px;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| FOOTER
+|--------------------------------------------------------------------------
+*/
+
+.sidebar-footer {
+
+    padding: var(--space-4) var(--space-3);
+
+    border-top: 1px solid var(--color-border);
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| USER
+|--------------------------------------------------------------------------
+*/
+
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+}
+
+.sidebar-user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+
+    border-radius: var(--radius-sm);
+    background: var(--color-primary-soft);
+    border: 1px solid var(--color-primary-border);
+
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+}
+
+.sidebar-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.sidebar-user-name {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-user-status {
+    font-size: var(--font-size-2xs);
+    color: var(--color-text-muted);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| RESPONSIVE
+|--------------------------------------------------------------------------
+*/
+
+@media (max-width: 992px) {
+
+    .sidebar {
+
+        transform: translateX(-100%);
+
+        transition: transform var(--transition-base);
+
+    }
+
+    .sidebar.is-open {
+
+        transform: translateX(0);
+
+    }
+
+}

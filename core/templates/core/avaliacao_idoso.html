@@ -1,0 +1,23 @@
+﻿{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card card-bordered card-body">
+        <h1 class="card-title">Avaliações - Idosos</h1>
+
+        {% for avaliacao in avaliacoes %}
+            <div class="form-group">
+                <h3>{{ avaliacao.aluno.nome }}</h3>
+                <p><strong>Sentar e levantar:</strong> {{ avaliacao.sentar_levantar }}</p>
+                <p><strong>Tempo TUG:</strong> {{ avaliacao.tug_tempo }}s</p>
+                <p><strong>Equilíbrio:</strong> {{ avaliacao.equilibrio_segundos }}s</p>
+                <p><strong>Caminhada 6 min:</strong> {{ avaliacao.caminhada_6_minutos }}m</p>
+            </div>
+        {% empty %}
+            <div class="form-group">
+                <p>Nenhuma avaliação cadastrada.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+[
+{
+  "model": "core.grupomuscular",
+  "pk": 1,
+  "fields": {
+    "nome": "Peito"
+  }
+},
+{
+  "model": "core.grupomuscular",
+  "pk": 2,
+  "fields": {
+    "nome": "Costas"
+  }
+},
+{
+  "model": "core.grupomuscular",
+  "pk": 3,
+  "fields": {
+    "nome": "Pernas - parte anterior"
+  }
+},
+{
+  "model": "core.grupomuscular",
+  "pk": 4,
+  "fields": {
+    "nome": "Pernas - parte posterior"
+  }
+},
+{
+  "model": "core.grupomuscular",
+  "pk": 5,
+  "fields": {
+    "nome": "Glúteos"
+  }
+},
+{
+  "model": "core.grupomuscular",
+  "pk": 6,
+  "fields": {
+    "nome": "Bíceps"
+  }
+},
+{
+  "model": "core.grupomuscular",
+  "pk": 7,
+  "fields": {
+    "nome": "Tríceps"
+  }
+},
+{
+  "model": "core.grupomuscular",
+  "pk": 8,
+  "fields": {
+    "nome": "Ombros"
+  }
+},
+{
+  "model": "core.grupomuscular",
+  "pk": 9,
+  "fields": {
+    "nome": "Panturrilhas"
+  }
+},
+{
+  "model": "core.grupomuscular",
+  "pk": 10,
+  "fields": {
+    "nome": "Abdôme"
+  }
+},
+{
+  "model": "core.grupomuscular",
+  "pk": 11,
+  "fields": {
+    "nome": "Outros"
+  }
+}
+]

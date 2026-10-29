@@ -1,0 +1,153 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   COMPONENTS - DROPDOWN
+========================================================== */
+
+
+/*
+|--------------------------------------------------------------------------
+| WRAPPER
+|--------------------------------------------------------------------------
+*/
+
+.dropdown {
+
+    position: relative;
+
+    display: inline-block;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| TOGGLE
+|--------------------------------------------------------------------------
+*/
+
+.dropdown-toggle {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: var(--space-2);
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MENU
+|--------------------------------------------------------------------------
+*/
+
+.dropdown-menu {
+
+    position: absolute;
+
+    top: calc(100% + var(--space-2));
+    right: 0;
+
+    min-width: 220px;
+
+    padding: var(--space-2);
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-lg);
+
+    display: none;
+
+    z-index: var(--z-dropdown);
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| OPEN
+|--------------------------------------------------------------------------
+*/
+
+.dropdown.open .dropdown-menu {
+
+    display: block;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ITEM
+|--------------------------------------------------------------------------
+*/
+
+.dropdown-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: var(--space-2);
+
+    width: 100%;
+
+    padding: var(--space-3) var(--space-4);
+
+    border-radius: var(--radius-md);
+
+    color: var(--color-text);
+
+    transition:
+        background-color var(--transition-fast),
+        color var(--transition-fast);
+
+}
+
+
+.dropdown-item:hover {
+
+    background: var(--color-surface-elevated);
+
+    color: var(--color-primary);
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| DIVIDER
+|--------------------------------------------------------------------------
+*/
+
+.dropdown-divider {
+
+    height: 1px;
+
+    margin: var(--space-2) 0;
+
+    background: var(--color-border);
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| HEADER
+|--------------------------------------------------------------------------
+*/
+
+.dropdown-header {
+
+    padding: var(--space-3) var(--space-4);
+
+    font-size: var(--font-size-sm);
+
+    color: var(--color-text-muted);
+
+}

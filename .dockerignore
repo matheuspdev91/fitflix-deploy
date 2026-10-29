@@ -1,0 +1,60 @@
+
+# Segredos e variáveis locais
+.env
+.env.*
+!.env.example
+
+# Bancos e backups locais
+*.dump
+*.sql
+*.bak
+
+# Arquivos estáticos gerados localmente
+staticfiles/
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Virtualenv
+venv/
+.venv/
+env/
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store
+
+# Logs
+*.log
+
+# Cache
+.cache/
+.pytest_cache/
+
+# Media e uploads
+media/
+
+# Arquivos grandes
+*.mp4
+*.zip
+*.rar
+
+# Node
+node_modules/
+
+# Build
+dist/
+build/
+
+# Docker
+docker-compose.yml

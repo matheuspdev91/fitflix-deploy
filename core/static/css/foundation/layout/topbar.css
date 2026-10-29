@@ -1,0 +1,248 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   LAYOUT - TOPBAR
+========================================================== */
+
+/*
+|--------------------------------------------------------------------------
+| TOPBAR
+|--------------------------------------------------------------------------
+*/
+
+.topbar {
+
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    min-height: var(--topbar-height);
+
+    padding-inline: var(--space-6);
+
+    background: rgba(5, 5, 5, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid var(--color-border);
+
+    z-index: var(--z-navbar);
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| SECTIONS
+|--------------------------------------------------------------------------
+*/
+
+.topbar-start,
+.topbar-center,
+.topbar-end {
+
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+
+}
+
+.topbar-center {
+
+    flex: 1;
+    justify-content: center;
+
+}
+
+.topbar-end {
+
+    justify-content: flex-end;
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| CONTEXT
+|--------------------------------------------------------------------------
+*/
+
+.topbar-context {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.topbar-eyebrow {
+    font-size: var(--font-size-2xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+.topbar-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+/*
+|--------------------------------------------------------------------------
+| SEARCH
+|--------------------------------------------------------------------------
+*/
+
+.topbar-search {
+    position: relative;
+    max-width: 360px;
+    width: 100%;
+}
+
+.topbar-search-input {
+    width: 100%;
+    padding: 8px 12px 8px 36px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.topbar-search-input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.topbar-search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-focus);
+}
+
+.topbar-search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+    pointer-events: none;
+}
+
+.topbar-search-icon > i,
+.topbar-search-icon > svg {
+    width: 16px;
+    height: 16px;
+}
+
+.topbar-search-shortcut {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: var(--font-size-2xs);
+    color: var(--color-text-muted);
+    padding: 2px 6px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xs);
+    background: var(--color-surface-elevated);
+}
+
+/*
+|--------------------------------------------------------------------------
+| USER (topbar)
+|--------------------------------------------------------------------------
+*/
+
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.topbar-user-name {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+}
+
+.topbar-user-role {
+    font-size: var(--font-size-2xs);
+    color: var(--color-text-muted);
+}
+
+.topbar-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--color-primary-soft);
+    border: 1px solid var(--color-primary-border);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+}
+
+/*
+|--------------------------------------------------------------------------
+| TOGGLE
+|--------------------------------------------------------------------------
+*/
+
+.sidebar-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    transition: background var(--transition-fast);
+}
+
+.sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/*
+|--------------------------------------------------------------------------
+| RESPONSIVE
+|--------------------------------------------------------------------------
+*/
+
+@media (max-width: 992px) {
+
+    .topbar {
+        padding-inline: var(--space-4);
+    }
+
+    .sidebar-toggle {
+        display: flex;
+    }
+
+    .topbar-search {
+        display: none;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .topbar {
+        padding-inline: var(--space-3);
+    }
+
+}

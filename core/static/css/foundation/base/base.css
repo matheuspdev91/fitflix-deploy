@@ -1,0 +1,222 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   FOUNDATION - BASE
+========================================================== */
+
+
+/*
+|--------------------------------------------------------------------------
+| HTML
+|--------------------------------------------------------------------------
+*/
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+
+    /* Custom Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 255, 136, 0.3) #050505;
+}
+
+html::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+html::-webkit-scrollbar-track {
+    background: #050505;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 136, 0.25);
+    border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 136, 0.4);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| BODY
+|--------------------------------------------------------------------------
+*/
+
+body {
+
+    min-height: 100vh;
+
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+
+    color: var(--color-text);
+    background: var(--color-background);
+
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MEDIA
+|--------------------------------------------------------------------------
+*/
+
+img,
+picture,
+svg,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| LINKS
+|--------------------------------------------------------------------------
+*/
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| FOCUS
+|--------------------------------------------------------------------------
+*/
+
+:focus-visible {
+    outline: 1px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SELECTION
+|--------------------------------------------------------------------------
+*/
+
+::selection {
+    background: var(--color-primary);
+    color: var(--color-black);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SEMANTIC TYPOGRAPHY
+|--------------------------------------------------------------------------
+|
+| Performance / Athletic hierarchy.
+| Display and page titles use Barlow Condensed.
+| Body and UI elements use Inter.
+|
+*/
+
+.text-display {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-display);
+    font-weight: var(--font-weight-extrabold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+}
+
+.page-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.page-subtitle {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+    color: var(--color-text-muted);
+}
+
+.section-title {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.section-subtitle {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+    color: var(--color-text-muted);
+}
+
+.card-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-snug);
+    color: var(--color-text);
+}
+
+.body-text {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+    color: var(--color-text-secondary);
+}
+
+.body-sm {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+    color: var(--color-text-secondary);
+}
+
+.label-text {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.caption {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+    color: var(--color-text-muted);
+}
+
+.helper-text {
+    font-size: var(--font-size-2xs);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+    color: var(--color-text-muted);
+}
+
+.metric-display {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    letter-spacing: var(--tracking-tight);
+}

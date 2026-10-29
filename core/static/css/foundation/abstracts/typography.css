@@ -1,0 +1,70 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   FOUNDATION - TYPOGRAPHY
+========================================================== */
+
+:root {
+
+    /*
+    |--------------------------------------------------------------------------
+    | FONT FAMILY
+    |--------------------------------------------------------------------------
+    */
+
+    --font-family-base: "Inter", system-ui, -apple-system, sans-serif;
+    --font-family-display: "Barlow Condensed", "Inter", system-ui, sans-serif;
+
+    /*
+    |--------------------------------------------------------------------------
+    | FONT SIZE
+    |--------------------------------------------------------------------------
+    */
+
+    --font-size-2xs: 0.625rem;    /* 10px */
+    --font-size-xs: 0.75rem;      /* 12px */
+    --font-size-sm: 0.875rem;     /* 14px */
+    --font-size-md: 1rem;         /* 16px */
+    --font-size-lg: 1.125rem;     /* 18px */
+    --font-size-xl: 1.5rem;       /* 24px */
+    --font-size-2xl: 2rem;        /* 32px */
+    --font-size-3xl: 2.5rem;      /* 40px */
+    --font-size-4xl: 3rem;        /* 48px */
+    --font-size-display: 3.5rem;  /* 56px */
+
+    /*
+    |--------------------------------------------------------------------------
+    | FONT WEIGHT
+    |--------------------------------------------------------------------------
+    */
+
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+
+    /*
+    |--------------------------------------------------------------------------
+    | LINE HEIGHT
+    |--------------------------------------------------------------------------
+    */
+
+    --line-height-tight: 1.1;
+    --line-height-snug: 1.25;
+    --line-height-base: 1.5;
+    --line-height-relaxed: 1.625;
+
+    /*
+    |--------------------------------------------------------------------------
+    | LETTER SPACING
+    |--------------------------------------------------------------------------
+    */
+
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.04em;
+    --tracking-wider: 0.08em;
+    --tracking-widest: 0.12em;
+
+}

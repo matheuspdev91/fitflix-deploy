@@ -1,0 +1,120 @@
+CLOUDINARY NAME: dkdpsbvri
+CLOUDINARY KEY: 663385686221129
+CLOUDINARY SECRET: Ccj4kJw9QD947LvjpEd2AGLF7iI
+669 | Supino | Máquina | exercicios/gif/nfhgtschfnb0bb1iibfa
+671 | Crucifixo | Inclinado halter | exercicios/gif/hwimuve9pczktcgabhcl
+683 | Desenvolvimento | Halteres | exercicios/gif/npb19i1ulkfmelg2vpxu
+693 | Rosca | Direta com halteres | exercicios/gif/hdewbxm0etsfd6f57gw6
+694 | Rosca | Martelo | exercicios/gif/jzf4ra9r3ogkuoaj50cg
+695 | Rosca | Scott | exercicios/gif/qhpziupmyo5elumzgjhf
+703 | Tríceps | Coice | exercicios/gif/eyjrw7ylqa1fyxsse895
+708 | Coice | Polia | exercicios/gif/mns8zoztdninoslpfbcf
+716 | Panturrilha | Smith | exercicios/gif/dyqpnsnz3wn0avxmyrsj
+727 | Mesa flexora | Unilateral | exercicios/gif/ubtsc4vasfzbdhehxa7o
+744 | Agachamento | Agachamento Sumô | exercicios/gif/vwd5ggpsjjmhzfjrzwre
+766 | Crucifixo | Crucifixo | exercicios/gif/ueua1mvwobgpfmxsm8be
+799 | Remada | Remada Curvada | exercicios/gif/dausl7zavjn36lhfupwg
+821 | Outros | Stiff | exercicios/gif/bjcrtvwsinergmzziwze
+827 | Outros | Levantamento Frontal | exercicios/gif/u22qqfdtcxr1afqy7puz
+667 | Supino | Inclinado barra | exercicios/gif/variacao-667-inclinado-barra
+
+TOTAL SUSPEITOS: 16
+
+URLs:
+
+
+================================================================================
+ID: 667
+EXERCÍCIO: Supino
+VARIAÇÃO: Inclinado barra
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/variacao-667-inclinado-barra
+
+================================================================================
+ID: 669
+EXERCÍCIO: Supino
+VARIAÇÃO: Máquina
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/nfhgtschfnb0bb1iibfa
+
+================================================================================
+ID: 671
+EXERCÍCIO: Crucifixo
+VARIAÇÃO: Inclinado halter
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/hwimuve9pczktcgabhcl
+
+================================================================================
+ID: 683
+EXERCÍCIO: Desenvolvimento
+VARIAÇÃO: Halteres
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/npb19i1ulkfmelg2vpxu
+
+================================================================================
+ID: 693
+EXERCÍCIO: Rosca
+VARIAÇÃO: Direta com halteres
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/hdewbxm0etsfd6f57gw6
+
+================================================================================
+ID: 694
+EXERCÍCIO: Rosca
+VARIAÇÃO: Martelo
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/jzf4ra9r3ogkuoaj50cg
+
+================================================================================
+ID: 695
+EXERCÍCIO: Rosca
+VARIAÇÃO: Scott
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/qhpziupmyo5elumzgjhf
+
+================================================================================
+ID: 703
+EXERCÍCIO: Tríceps
+VARIAÇÃO: Coice
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/eyjrw7ylqa1fyxsse895
+
+================================================================================
+ID: 708
+EXERCÍCIO: Coice
+VARIAÇÃO: Polia
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/mns8zoztdninoslpfbcf
+
+================================================================================
+ID: 716
+EXERCÍCIO: Panturrilha
+VARIAÇÃO: Smith
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/dyqpnsnz3wn0avxmyrsj
+
+================================================================================
+ID: 727
+EXERCÍCIO: Mesa flexora
+VARIAÇÃO: Unilateral
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/ubtsc4vasfzbdhehxa7o
+
+================================================================================
+ID: 744
+EXERCÍCIO: Agachamento
+VARIAÇÃO: Agachamento Sumô
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/vwd5ggpsjjmhzfjrzwre
+
+================================================================================
+ID: 766
+EXERCÍCIO: Crucifixo
+VARIAÇÃO: Crucifixo
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/ueua1mvwobgpfmxsm8be
+
+================================================================================
+ID: 799
+EXERCÍCIO: Remada
+VARIAÇÃO: Remada Curvada
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/dausl7zavjn36lhfupwg
+
+================================================================================
+ID: 821
+EXERCÍCIO: Outros
+VARIAÇÃO: Stiff
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/bjcrtvwsinergmzziwze
+
+================================================================================
+ID: 827
+EXERCÍCIO: Outros
+VARIAÇÃO: Levantamento Frontal
+GIF: https://res.cloudinary.com/dkdpsbvri/image/upload/v1/exercicios/gif/u22qqfdtcxr1afqy7puz

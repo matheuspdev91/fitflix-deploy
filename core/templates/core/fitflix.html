@@ -1,0 +1,68 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="fitflix-container">
+    <div class="dashboard-hero">
+        <div class="dashboard-hero-visual">
+            <img src="{% static 'img/dashboard-kv.png' %}" alt="FitFlix Key Visual" class="dashboard-hero-kv">
+        </div>
+        <div class="dashboard-hero-content">
+            <div class="dashboard-hero-header">
+                <h1>FitFlix</h1>
+                <p>Gestão de treinos e exercícios</p>
+            </div>
+            <div class="dashboard-hero-actions">
+                <a href="{% url 'core:criar_treino' %}" class="btn btn-primary">+ Novo Treino</a>
+                <a href="{% url 'core:criar_exercicio' %}" class="btn btn-secondary">+ Novo Exercício</a>
+            </div>
+        </div>
+    </div>
+
+    {% for grupo in grupos %}
+    <a href="{% url 'core:lista_exercicios' grupo.grupo.id %}" style="text-decoration: none; color: inherit;">
+            {{ grupo.grupo.nome }}
+        <div class="fitflix-category">
+            <div class="fitflix-category-header">
+                <h2>{{ grupo.nome }}</h2>
+                <p>{{ grupo.total_exercicios }} exercício{{ grupo.total_exercicios|pluralize }}</p>
+            </div>
+            
+            <div class="fitflix-category-content">
+                <div class="fitflix-list">
+                    {% for exercicio in grupo.exercicios %}
+                    <div class="fitflix-item">
+                        <div class="fitflix-exercise-image">
+                            {% if exercicio.imagem %}
+                            <img src="{{ exercicio.imagem.url }}" class="fitflix-exercise-thumb" alt="{{ exercicio.nome }}">
+                            {% else %}
+                            <img src="{% static 'img/placeholder.png' %}" class="fitflix-exercise-thumb" alt="{{ exercicio.nome }}">
+                            {% endif %}
+                        </div>
+                        
+                            <div class="fitflix-exercise-info">
+                                <h3>{{ exercicio.nome }}</h3>
+
+                                {% for variacao in exercicio.variacoes.all %}
+                                    <p>{{ variacao.nome }}</p>
+                                    {% empty %}
+                                    <p>Nenhuma variação cadastrada.</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>Nenhum exercício cadastrado.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </a>
+    {% empty %}
+    <div class="fitflix-category">
+        <div class="fitflix-category-content">
+            <p>Nenhum exercício cadastrado.</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

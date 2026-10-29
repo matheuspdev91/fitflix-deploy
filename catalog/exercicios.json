@@ -1,0 +1,3325 @@
+[
+{
+  "model": "core.videoexercicio",
+  "pk": 1,
+  "fields": {
+    "nome": "Supino",
+    "grupo_muscular": 1,
+    "gif": "",
+    "descricao": "Exercicio base para peitoral.",
+    "criado_em": "2026-04-27T17:20:55.353Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 2,
+  "fields": {
+    "nome": "Crucifixo",
+    "grupo_muscular": 1,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-04-27T17:20:55.405Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 3,
+  "fields": {
+    "nome": "Remada",
+    "grupo_muscular": 2,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-04-27T17:20:55.457Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 4,
+  "fields": {
+    "nome": "Puxada",
+    "grupo_muscular": 2,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-04-27T17:20:55.510Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 5,
+  "fields": {
+    "nome": "Flexão de braço",
+    "grupo_muscular": 1,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-04-29T16:25:02.290Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 6,
+  "fields": {
+    "nome": "Outros",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.021Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 7,
+  "fields": {
+    "nome": "Leg",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.036Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 8,
+  "fields": {
+    "nome": "Agachamento",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.051Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 9,
+  "fields": {
+    "nome": "Triceps",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.092Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 10,
+  "fields": {
+    "nome": "Desenvolvimento",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.175Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 11,
+  "fields": {
+    "nome": "Rosca",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.198Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 12,
+  "fields": {
+    "nome": "Elevacao lateral",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.212Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 13,
+  "fields": {
+    "nome": "Gluteo",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.249Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 14,
+  "fields": {
+    "nome": "Flexora",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.330Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 15,
+  "fields": {
+    "nome": "Panturrilha",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.352Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 16,
+  "fields": {
+    "nome": "Extensora",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.692Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 17,
+  "fields": {
+    "nome": "leg",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.615Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 18,
+  "fields": {
+    "nome": "agachamento",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.629Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 19,
+  "fields": {
+    "nome": "triceps",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.672Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 20,
+  "fields": {
+    "nome": "crucifixo",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.687Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 21,
+  "fields": {
+    "nome": "remada",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.736Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 22,
+  "fields": {
+    "nome": "desenvolvimento",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.770Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 23,
+  "fields": {
+    "nome": "rosca",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.793Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 24,
+  "fields": {
+    "nome": "elevacao lateral",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.807Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 25,
+  "fields": {
+    "nome": "puxada",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.828Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 26,
+  "fields": {
+    "nome": "gluteo",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.850Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 27,
+  "fields": {
+    "nome": "flexora",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.930Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 28,
+  "fields": {
+    "nome": "panturrilha",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.953Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 29,
+  "fields": {
+    "nome": "supino",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:48.207Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 30,
+  "fields": {
+    "nome": "extensora",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:48.310Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 31,
+  "fields": {
+    "nome": "Tríceps",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:34:38.582Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 32,
+  "fields": {
+    "nome": "Elevacao Lateral",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:34:38.677Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 33,
+  "fields": {
+    "nome": "Glúteo",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:34:38.710Z"
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 1,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Reto barra",
+    "gif": "exercicios/gif/Supino_inclinado_com_barra.gif",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 2,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Reto halter",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 3,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Inclinado barra",
+    "gif": "gifs/Supino_inclinado_com_barra.gif",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 4,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Inclinado halter",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 5,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Máquina",
+    "gif": "gifs/Supino_na_máquina_Smith.gif",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 6,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Reto halter",
+    "gif": "gifs/Crucifixo_com_halteres.gif",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 7,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Inclinado halter",
+    "gif": "gifs/Crucifixo_Inclinado_Cross.gif",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 8,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Máquina",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 9,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Cross (cabo)",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 10,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Curvada barra",
+    "gif": "gifs/Remada_Curvada_com_Barra.gif",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 11,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Unilateral halter",
+    "gif": "gifs/Remada_curvada_com_halteres.gif",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 12,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Máquina",
+    "gif": "gifs/Remada_Sentada_na_Máquina.gif",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 13,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Cavalinho",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 14,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Frontal aberta",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 15,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Frontal fechada",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 16,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Neutra",
+    "gif": "gifs/Puxada_Alta.gif",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 17,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Supinada",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 18,
+  "fields": {
+    "exercicio": 5,
+    "nome": "Flexão de braço",
+    "gif": "gifs/Flexão_de_braço_com_palmas.gif",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 19,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Barra fixa",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 20,
+  "fields": {
+    "exercicio": 7,
+    "nome": "Elevação de Panturrilha no Leg Press",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 21,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento Hack",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Agachamento_Hack_Invertido.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 22,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Máquina de Abdução de Quadril",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 23,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento Sumô com Barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 24,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Elevação Pélvica na Máquina Smith",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 25,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Tríceps Francês com Halter Bilateral",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 26,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Crucifixo com Halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 27,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento Sumô com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 28,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento no Smith",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 29,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento frontal com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 30,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Tríceps pulley corda",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 31,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada Sentada com Cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 32,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Elevação Pélvica Com Barra",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_Pélvica_Com_Barra_KQNkjeM.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 33,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Tríceps no Banco",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 34,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Desenvolvimento_Arnold.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 35,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Extensão de tríceps com haltere em pronação com um braço",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 36,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca bíceps com halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 37,
+  "fields": {
+    "exercicio": 12,
+    "nome": "Elevação lateral de braços com halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 38,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Cadeira",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Cadeira_flexora.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 39,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Puxada Alta com Triângulo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 40,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento frontal com anilha",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 41,
+  "fields": {
+    "exercicio": 13,
+    "nome": "Gluteos Coice nilateral Polia Baixa",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 42,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca Scott com Barra W",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 43,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Agachamento_rEYdcA1.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 44,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Mesa",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Mesa_flexora.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 45,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Máquina de Abdução de",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 46,
+  "fields": {
+    "exercicio": 7,
+    "nome": "Leg Press",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Leg_Press.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 47,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento de Ombro no Banco com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 48,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Adução do Quadril com Cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 49,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Crucifixo com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 50,
+  "fields": {
+    "exercicio": 14,
+    "nome": "Mesa Flexora",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Mesa_Flexora_Unilateral.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 51,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Crucifixo Inclinado Cross",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Crucifixo_Inclinado_Cross.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 52,
+  "fields": {
+    "exercicio": 15,
+    "nome": "Elevação de Panturrilha no Smith",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 53,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Stiff com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 54,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento Búlgaro com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 55,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento de ombros na máquina Smith",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 56,
+  "fields": {
+    "exercicio": 14,
+    "nome": "Cadeira flexora",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 57,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca direta com barra w",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 58,
+  "fields": {
+    "exercicio": 15,
+    "nome": "Elevação de Panturrilha Sentado com Alavanca",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 59,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca martelo com corda",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 60,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento frontal alternado com haltere",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 61,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca concentrada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 62,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento com Halteres no Banco",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 63,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento Búlgaro com Barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 64,
+  "fields": {
+    "exercicio": 7,
+    "nome": "Leg Press unilateral",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 65,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento de ombros na máquina",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 66,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento frontal alternado com haltere sentado",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 67,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Tríceps Coice com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 68,
+  "fields": {
+    "exercicio": 13,
+    "nome": "Glúteo Coice Na Máquina",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 69,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento frontal unilateral com cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 70,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Máquina de Adução de",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 71,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Barra Fixa",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Barra_Fixa_Assistida.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 72,
+  "fields": {
+    "exercicio": 12,
+    "nome": "Elevação lateral unilateral com cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 73,
+  "fields": {
+    "exercicio": 12,
+    "nome": "Máquina de elevação lateral",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 74,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Tríceps pulley barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 75,
+  "fields": {
+    "exercicio": 6,
+    "nome": "",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Agachamento.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 76,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Abdução de quadril com cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 77,
+  "fields": {
+    "exercicio": 7,
+    "nome": "Elevação de Panturrilha no Leg Press horizontal",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 78,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Tríceps Francês com Halter",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 79,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca bíceps com pegada fechada na barra W",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 80,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Supino no banco inclinado 30 graus com pegada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 81,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada Curvada com Barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 82,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada Inclinada com Cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 83,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada curvada com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 84,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Rosca_martelo.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 85,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Flexão de braço com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 86,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Puxada com Um Braço com Cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 87,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Voador no pec deck",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 88,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca alternada com halteres sentado",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 89,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada sentado com cabo pegada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 90,
+  "fields": {
+    "exercicio": 16,
+    "nome": "Cadeira extensora",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 91,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento de ombros com halteres em pé com pegada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 92,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Supino inclinado com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 93,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Tríceps testa pegada neutra com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 94,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Supino com pegada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 95,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Máquina de Adução de Quadril",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 96,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Máquina de elevação",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 97,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Tríceps Pulley barra V",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 98,
+  "fields": {
+    "exercicio": 12,
+    "nome": "Elevação lateral cruzada no",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 99,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Puxada Alta",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Puxada_Alta.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 100,
+  "fields": {
+    "exercicio": 12,
+    "nome": "Elevação lateral de braços com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 101,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Supino na máquina Smith",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 102,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Tríceps testa pegada neutra com halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 103,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Stiff com Halter",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 104,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Elevação Pélvica Unilateral Com Barra",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_Pélvica_Unilateral_Com_Barra.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 105,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Stiff com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 106,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento de Ombro no Banco com Halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 107,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento de ombro na máquina pegada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 108,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca alternada com halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 109,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento militar com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 110,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Extensão de Tríceps com Cabos",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 111,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento frontal com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 112,
+  "fields": {
+    "exercicio": 15,
+    "nome": "Elevação de Panturrilha Sentado com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 113,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento Hack Invertido",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Agachamento_Hack_Invertido_obhlya2.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 114,
+  "fields": {
+    "exercicio": 7,
+    "nome": "Leg Press Horizontal",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Leg_Press_Horizontal_k4R7Lko.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 115,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada Sentada na Máquina",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 116,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca bíceps com",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 117,
+  "fields": {
+    "exercicio": 9,
+    "nome": "Extensão de tríceps com haltere unilateral",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 118,
+  "fields": {
+    "exercicio": 6,
+    "nome": "barra fixa",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 119,
+  "fields": {
+    "exercicio": 17,
+    "nome": "elevação de panturrilha no leg press",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 120,
+  "fields": {
+    "exercicio": 18,
+    "nome": "agachamento hack",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 121,
+  "fields": {
+    "exercicio": 6,
+    "nome": "máquina de abdução de quadril",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 122,
+  "fields": {
+    "exercicio": 18,
+    "nome": "agachamento sumô com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 123,
+  "fields": {
+    "exercicio": 6,
+    "nome": "elevação pélvica na máquina smith",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 124,
+  "fields": {
+    "exercicio": 19,
+    "nome": "tríceps francês com halter bilateral",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 125,
+  "fields": {
+    "exercicio": 20,
+    "nome": "crucifixo com halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 126,
+  "fields": {
+    "exercicio": 18,
+    "nome": "agachamento sumô ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 127,
+  "fields": {
+    "exercicio": 18,
+    "nome": "agachamento no smith",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 128,
+  "fields": {
+    "exercicio": 6,
+    "nome": "levantamento frontal com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 129,
+  "fields": {
+    "exercicio": 19,
+    "nome": "tríceps pulley corda",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 130,
+  "fields": {
+    "exercicio": 21,
+    "nome": "remada sentada com cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 131,
+  "fields": {
+    "exercicio": 6,
+    "nome": "elevação pélvica com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 132,
+  "fields": {
+    "exercicio": 19,
+    "nome": "tríceps no banco",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 133,
+  "fields": {
+    "exercicio": 22,
+    "nome": "desenvolvimento",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 134,
+  "fields": {
+    "exercicio": 19,
+    "nome": "extensão de tríceps com haltere em pronação com um braço",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 135,
+  "fields": {
+    "exercicio": 23,
+    "nome": "rosca bíceps com halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 136,
+  "fields": {
+    "exercicio": 24,
+    "nome": "elevação lateral de braços com halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 137,
+  "fields": {
+    "exercicio": 6,
+    "nome": "cadeira",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 138,
+  "fields": {
+    "exercicio": 25,
+    "nome": "puxada alta com triângulo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 139,
+  "fields": {
+    "exercicio": 6,
+    "nome": "levantamento frontal com anilha",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 140,
+  "fields": {
+    "exercicio": 26,
+    "nome": "gluteos coice nilateral polia baixa",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 141,
+  "fields": {
+    "exercicio": 23,
+    "nome": "rosca scott com barra w",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 142,
+  "fields": {
+    "exercicio": 18,
+    "nome": "agachamento",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 143,
+  "fields": {
+    "exercicio": 6,
+    "nome": "mesa",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 144,
+  "fields": {
+    "exercicio": 6,
+    "nome": "máquina de abdução ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 145,
+  "fields": {
+    "exercicio": 17,
+    "nome": "leg press",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 146,
+  "fields": {
+    "exercicio": 22,
+    "nome": "desenvolvimento de ombro no banco ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 147,
+  "fields": {
+    "exercicio": 6,
+    "nome": "adução do quadril com cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 148,
+  "fields": {
+    "exercicio": 20,
+    "nome": "crucifixo ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 149,
+  "fields": {
+    "exercicio": 27,
+    "nome": "mesa flexora",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 150,
+  "fields": {
+    "exercicio": 20,
+    "nome": "crucifixo inclinado cross",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 151,
+  "fields": {
+    "exercicio": 28,
+    "nome": "elevação de panturrilha no smith",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 152,
+  "fields": {
+    "exercicio": 6,
+    "nome": "stiff com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 153,
+  "fields": {
+    "exercicio": 18,
+    "nome": "agachamento búlgaro ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 154,
+  "fields": {
+    "exercicio": 22,
+    "nome": "desenvolvimento de ombros na máquina smith",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 155,
+  "fields": {
+    "exercicio": 27,
+    "nome": "cadeira flexora",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 156,
+  "fields": {
+    "exercicio": 23,
+    "nome": "rosca direta com barra w",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 157,
+  "fields": {
+    "exercicio": 28,
+    "nome": "elevação de panturrilha sentado com alavanca",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 158,
+  "fields": {
+    "exercicio": 23,
+    "nome": "rosca martelo com corda",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 159,
+  "fields": {
+    "exercicio": 6,
+    "nome": "levantamento frontal alternado com haltere",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 160,
+  "fields": {
+    "exercicio": 23,
+    "nome": "rosca concentrada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 161,
+  "fields": {
+    "exercicio": 18,
+    "nome": "agachamento com halteres no banco",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 162,
+  "fields": {
+    "exercicio": 18,
+    "nome": "agachamento búlgaro com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 163,
+  "fields": {
+    "exercicio": 17,
+    "nome": "leg press unilateral",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 164,
+  "fields": {
+    "exercicio": 22,
+    "nome": "desenvolvimento de ombros na máquina",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 165,
+  "fields": {
+    "exercicio": 6,
+    "nome": "levantamento frontal alternado com haltere sentado",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 166,
+  "fields": {
+    "exercicio": 19,
+    "nome": "tríceps coice ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 167,
+  "fields": {
+    "exercicio": 26,
+    "nome": "glúteo coice na máquina",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 168,
+  "fields": {
+    "exercicio": 6,
+    "nome": "levantamento frontal unilateral com cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 169,
+  "fields": {
+    "exercicio": 6,
+    "nome": "máquina de adução ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 170,
+  "fields": {
+    "exercicio": 24,
+    "nome": "elevação lateral unilateral com cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 171,
+  "fields": {
+    "exercicio": 24,
+    "nome": "máquina de elevação lateral",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 172,
+  "fields": {
+    "exercicio": 19,
+    "nome": "tríceps pulley barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 173,
+  "fields": {
+    "exercicio": 6,
+    "nome": "abdução de quadril com cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 174,
+  "fields": {
+    "exercicio": 17,
+    "nome": "elevação de panturrilha no leg press horizontal",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 175,
+  "fields": {
+    "exercicio": 19,
+    "nome": "tríceps francês com halter",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 176,
+  "fields": {
+    "exercicio": 23,
+    "nome": "rosca bíceps com pegada fechada na barra w",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 177,
+  "fields": {
+    "exercicio": 29,
+    "nome": "supino no banco inclinado 30 graus com pegada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 178,
+  "fields": {
+    "exercicio": 21,
+    "nome": "remada curvada com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 179,
+  "fields": {
+    "exercicio": 21,
+    "nome": "remada inclinada com cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 180,
+  "fields": {
+    "exercicio": 21,
+    "nome": "remada curvada ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 181,
+  "fields": {
+    "exercicio": 23,
+    "nome": "rosca",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 182,
+  "fields": {
+    "exercicio": 6,
+    "nome": "flexão de braço ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 183,
+  "fields": {
+    "exercicio": 25,
+    "nome": "puxada com um braço com cabo",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 184,
+  "fields": {
+    "exercicio": 6,
+    "nome": "voador no pec deck",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 185,
+  "fields": {
+    "exercicio": 23,
+    "nome": "rosca alternada com halteres sentado",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 186,
+  "fields": {
+    "exercicio": 21,
+    "nome": "remada sentado com cabo pegada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 187,
+  "fields": {
+    "exercicio": 30,
+    "nome": "cadeira extensora",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 188,
+  "fields": {
+    "exercicio": 22,
+    "nome": "desenvolvimento de ombros com halteres em pé com pegada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 189,
+  "fields": {
+    "exercicio": 29,
+    "nome": "supino inclinado com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 190,
+  "fields": {
+    "exercicio": 19,
+    "nome": "tríceps testa pegada neutra ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 191,
+  "fields": {
+    "exercicio": 29,
+    "nome": "supino com pegada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 192,
+  "fields": {
+    "exercicio": 6,
+    "nome": "máquina de adução de quadril",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 193,
+  "fields": {
+    "exercicio": 6,
+    "nome": "máquina de elevação",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 194,
+  "fields": {
+    "exercicio": 19,
+    "nome": "tríceps pulley barra v",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 195,
+  "fields": {
+    "exercicio": 24,
+    "nome": "elevação lateral cruzada ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 196,
+  "fields": {
+    "exercicio": 25,
+    "nome": "puxada alta",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 197,
+  "fields": {
+    "exercicio": 24,
+    "nome": "elevação lateral de braços ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 198,
+  "fields": {
+    "exercicio": 29,
+    "nome": "supino na máquina smith",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 199,
+  "fields": {
+    "exercicio": 19,
+    "nome": "tríceps testa pegada neutra com halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 200,
+  "fields": {
+    "exercicio": 6,
+    "nome": "stiff com halter",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 201,
+  "fields": {
+    "exercicio": 6,
+    "nome": "elevação pélvica unilateral com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 202,
+  "fields": {
+    "exercicio": 6,
+    "nome": "stiff ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 203,
+  "fields": {
+    "exercicio": 22,
+    "nome": "desenvolvimento de ombro no banco com halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 204,
+  "fields": {
+    "exercicio": 22,
+    "nome": "desenvolvimento de ombro na máquina pegada",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 205,
+  "fields": {
+    "exercicio": 23,
+    "nome": "rosca alternada com halteres",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 206,
+  "fields": {
+    "exercicio": 22,
+    "nome": "desenvolvimento militar com barra",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 207,
+  "fields": {
+    "exercicio": 19,
+    "nome": "extensão de tríceps com cabos",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 208,
+  "fields": {
+    "exercicio": 6,
+    "nome": "levantamento frontal ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 209,
+  "fields": {
+    "exercicio": 28,
+    "nome": "elevação de panturrilha sentado ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 210,
+  "fields": {
+    "exercicio": 18,
+    "nome": "agachamento hack invertido",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 211,
+  "fields": {
+    "exercicio": 17,
+    "nome": "leg press horizontal",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 212,
+  "fields": {
+    "exercicio": 21,
+    "nome": "remada sentada na máquina",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 213,
+  "fields": {
+    "exercicio": 23,
+    "nome": "rosca bíceps ",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 214,
+  "fields": {
+    "exercicio": 19,
+    "nome": "extensão de tríceps com haltere unilateral",
+    "gif": "",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 215,
+  "fields": {
+    "exercicio": 7,
+    "nome": "Elevação De Panturrilha No Leg Press",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_de_Panturrilha_no_Leg_Press_horizontal.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 216,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Máquina De Abdução De Quadril",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Máquina_de_Abdução_de_Quadril_jUlexBk.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 217,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento Sumô Com Barra",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Agachamento_Sumô_com_Barra_KujkVY8.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 218,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Elevação Pélvica Na Máquina Smith",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_Pélvica_na_Máquina_Smith.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 219,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Tríceps Francês Com Halter Bilateral",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Tríceps_Francês_com_Halter_Bilateral_ETiImYB.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 220,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Crucifixo Com Halteres",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Crucifixo_com_Halteres_Inclinado.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 221,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento Sumô",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Agachamento_Sumô_com_Halteres.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 222,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento No Smith",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Agachamento_no_Smith.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 223,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento Frontal Com Barra",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Levantamento_frontal_com_barra_E3nqQ7R.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 224,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Tríceps Pulley Corda",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Tríceps_pulley_corda_PvP9TtC.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 225,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada Sentada Com Cabo",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Remada_Sentada_com_Cabo.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 226,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Tríceps No Banco",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Tríceps_no_Banco.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 227,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Extensão De Tríceps Com Haltere Em Pronação Com Um Braço",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Extensão_de_tríceps_com_haltere_em_pronação_com_um_braço.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 228,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca Bíceps Com Halteres",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Rosca_bíceps_com_halteres_JjYhQWp.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 229,
+  "fields": {
+    "exercicio": 32,
+    "nome": "Elevação Lateral De Braços Com Halteres",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_lateral_de_braços_com_halteres_zmMup5p.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 230,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Puxada Alta Com Triângulo",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Puxada_Alta_com_Triângulo.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 231,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento Frontal Com Anilha",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Levantamento_frontal_com_anilha_FzvMCdI.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 232,
+  "fields": {
+    "exercicio": 33,
+    "nome": "Glúteos Coice Nilateral Polia Baixa",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Gluteos_Coice_nilateral_Polia_Baixa.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 233,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca Scott Com Barra W",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Rosca_Scott_com_Barra_W.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 234,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Máquina De Abdução",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Máquina_de_Abdução_de_Quadril.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 235,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento De Ombro No Banco",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Desenvolvimento_de_Ombro_no_Banco_com_Halteres.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 236,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Adução Do Quadril Com Cabo",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Adução_do_Quadril_com_Cabo.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 237,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Crucifixo",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Crucifixo_com_halteres.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 238,
+  "fields": {
+    "exercicio": 15,
+    "nome": "Elevação De Panturrilha No Smith",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_de_Panturrilha_no_Smith_1hYSPQb.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 239,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Stiff Com Barra",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Stiff_com_barra.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 240,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento Búlgaro",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Agachamento_Búlgaro_com_Halteres.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 241,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento De Ombros Na Máquina Smith",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Desenvolvimento_de_ombros_na_máquina_Smith.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 242,
+  "fields": {
+    "exercicio": 14,
+    "nome": "Cadeira Flexora",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Cadeira_flexora_4YE1CkP.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 243,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca Direta Com Barra W",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Rosca_direta_com_barra_w.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 244,
+  "fields": {
+    "exercicio": 15,
+    "nome": "Elevação De Panturrilha Sentado Com Alavanca",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_de_Panturrilha_Sentado_com_Alavanca_mPg4rcs.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 245,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca Martelo Com Corda",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Rosca_martelo_com_corda.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 246,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento Frontal Alternado Com Haltere",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Levantamento_frontal_alternado_com_haltere_sentado.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 247,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca Concentrada",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Rosca_concentrada_IL6Pizy.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 248,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento Com Halteres No Banco",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Agachamento_com_Halteres_no_Banco.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 249,
+  "fields": {
+    "exercicio": 8,
+    "nome": "Agachamento Búlgaro Com Barra",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Agachamento_Búlgaro_com_Barra_izjZ3Fc.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 250,
+  "fields": {
+    "exercicio": 7,
+    "nome": "Leg Press Unilateral",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Leg_Press_unilateral_guk7xSC.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 251,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento De Ombros Na Máquina",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Desenvolvimento_de_ombros_na_máquina.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 252,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento Frontal Alternado Com Haltere Sentado",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Levantamento_frontal_alternado_com_haltere_sentado_oXaqjEs.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 253,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Tríceps Coice",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Tríceps_Coice_com_Halteres.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 254,
+  "fields": {
+    "exercicio": 33,
+    "nome": "Glúteo Coice Na Máquina",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Glúteo_Coice_Na_Máquina.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 255,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento Frontal Unilateral Com Cabo",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Levantamento_frontal_unilateral_com_cabo.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 256,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Máquina De Adução",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Máquina_de_Adução_de_Quadril.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 257,
+  "fields": {
+    "exercicio": 32,
+    "nome": "Elevação Lateral Unilateral Com Cabo",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_lateral_unilateral_com_cabo_BmPRYHo.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 258,
+  "fields": {
+    "exercicio": 32,
+    "nome": "Máquina De Elevação Lateral",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Máquina_de_elevação_lateral_ZzpysoK.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 259,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Tríceps Pulley Barra",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Tríceps_pulley_barra.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 260,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Abdução De Quadril Com Cabo",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Abdução_de_quadril_com_cabo.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 261,
+  "fields": {
+    "exercicio": 7,
+    "nome": "Elevação De Panturrilha No Leg Press Horizontal",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_de_Panturrilha_no_Leg_Press_horizontal_rASXush.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 262,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Tríceps Francês Com Halter",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Tríceps_Francês_com_Halter_Bilateral.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 263,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca Bíceps Com Pegada Fechada Na Barra W",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Rosca_bíceps_com_pegada_fechada_na_barra_W.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 264,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Supino No Banco Inclinado 30 Graus Com Pegada",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Supino_no_banco_inclinado_30_graus_com_pegada_invertida.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 265,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada Curvada Com Barra",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Remada_Curvada_com_Barra.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 266,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada Inclinada Com Cabo",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Remada_Inclinada_com_Cabo.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 267,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada Curvada",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Remada_curvada_com_halteres.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 268,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Flexão De Braço",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Flexão_de_braço_com_palmas.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 269,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Puxada Com Um Braço Com Cabo",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Puxada_com_Um_Braço_com_Cabo.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 270,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Voador No Pec Deck",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Voador_no_pec_deck.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 271,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca Alternada Com Halteres Sentado",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Rosca_alternada_com_halteres_sentado_9yFghTd.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 272,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada Sentado Com Cabo Pegada",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Remada_sentado_com_cabo_pegada_fechada.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 273,
+  "fields": {
+    "exercicio": 16,
+    "nome": "Cadeira Extensora",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Cadeira_extensora_UORLnVB.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 274,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento De Ombros Com Halteres Em Pé Com Pegada",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Desenvolvimento_de_ombros_com_halteres_em_pé_com_pegada_neutra.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 275,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Supino Inclinado Com Barra",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Supino_inclinado_com_barra.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 276,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Tríceps Testa Pegada Neutra",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Tríceps_testa_pegada_neutra_com_halteres.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 277,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Supino Com Pegada",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Supino_com_pegada_aberta.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 278,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Máquina De Adução De Quadril",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Máquina_de_Adução_de_Quadril_TZ95XQe.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 279,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Máquina De Elevação",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Máquina_de_elevação_lateral.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 280,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Tríceps Pulley Barra V",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Tríceps_Pulley_barra_V.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 281,
+  "fields": {
+    "exercicio": 32,
+    "nome": "Elevação Lateral Cruzada",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_lateral_cruzada_no_crossover.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 282,
+  "fields": {
+    "exercicio": 32,
+    "nome": "Elevação Lateral De Braços",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_lateral_de_braços_com_halteres.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 283,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Supino Na Máquina Smith",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Supino_na_máquina_Smith.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 284,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Tríceps Testa Pegada Neutra Com Halteres",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Tríceps_testa_pegada_neutra_com_halteres_y2NSE9y.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 285,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Stiff Com Halter",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Stiff_com_Halter_mo2RB3h.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 286,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Stiff",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Stiff_com_Halter.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 287,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento De Ombro No Banco Com Halteres",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Desenvolvimento_de_Ombro_no_Banco_com_Halteres_LL12ca3.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 288,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento De Ombro Na Máquina Pegada",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Desenvolvimento_de_ombro_na_máquina_pegada_martelo.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 289,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca Alternada Com Halteres",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Rosca_alternada_com_halteres_sentado.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 290,
+  "fields": {
+    "exercicio": 10,
+    "nome": "Desenvolvimento Militar Com Barra",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Desenvolvimento_militar_com_barra.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 291,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Extensão De Tríceps Com Cabos",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Extensão_de_Tríceps_com_Cabos_Cruzados.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 292,
+  "fields": {
+    "exercicio": 6,
+    "nome": "Levantamento Frontal",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Levantamento_frontal_com_anilha.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 293,
+  "fields": {
+    "exercicio": 15,
+    "nome": "Elevação De Panturrilha Sentado",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Elevação_de_Panturrilha_Sentado_com_Alavanca.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 294,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Remada Sentada Na Máquina",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Remada_Sentada_na_Máquina.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 295,
+  "fields": {
+    "exercicio": 11,
+    "nome": "Rosca Bíceps",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Rosca_bíceps_com_halteres.gif",
+    "grupo_muscular": null
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 296,
+  "fields": {
+    "exercicio": 31,
+    "nome": "Extensão De Tríceps Com Haltere Unilateral",
+    "gif": "/home/matheus/Área de trabalho/django_pratica/media/exercicios/gif/Extensão_de_tríceps_com_haltere_unilateral_sentado.gif",
+    "grupo_muscular": null
+  }
+}
+]
