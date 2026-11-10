@@ -14,4 +14,6 @@ webhook_debug.txt
 *.log
 
 # Backups de dados
-backup_*.json
+backup_*.json
+# Ambiente virtual local
+venv311/
