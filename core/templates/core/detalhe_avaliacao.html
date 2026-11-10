@@ -10,11 +10,11 @@
         Editar
     </a>
 
-    <a href="{% url 'core:excluir_avaliacao' avaliacao.id %}"
-        class="btn btn-danger"
-        onclick="return confirm('Tem certeza que deseja excluir esta avaliação?')">
-        Excluir
-    </a>
+    <form method="post" action="{% url 'core:excluir_avaliacao' avaliacao.id %}" style="display: inline;"
+        onsubmit="return confirm('Tem certeza que deseja excluir esta avaliação?')">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Excluir</button>
+    </form>
 </div>
 
 <h1>{{ avaliacao.nome }}</h1>

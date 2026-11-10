@@ -19,6 +19,20 @@
         </div>
     </div>
 
+    <section class="fitflix-category" aria-labelledby="alunos-title">
+        <div class="fitflix-category-header">
+            <h2 id="alunos-title">Meus alunos</h2>
+            <a href="{% url 'core:criar_aluno' %}" class="btn btn-secondary">+ Cadastrar aluno</a>
+        </div>
+        <div class="fitflix-category-content">
+            {% for aluno in alunos %}
+            <p><a href="{% url 'core:painel_aluno' aluno.id %}">{{ aluno.nome }}</a></p>
+            {% empty %}
+            <p>Nenhum aluno cadastrado</p>
+            {% endfor %}
+        </div>
+    </section>
+
     {% for grupo in grupos %}
     <a href="{% url 'core:lista_exercicios' grupo.grupo.id %}" style="text-decoration: none; color: inherit;">
             {{ grupo.grupo.nome }}

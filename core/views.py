@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import Http404, JsonResponse
 from core.services.asaas.subscription_service import SubscriptionService
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -7,6 +7,8 @@ from django.contrib import messages
 from django.db import transaction
 from django.db.models import Q
 from django.utils import timezone
+from django.conf import settings
+from django.utils.http import url_has_allowed_host_and_scheme
 from urllib.parse import urlencode
 from decimal import Decimal
 import secrets
@@ -16,6 +18,7 @@ from django.http import HttpResponse
 import json
 import os
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.utils.crypto import constant_time_compare
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode
@@ -50,7 +53,7 @@ from .forms import (
 )
 
 from .email_service import enviar_email_acesso_aluno
-from .decorators import apenas_personal
+from .decorators import apenas_aluno, apenas_personal
 
 User = get_user_model()
 
@@ -77,10 +80,15 @@ def home(request):
 @ratelimit(key='ip', rate='5/m', method='POST', block=True)
 def login_view(request):
     if request.method == "GET":
-        return render(request, "core/login.html")
+        return render(
+            request,
+            "core/login.html",
+            {"next": request.GET.get("next", "")},
+        )
 
     email = request.POST.get("email", "").strip()
     password = request.POST.get("password", "")
+    next_url = request.POST.get("next", "").strip() or request.GET.get("next", "").strip()
 
     try:
         usuario = get_user_model().objects.get(email__iexact=email)
@@ -101,6 +109,11 @@ def login_view(request):
 
     if user:
         login(request, user)
+
+        if next_url and url_has_allowed_host_and_scheme(
+            next_url, allowed_hosts=settings.ALLOWED_HOSTS
+        ):
+            return redirect(next_url)
 
         if hasattr(user, "aluno"):
             return redirect("core:painel_aluno", aluno_id=user.aluno.id)
@@ -225,6 +238,7 @@ def criar_aluno(request):
 
 
 @login_required
+@apenas_personal
 def avaliacoes(request):
 
     avaliacoes = AvaliacaoFisica.objects.filter(
@@ -244,6 +258,7 @@ def avaliacoes(request):
 
 
 @login_required
+@apenas_personal
 def detalhe_avaliacao(request, id):
     avaliacao = get_object_or_404(AvaliacaoFisica, id=id, usuario=request.user)
 
@@ -270,6 +285,7 @@ def detalhe_avaliacao(request, id):
 
 
 @login_required
+@apenas_personal
 def dashboard(request, id):
     avaliacao = get_object_or_404(AvaliacaoFisica, id=id, usuario=request.user)
 
@@ -360,7 +376,12 @@ def fitflix(request):
         for nome, lista in grupo_dict.items()
     ]
 
-    return render(request, "core/fitflix.html", {"grupos": grupos})
+    alunos = Aluno.objects.filter(personal=request.user).order_by("nome")
+    return render(
+        request,
+        "core/fitflix.html",
+        {"grupos": grupos, "alunos": alunos},
+    )
 
 
 # ==================
@@ -369,12 +390,11 @@ def fitflix(request):
 
 
 @login_required
+@apenas_aluno
 def painel_aluno(request, aluno_id):
-    aluno_filter = Q(id=aluno_id, user=request.user) | Q(
-        id=aluno_id,
-        personal=request.user,
-    )
-    aluno = get_object_or_404(Aluno, aluno_filter)
+    aluno = get_object_or_404(Aluno, id=aluno_id, user=request.user)
+    if aluno.personal_id is None:
+        raise Http404
     treinos = Treino.objects.filter(aluno=aluno)
 
     return render(
@@ -428,29 +448,37 @@ def calcular_composicao(avaliacao):
 
 
 @login_required
+@apenas_personal
 def criar_avaliacao(request):
     if request.method == "POST":
-        avaliacao_form = AvaliacaoFisicaForm(request.POST)
+        avaliacao_form = AvaliacaoFisicaForm(request.POST, user=request.user)
         circ_form = CircunferenciaForm(request.POST)
         adip_form = AdipometriaForm(request.POST)
 
         if all([avaliacao_form.is_valid(), circ_form.is_valid(), adip_form.is_valid()]):
             avaliacao = avaliacao_form.save(commit=False)
             avaliacao.usuario = request.user
-            avaliacao.save()
+            aluno = avaliacao_form.cleaned_data.get("aluno")
+            if aluno is not None and aluno.personal_id != request.user.pk:
+                avaliacao_form.add_error(
+                    "aluno", "Aluno inválido para este personal."
+                )
+            else:
+                avaliacao.aluno = aluno
+                avaliacao.save()
 
-            circ = circ_form.save(commit=False)
-            circ.avaliacao = avaliacao
-            circ.save()
+                circ = circ_form.save(commit=False)
+                circ.avaliacao = avaliacao
+                circ.save()
 
-            adip = adip_form.save(commit=False)
-            adip.avaliacao = avaliacao
-            adip.save()
+                adip = adip_form.save(commit=False)
+                adip.avaliacao = avaliacao
+                adip.save()
 
-            return redirect("core:avaliacoes")
+                return redirect("core:avaliacoes")
 
     else:
-        avaliacao_form = AvaliacaoFisicaForm()
+        avaliacao_form = AvaliacaoFisicaForm(user=request.user)
         circ_form = CircunferenciaForm()
         adip_form = AdipometriaForm()
 
@@ -471,6 +499,8 @@ def criar_avaliacao(request):
 
 
 @login_required
+@apenas_personal
+@require_POST
 def excluir_avaliacao(request, id):
     avaliacao = get_object_or_404(AvaliacaoFisica, id=id, usuario=request.user)
     avaliacao.delete()
@@ -483,16 +513,17 @@ def excluir_avaliacao(request, id):
 
 
 @login_required
+@apenas_personal
 def editar_avaliacao(request, id):
     avaliacao = get_object_or_404(AvaliacaoFisica, id=id, usuario=request.user)
 
     if request.method == "POST":
-        form = AvaliacaoFisicaForm(request.POST, instance=avaliacao)
+        form = AvaliacaoFisicaForm(request.POST, instance=avaliacao, user=request.user)
         if form.is_valid():
             form.save()
             return redirect("core:avaliacoes")
     else:
-        form = AvaliacaoFisicaForm(instance=avaliacao)
+        form = AvaliacaoFisicaForm(instance=avaliacao, user=request.user)
 
     return render(
         request, "core/editar_avaliacao.html", {
@@ -505,6 +536,8 @@ def editar_avaliacao(request, id):
 # ================
 
 
+@login_required
+@apenas_personal
 def escolher_tipo(request):
     return render(request, "core/escolher_tipo.html")
 
@@ -515,27 +548,35 @@ def escolher_tipo(request):
 
 
 @login_required
+@apenas_personal
 def criar_avaliacao_idoso(request):
-    avaliacao_form = AvaliacaoFisicaForm(request.POST or None)
+    avaliacao_form = AvaliacaoFisicaForm(request.POST or None, user=request.user)
     circ_form = CircunferenciaIdosoForm(request.POST or None)
     form = AvaliacaoIdosoForm(request.POST or None)
 
     if request.method == "POST":
         if avaliacao_form.is_valid() and circ_form.is_valid() and form.is_valid():
-            with transaction.atomic():
-                avaliacao = avaliacao_form.save(commit=False)
-                avaliacao.usuario = request.user
-                avaliacao.save()
+            aluno = avaliacao_form.cleaned_data.get("aluno")
+            if aluno is not None and aluno.personal_id != request.user.pk:
+                avaliacao_form.add_error(
+                    "aluno", "Aluno inválido para este personal."
+                )
+            else:
+                with transaction.atomic():
+                    avaliacao = avaliacao_form.save(commit=False)
+                    avaliacao.usuario = request.user
+                    avaliacao.aluno = aluno
+                    avaliacao.save()
 
-                circ = circ_form.save(commit=False)
-                circ.avaliacao = avaliacao
-                circ.save()
+                    circ = circ_form.save(commit=False)
+                    circ.avaliacao = avaliacao
+                    circ.save()
 
-                idoso = form.save(commit=False)
-                idoso.avaliacao = avaliacao
-                idoso.save()
+                    idoso = form.save(commit=False)
+                    idoso.avaliacao = avaliacao
+                    idoso.save()
 
-            return redirect("core:avaliacoes")
+                return redirect("core:avaliacoes")
 
     return render(
         request,
@@ -554,22 +595,30 @@ def criar_avaliacao_idoso(request):
 
 
 @login_required
+@apenas_personal
 def criar_avaliacao_crianca(request):
-    avaliacao_form = AvaliacaoFisicaForm(request.POST or None)
+    avaliacao_form = AvaliacaoFisicaForm(request.POST or None, user=request.user)
     form = AvaliacaoCriancaForm(request.POST or None)
 
     if request.method == "POST":
         if avaliacao_form.is_valid() and form.is_valid():
-            with transaction.atomic():
-                avaliacao = avaliacao_form.save(commit=False)
-                avaliacao.usuario = request.user
-                avaliacao.save()
+            aluno = avaliacao_form.cleaned_data.get("aluno")
+            if aluno is not None and aluno.personal_id != request.user.pk:
+                avaliacao_form.add_error(
+                    "aluno", "Aluno inválido para este personal."
+                )
+            else:
+                with transaction.atomic():
+                    avaliacao = avaliacao_form.save(commit=False)
+                    avaliacao.usuario = request.user
+                    avaliacao.aluno = aluno
+                    avaliacao.save()
 
-                crianca = form.save(commit=False)
-                crianca.avaliacao = avaliacao
-                crianca.save()
+                    crianca = form.save(commit=False)
+                    crianca.avaliacao = avaliacao
+                    crianca.save()
 
-            return redirect("core:avaliacoes")
+                return redirect("core:avaliacoes")
 
     return render(
         request,
@@ -676,6 +725,8 @@ def criar_exercicio(request):
 # ====================
 
 
+@login_required
+@apenas_personal
 def exercicio_detalhe(request, id):
     exercicio = get_object_or_404(VideoExercicio, id=id)
     variacoes = exercicio.variacoes.all()
@@ -760,6 +811,8 @@ def editar_treino(request, treino_id):
 # =====================
 
 
+@login_required
+@apenas_personal
 def lista_exercicios(request, id):
     grupo = get_object_or_404(GrupoMuscular, id=id)
     exercicios = grupo.exercicios.all()
@@ -797,12 +850,26 @@ def treino_detail(request, treino_id):
 # ================
 
 
+@login_required
 def ver_treino(request, token):
     treino = get_object_or_404(Treino, token=token)
 
-    link = request.build_absolute_uri(treino.get_link())
+    # Validação de propriedade: o usuário autenticado deve ser o aluno dono
+    # do treino (relação Treino -> Aluno -> User).
+    aluno = treino.aluno
+    if aluno.user != request.user:
+        # Aluno diferente, personal ou admin: 404
+        raise Http404
 
-    return render(request, "core/treino_publico.html", {"treino": treino, "link": link})
+    # Renderizar o treino publico para o aluno proprietário.
+    return render(
+        request,
+        "core/treino_publico.html",
+        {
+            "treino": treino,
+            "link": request.build_absolute_uri(treino.get_link()),
+        },
+    )
 
 
 # =====================

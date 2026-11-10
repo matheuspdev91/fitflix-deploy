@@ -19,9 +19,15 @@ User = get_user_model()
 
 
 class AvaliacaoFisicaForm(forms.ModelForm):
+    aluno = forms.ModelChoiceField(
+        queryset=Aluno.objects.none(),
+        label="Aluno",
+    )
+
     class Meta:
         model = AvaliacaoFisica
         fields = [
+            "aluno",
             "nome",
             "sexo",
             "data_nascimento",
@@ -33,6 +39,20 @@ class AvaliacaoFisicaForm(forms.ModelForm):
         widgets = {
             "data_nascimento": forms.DateInput(attrs={"type": "date"}),
         }
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        if user is not None and user.is_authenticated:
+            self.fields["aluno"].queryset = Aluno.objects.filter(
+                personal=user
+            ).order_by("nome")
+            if self.instance.pk:
+                if self.instance.aluno_id:
+                    self.fields["aluno"].initial = self.instance.aluno_id
+                    self.fields["aluno"].required = True
+                else:
+                    self.fields["aluno"].initial = None
+                    self.fields["aluno"].required = False
 
 
 class CircunferenciaForm(forms.ModelForm):

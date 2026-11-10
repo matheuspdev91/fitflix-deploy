@@ -41,6 +41,7 @@
     <div class="acoes">
         <a href="{% url 'core:adicionar_exercicio' treino.id %}" class="btn">Adicionar exercicio</a>
         <a href="{% url 'core:home' %}" class="btn">Voltar</a>
+        <button type="button" class="btn" id="copiar-link" data-link="{{ treino_url }}">Copiar link</button>
         <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn">
             WhatsApp
         </a>
@@ -49,3 +50,87 @@
 </div>
 
 {% endblock %}
+
+<script>
+(function () {
+  var btn = document.getElementById("copiar-link");
+  var msg = document.getElementById("copiar-link-msg");
+  if (!btn) {
+    return;
+  }
+  if (!msg) {
+    msg = document.createElement("p");
+    msg.id = "copiar-link-msg";
+    msg.setAttribute("role", "status");
+    btn.insertAdjacentElement("afterend", msg);
+  }
+  btn.addEventListener("click", function () {
+    var link = btn.getAttribute("data-link");
+    copyText(link);
+  });
+
+  function copyText(text) {
+    var onOk = function () {
+      msg.textContent = "Link copiado!";
+      flashSuccess(btn);
+    };
+    var onFail = function () {
+      msg.textContent = "Não foi possível copiar o link.";
+      flashError(btn);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onOk).catch(onFail);
+    } else {
+      fallbackCopy(text, onOk, onFail);
+    }
+  }
+
+  function fallbackCopy(text, ok, fail) {
+    var textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand("copy");
+      ok();
+    } catch (err) {
+      fail();
+    }
+    document.body.removeChild(textarea);
+  }
+
+  function flashSuccess(el) {
+    if (!el) {
+      return;
+    }
+    el.classList.add("copiado");
+    setTimeout(function () {
+      el.classList.remove("copiado");
+    }, 1200);
+  }
+
+  function flashError(el) {
+    if (!el) {
+      return;
+    }
+    el.classList.add("erro");
+    setTimeout(function () {
+      el.classList.remove("erro");
+    }, 1200);
+  }
+})();
+</script>
+
+<style>
+#copiar-link.copiado {
+  background-color: #198754;
+  color: #ffffff;
+}
+#copiar-link.erro {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+</style>

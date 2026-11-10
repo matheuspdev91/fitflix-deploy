@@ -1,0 +1,17 @@
+/* BOTÃO DE CADASTRO DE ALUNO */
+
+.fitflix-student-submit {
+    min-width: 190px;
+    min-height: 52px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+}
+
+.fitflix-student-submit:hover {
+    transform: translateY(-2px);
+}

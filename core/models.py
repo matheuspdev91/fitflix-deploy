@@ -2,6 +2,7 @@ from django.contrib.auth import models
 from datetime import date
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.db import models
 import uuid
 
@@ -48,6 +49,13 @@ class AvaliacaoFisica(models.Model):
 
     data = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(
+        "Aluno",
+        on_delete=models.SET_NULL,
+        related_name="avaliacoes_fisicas",
+        null=True,
+        blank=True,
+    )
 
     nome = models.CharField(max_length=100)
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
@@ -307,6 +315,24 @@ class ExercicioTreino(models.Model):
     carga = models.CharField(max_length=50, blank=True)
 
     ordem = models.IntegerField()
+
+    def clean(self):
+        super().clean()
+        if (
+            self.exercicio_id
+            and self.variacao_id
+            and not VariacaoExercicio.objects.filter(
+                pk=self.variacao_id,
+                exercicio_id=self.exercicio_id,
+            ).exists()
+        ):
+            raise ValidationError(
+                {"variacao": "A variação deve pertencer ao exercício selecionado."}
+            )
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.treino.nome} - {self.exercicio.nome}"

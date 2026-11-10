@@ -10,10 +10,14 @@ from django.contrib.auth import get_user_model
 from core.services.asaas.client import AsaasClient
 from core.services.asaas.exceptions import AsaasAuthenticationError, AsaasAPIError
 from datetime import date
+import requests
+import certifi
+import requests.certs as requests_certs
 
 User = get_user_model()
 
 
+@override_settings(SECURE_SSL_REDIRECT=False)
 class WebhookTests(TestCase):
 
     def setUp(self):
@@ -430,6 +434,78 @@ class AsaasClientTests(TestCase):
 
     @patch.dict(
         'os.environ',
+        {'ASAAS_ENVIRONMENT': 'sandbox', 'ASAAS_SANDBOX_API_KEY': 'test-key'},
+    )
+    @patch('core.services.asaas.client.requests.request')
+    def test_client_converte_erro_http(self, mock_request):
+        response = MagicMock()
+        response.text = "erro simulado"
+        mock_request.side_effect = requests.HTTPError(response=response)
+
+        with self.assertRaises(AsaasAPIError):
+            AsaasClient().get_account()
+
+    @patch.dict(
+        'os.environ',
+        {'ASAAS_ENVIRONMENT': 'sandbox', 'ASAAS_SANDBOX_API_KEY': 'test-key'},
+    )
+    @patch('core.services.asaas.client.requests.request')
+    def test_client_converte_timeout(self, mock_request):
+        mock_request.side_effect = requests.Timeout("timeout simulado")
+
+        with self.assertRaises(AsaasAPIError):
+            AsaasClient().get_account()
+
+    @patch.dict(
+        'os.environ',
+        {'ASAAS_ENVIRONMENT': 'sandbox', 'ASAAS_SANDBOX_API_KEY': 'test-key'},
+    )
+    @patch('core.services.asaas.client.requests.request')
+    def test_client_converte_falha_de_conexao(self, mock_request):
+        mock_request.side_effect = requests.ConnectionError("falha simulada")
+
+        with self.assertRaises(AsaasAPIError):
+            AsaasClient().get_account()
+
+    @patch.dict(
+        'os.environ',
+        {'ASAAS_ENVIRONMENT': 'sandbox', 'ASAAS_SANDBOX_API_KEY': 'test-key'},
+    )
+    @patch('core.services.asaas.client.requests.request')
+    def test_client_converte_erro_de_certificado_tls(self, mock_request):
+        mock_request.side_effect = requests.exceptions.SSLError(
+            "falha TLS simulada"
+        )
+
+        with self.assertRaises(AsaasAPIError):
+            AsaasClient().get_account()
+
+    @patch.dict(
+        'os.environ',
+        {'ASAAS_ENVIRONMENT': 'sandbox', 'ASAAS_SANDBOX_API_KEY': 'test-key'},
+    )
+    @patch('core.services.asaas.client.requests.request')
+    def test_client_mantem_validacao_tls_habilitada(self, mock_request):
+        response = MagicMock()
+        response.status_code = 200
+        response.json.return_value = {"id": "account-test"}
+        mock_request.return_value = response
+
+        AsaasClient().get_account()
+
+        self.assertNotIn("verify", mock_request.call_args.kwargs)
+        verify_settings = requests.Session().merge_environment_settings(
+            "https://api-sandbox.asaas.com/v3",
+            {},
+            None,
+            None,
+            None,
+        )
+        self.assertIs(verify_settings["verify"], True)
+        self.assertEqual(requests_certs.where(), certifi.where())
+
+    @patch.dict(
+        'os.environ',
         {
             'ASAAS_ENVIRONMENT': 'sandbox',
             'ASAAS_SANDBOX_API_KEY': '123',
@@ -762,6 +838,7 @@ class PagamentoAsaasTests(TestCase):
             )
 
 
+@override_settings(SECURE_SSL_REDIRECT=False)
 class CriarAssinaturaViewTests(TestCase):
 
     def setUp(self):

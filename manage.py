@@ -4,7 +4,7 @@ import sys
 
 
 def main():
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "projeto.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "projeto.test_settings")
 
     from django.core.management import execute_from_command_line
 
