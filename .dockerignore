@@ -58,3 +58,9 @@ build/
 
 # Docker
 docker-compose.yml
+
+# Virtualenv
+venv/
+venv311/
+.venv/
+env/
