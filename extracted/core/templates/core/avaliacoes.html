@@ -1,0 +1,98 @@
+{% extends "core/base.html" %}
+
+{% block title %}Avaliações Físicas{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 1200px; padding: var(--space-6) var(--space-4);">
+    
+    <!-- HEADER -->
+    <div class="d-flex justify-between items-center" style="margin-bottom: var(--space-8); flex-wrap: wrap; gap: var(--space-4);">
+        <div>
+            <h1 style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); margin: 0; color: var(--color-text);">Avaliações Físicas</h1>
+            <p style="color: var(--color-text-muted); margin-top: var(--space-1);">Gerencie o histórico e a evolução dos seus alunos.</p>
+        </div>
+        <div>
+            <a href="{% url 'core:escolher_tipo' %}" class="btn btn-primary" style="padding: 12px 24px; font-weight: var(--font-weight-bold); box-shadow: 0 10px 20px rgba(0, 255, 136, 0.2);">
+                <span style="margin-right: 8px;">+</span> Nova Avaliação
+            </a>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    {% if avaliacoes %}
+        <div class="grid-3" id="avaliacoes-grid">
+            {% for avaliacao in avaliacoes %}
+                <div class="card card-bordered avaliacao-card" data-aluno="{{ avaliacao.nome }}" style="display: flex; flex-direction: column;">
+                    
+                    <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: var(--space-4);">
+                        <div class="status-badge-container">
+                            <!-- JS will inject badge here -->
+                        </div>
+                        <div style="font-size: var(--font-size-xs); color: var(--color-text-muted);">
+                            {{ avaliacao.criado_em|date:"d/m/Y" }}
+                        </div>
+                    </div>
+
+                    <div class="card-body" style="padding: var(--space-5) var(--space-4); flex: 1;">
+                        <h3 class="card-title" style="margin-bottom: var(--space-2); font-size: var(--font-size-lg);">
+                            {{ avaliacao.nome }}
+                        </h3>
+                        
+                        <!-- Determinando Tipo -->
+                        <div style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(255,255,255,0.04); border-radius: var(--radius-full); font-size: var(--font-size-xs); color: var(--color-text-muted);">
+                            {% if avaliacao.idoso %}
+                                🧓 Avaliação Funcional (Idoso)
+                            {% elif avaliacao.crianca %}
+                                🧒 Avaliação Infantil (Criança)
+                            {% else %}
+                                🧍 Avaliação Antropométrica (Adulto)
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="card-footer" style="padding: var(--space-4); border-top: 1px solid rgba(255,255,255,0.05);">
+                        <a href="{% url 'core:detalhe_avaliacao' avaliacao.id %}" class="btn w-full justify-center" style="border-color: rgba(0, 255, 136, 0.3); color: var(--color-primary);">
+                            Visualizar Avaliação
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- EMPTY STATE -->
+        <div class="empty-state" style="text-align: center; padding: var(--space-12) var(--space-4); background: var(--color-surface); border: 1px dashed rgba(255,255,255,0.1); border-radius: var(--radius-lg);">
+            <div style="font-size: 4rem; margin-bottom: var(--space-4); opacity: 0.5;">📋</div>
+            <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-2);">Nenhuma avaliação encontrada</h3>
+            <p style="color: var(--color-text-muted); max-width: 400px; margin: 0 auto var(--space-6);">Você ainda não possui avaliações físicas cadastradas no sistema. Inicie criando o primeiro protocolo.</p>
+            <a href="{% url 'core:escolher_tipo' %}" class="btn btn-primary" style="padding: 12px 24px;">
+                + Criar Primeira Avaliação
+            </a>
+        </div>
+    {% endif %}
+
+</div>
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.avaliacao-card');
+        const vistos = new Set();
+
+        cards.forEach(card => {
+            const nome = card.getAttribute('data-aluno').trim().toLowerCase();
+            const badgeContainer = card.querySelector('.status-badge-container');
+            
+            if (!vistos.has(nome)) {
+                // Primeira vez que vemos este aluno (mais recente)
+                badgeContainer.innerHTML = '<span style="display: inline-block; padding: 4px 8px; border-radius: var(--radius-sm); font-size: 0.65rem; font-weight: bold; background: rgba(0, 255, 136, 0.15); color: var(--color-primary); letter-spacing: 0.05em;">AVALIAÇÃO ATUAL</span>';
+                vistos.add(nome);
+                card.style.borderColor = 'rgba(0, 255, 136, 0.2)';
+            } else {
+                // Histórico
+                badgeContainer.innerHTML = '<span style="display: inline-block; padding: 4px 8px; border-radius: var(--radius-sm); font-size: 0.65rem; font-weight: bold; background: rgba(255, 255, 255, 0.05); color: rgba(255,255,255,0.4); letter-spacing: 0.05em;">HISTÓRICO</span>';
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

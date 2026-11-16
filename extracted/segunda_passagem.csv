@@ -1,0 +1,318 @@
+id,exercicio,variacao,busca,arquivo,score,status
+666,Supino,Reto halter,Supino Reto halter,PEITORAL/Supino Declinado com Halteres.gif,0.6809,SEM_MATCH
+668,Supino,Inclinado halter,Supino Inclinado halter,PEITORAL/Supino Inclinado com Halteres.gif,0.8846,MATCH
+672,Crucifixo,Máquina,Crucifixo Máquina,PEITORAL/Crucifixo com Cabo Declinado.gif,0.6667,SEM_MATCH
+673,Crucifixo,Cross (cabo),Crucifixo Cross (cabo),PEITORAL/Crucifixo Deitado com Cabo.gif,0.7391,SEM_MATCH
+675,Remada,Unilateral halter,Remada Unilateral halter,COSTAS/Remada Unilateral com Barra.gif,0.7843,SEM_MATCH
+677,Remada,Cavalinho,Remada Cavalinho,COSTAS/Remada T com alavanca.gif,0.6486,SEM_MATCH
+678,Puxada,Frontal aberta,Puxada Frontal aberta,GIFS CALISTENIA/Puxada Front Lever.gif,0.7692,SEM_MATCH
+679,Puxada,Frontal fechada,Puxada Frontal fechada,GIFS CALISTENIA/Puxada Front Lever.gif,0.7,SEM_MATCH
+680,Puxada,Neutra,Puxada Neutra,COSTAS/Puxada Alta.gif,0.75,SEM_MATCH
+681,Puxada,Supinada,Puxada Supinada,COSTAS/Puxada Alta.gif,0.6923,SEM_MATCH
+687,Elevação lateral,Polia,Elevação lateral Polia,OMBROS/Elevação lateral deitado.gif,0.7826,SEM_MATCH
+690,Elevação frontal,Halteres,Elevação frontal Halteres,OMBROS/Elevação frontal com halteres.gif,0.9259,MATCH
+691,Elevação frontal,Polia,Elevação frontal Polia,OMBROS/Elevação frontal com halteres.gif,0.7451,SEM_MATCH
+696,Rosca,No cabo,Rosca No cabo,BÍCEPS/Rosca no Cabo.gif,1.0,MATCH
+711,Abdução,Polia,Abdução Polia,GIFS ABDOMINAIS/Abdominal com Peso.gif,0.5161,SEM_MATCH
+712,Abdução,Elástico,Abdução Elástico,GIFS TREINAMENTO FUNCIONAL/Step com elástico.gif,0.6667,SEM_MATCH
+713,Panturrilha,Em pé,Panturrilha Em pé,PANTURRILHAS/Panturrilhas em Pé.gif,0.9714,MATCH
+717,Agachamento,Livre,Agachamento Livre,GIFS CALISTENIA/Agachamento.gif,0.7857,SEM_MATCH
+719,Agachamento,Frontal,Agachamento Frontal,PERNAS/Agachamento Frontal.gif,1.0,MATCH
+725,Cadeira extensora,Unilateral,Cadeira extensora Unilateral,PERNAS/Cadeira extensora.gif,0.7556,SEM_MATCH
+726,Cadeira extensora,Bilateral,Cadeira extensora Bilateral,PERNAS/Cadeira extensora.gif,0.7727,SEM_MATCH
+730,Stiff,Halteres,Stiff Halteres,PERNAS/Stiff com Halter.gif,0.8,SEM_MATCH
+731,Stiff,Smith,Stiff Smith,PERNAS/Stiff com Halter.gif,0.5926,SEM_MATCH
+733,Afundo,Smith,Afundo Smith,GIFS TREINAMENTO FUNCIONAL/Afundo Lateral.gif,0.6154,SEM_MATCH
+734,Afundo,Passada,Afundo Passada,GIFS TREINAMENTO FUNCIONAL/Afundo Lateral.gif,0.6429,SEM_MATCH
+834,Supino,Supino Inclinado Com Halteres E Pegada,Supino Supino Inclinado Com Halteres E Pegada,PEITORAL/Supino inclinado com halteres e pegada fechada.gif,0.8352,SEM_MATCH
+836,Supino,Supino Declinada,Supino Supino Declinada,PEITORAL/Supino inclinado com cabo.gif,0.6667,SEM_MATCH
+837,Outros,Pullover Com Halteres Na Bola,Outros Pullover Com Halteres Na Bola,PEITORAL/Pullover com Halteres na Bola de Estabilidade.gif,0.716,SEM_MATCH
+838,Supino,Supino Pegada,Supino Supino Pegada,PEITORAL/Supino declinado pegada martelo.gif,0.6667,SEM_MATCH
+839,Outros,Mergulho De Peito,Outros Mergulho De Peito,PEITORAL/Mergulho de peito assistido.gif,0.6667,SEM_MATCH
+840,Supino,Supino Inclinado Na Máquina Com Pegada,Supino Supino Inclinado Na Máquina Com Pegada,PEITORAL/Supino Inclinado na Máquina com Pegada Martelo.gif,0.8352,SEM_MATCH
+841,Supino,Supino Inclinado,Supino Supino Inclinado,PEITORAL/Supino inclinado com cabo.gif,0.6667,SEM_MATCH
+846,Supino,Supino Invertido Com Pegada,Supino Supino Invertido Com Pegada,PEITORAL/Supino invertido com pegada aberta.gif,0.7941,SEM_MATCH
+847,Supino,Supino Unilateral,Supino Supino Unilateral,PEITORAL/Supino unilateral com Alavanca.gif,0.6296,SEM_MATCH
+849,Supino,Supino Declinado Pegada,Supino Supino Declinado Pegada,PEITORAL/Supino declinado pegada martelo.gif,0.7541,SEM_MATCH
+851,Cross Over,Crossover,Cross Over Crossover,PEITORAL/Cross over polia Alta.gif,0.5854,SEM_MATCH
+852,Supino,Supino Declinado Unilateral Pegada Martelo,Supino Supino Declinado Unilateral Pegada Martelo,PEITORAL/Supino Declinado Unilateral Pegada Martelo com Haltere.gif,0.8155,SEM_MATCH
+854,Crucifixo,Crucifixo Com Cabo,Crucifixo Crucifixo Com Cabo,PEITORAL/Crucifixo Deitado com Cabo.gif,0.7778,SEM_MATCH
+857,Supino,Supino Declinado,Supino Supino Declinado,PEITORAL/Supino inclinado com cabo.gif,0.6667,SEM_MATCH
+858,Supino,Supino Unilateral Com Halteres Com Pegada,Supino Supino Unilateral Com Halteres Com Pegada,PEITORAL/Supino Unilateral com Halteres com Pegada Reversa.gif,0.8454,SEM_MATCH
+859,Supino,Supino Inclinado Com Pegada,Supino Supino Inclinado Com Pegada,PEITORAL/Supino inclinado com pegada fechada.gif,0.7826,SEM_MATCH
+860,Puxada,Puxada Alta Com Um Joelho,Puxada Puxada Alta Com Um Joelho,COSTAS/Puxada Alta com Um Joelho Apoiado.gif,0.7692,SEM_MATCH
+864,Remada,Remada T Invertida,Remada Remada T Invertida,COSTAS/Remada Invertida.gif,0.7805,SEM_MATCH
+865,Outros,Pullover Na Máquina,Outros Pullover Na Máquina,GLÚTEOS/Glúteo Coice Na Máquina.gif,0.6939,SEM_MATCH
+867,Remada,Remada,Remada Remada,OMBROS/Remada Alta (1).gif,0.6923,SEM_MATCH
+871,Remada,Remada T,Remada Remada T,OMBROS/Remada Alta (1).gif,0.7143,SEM_MATCH
+872,Outros,Pullover Com Barra W Pegada,Outros Pullover Com Barra W Pegada,COSTAS/Pullover com Barra W Pegada invertida.gif,0.7606,SEM_MATCH
+878,Puxada,Puxada Na Polia Alta Com Pegada,Puxada Puxada Na Polia Alta Com Pegada,COSTAS/Puxada na Polia Alta com Pegada Fechada.gif,0.8052,SEM_MATCH
+880,Outros,Pullover Com Barra No Banco,Outros Pullover Com Barra No Banco,COSTAS/Pullover com barra no banco declinado.gif,0.7606,SEM_MATCH
+881,Puxada,Puxada Alta Unilateral Alta,Puxada Puxada Alta Unilateral Alta,COSTAS/Puxada alta unilateral alta ajoelhada.gif,0.7606,SEM_MATCH
+882,Agachamento,Agachamento Com Salto Usando Barra,Agachamento Agachamento Com Salto Usando Barra,PERNAS/Agachamento com Salto usando Barra Hexagonal.gif,0.7556,SEM_MATCH
+883,Outros,Flexão De Pernas Na Bola,Outros Flexão De Pernas Na Bola,GIFS CALISTENIA/Flexão de pernas com toalha.gif,0.6897,SEM_MATCH
+891,Outros,Avanço Invertido,Outros Avanço Invertido,GIFS ABDOMINAIS/Prancha Invertida.gif,0.65,SEM_MATCH
+892,Agachamento,Agachamento Goblet,Agachamento Agachamento Goblet,PERNAS/Agachamento com Cinto.gif,0.6667,SEM_MATCH
+895,Outros,Elevação De Perna Em Pé,Outros Elevação De Perna Em Pé,GIFS TREINAMENTO FUNCIONAL/Elevação de panturrilha em pé.gif,0.7119,SEM_MATCH
+897,Outros,Elevação De Joelho,Outros Elevação De Joelho,GIFS TREINAMENTO FUNCIONAL/Subida no Step com Elevação de Joelhos.gif,0.6984,SEM_MATCH
+899,Outros,Stiff Unilateral,Outros Stiff Unilateral,PERNAS/Stiff Unilateral com Barra.gif,0.6531,SEM_MATCH
+900,Outros,Elevação Com Barra Em,Outros Elevação Com Barra Em,PERNAS/Elevação com Barra em Degrau.gif,0.75,SEM_MATCH
+901,Outros,Extensão De Perna,Outros Extensão De Perna,PERNAS/Extensão de Perna Unilateral.gif,0.6538,SEM_MATCH
+902,Outros,Wall Sit,Outros Wall Sit,GIFS TREINAMENTO FUNCIONAL/Wall Sit.gif,0.6957,SEM_MATCH
+904,Outros,Subida No Step Com Elevação,Outros Subida No Step Com Elevação,GIFS TREINAMENTO FUNCIONAL/Subida no Step com Elevação de Joelhos.gif,0.75,SEM_MATCH
+905,Outros,Afundo,Outros Afundo,GLÚTEOS/Quatro Apoios.gif,0.5385,SEM_MATCH
+906,Outros,Flexão De Pernas,Outros Flexão De Pernas,GIFS ABDOMINAIS/Tesoura de Pernas.gif,0.7,SEM_MATCH
+907,Leg Press,Leg Press,Leg Press Leg Press,PERNAS/Leg Press Horizontal.gif,0.5641,SEM_MATCH
+908,Outros,Flexão De Pernas Com Halteres,Outros Flexão De Pernas Com Halteres,PERNAS/Flexão de Pernas com Halteres Declinado.gif,0.7733,SEM_MATCH
+910,Agachamento,Agachamento Unilateral Cruzado,Agachamento Agachamento Unilateral Cruzado,PERNAS/Agachamento unilateral cruzado com haltere.gif,0.7143,SEM_MATCH
+911,Outros,Pressão Unilateral Assistida Por,Outros Pressão Unilateral Assistida Por,PERNAS/Pressão Unilateral Assistida por Alavanca.gif,0.8,SEM_MATCH
+916,Tríceps Francês,Tríceps Francês,Tríceps Francês Tríceps Francês,TRÍCEPS/Tríceps Francês com Halteres.gif,0.678,SEM_MATCH
+917,Tríceps,Extensão De Tríceps Com Cabo Em Posição,Tríceps Extensão De Tríceps Com Cabo Em Posição,TRÍCEPS/Extensão de Tríceps com Cabo em Posição Ajoelhada.gif,0.8125,SEM_MATCH
+923,Tríceps,Extensão De Tríceps Com Cabo,Tríceps Extensão De Tríceps Com Cabo,TRÍCEPS/Extensão de tríceps lateral com cabo.gif,0.7778,SEM_MATCH
+924,Tríceps Francês,Tríceps Francês Alternada Com Halteres No Banco,Tríceps Francês Tríceps Francês Alternada Com Halteres No Banco,TRÍCEPS/Tríceps Francês Alternada com Halteres no Banco Inclinado.gif,0.7833,SEM_MATCH
+925,Outros,Extensão Concentrada Com Cabo,Outros Extensão Concentrada Com Cabo,TRÍCEPS/Extensão Concentrada com Cabo no Joelho.gif,0.7733,SEM_MATCH
+928,Tríceps Francês,Tríceps Francês Com Halter,Tríceps Francês Tríceps Francês Com Halter,TRÍCEPS/Tríceps Francês com Halteres.gif,0.7429,SEM_MATCH
+929,Tríceps,Extensão De Tríceps Invertida,Tríceps Extensão De Tríceps Invertida,TRÍCEPS/Extensão de tríceps com pegada invertida.gif,0.7532,SEM_MATCH
+930,Tríceps,Extensão De Tríceps Com Barra W,Tríceps Extensão De Tríceps Com Barra W,TRÍCEPS/Extensão de tríceps com barra em pé.gif,0.8108,SEM_MATCH
+935,Tríceps Testa,Tríceps Testa Pegada Neutra,Tríceps Testa Tríceps Testa Pegada Neutra,TRÍCEPS/Tríceps Testa com Barra Pegada Invertida.gif,0.6914,SEM_MATCH
+936,Tríceps Testa,Tríceps Testa Com Barra Pegada,Tríceps Testa Tríceps Testa Com Barra Pegada,TRÍCEPS/Tríceps Testa com Barra Pegada Invertida.gif,0.7143,SEM_MATCH
+937,Tríceps,Tríceps Pulley Pegada,Tríceps Tríceps Pulley Pegada,TRÍCEPS/Tríceps pulley pegada invertida.gif,0.7,SEM_MATCH
+938,Supino,Supino,Supino Supino,TRÍCEPS/Supino Fechado.gif,0.5926,SEM_MATCH
+942,Tríceps Testa,Extensão De Tríceps Testa Declinado,Tríceps Testa Extensão De Tríceps Testa Declinado,TRÍCEPS/Extensão de Tríceps Testa Declinado Fechado.gif,0.7609,SEM_MATCH
+943,Tríceps Testa,Tríceps Testa Com Banco Declinado,Tríceps Testa Tríceps Testa Com Banco Declinado,TRÍCEPS/Tríceps Testa com Banco Declinado com Halteres.gif,0.7097,SEM_MATCH
+944,Tríceps,Extensão De Tríceps Com Pegada,Tríceps Extensão De Tríceps Com Pegada,TRÍCEPS/Extensão de tríceps com pegada invertida.gif,0.7692,SEM_MATCH
+946,Tríceps Francês,Tríceps Francês Com Barra W Acima Da Cabeça,Tríceps Francês Tríceps Francês Com Barra W Acima Da Cabeça,TRÍCEPS/Tríceps francês com barra W acima da cabeça sentado.gif,0.7818,SEM_MATCH
+947,Tríceps,Extensão De Tríceps Com Cabo Na Posição,Tríceps Extensão De Tríceps Com Cabo Na Posição,TRÍCEPS/Extensão de tríceps com cabo na posição horizontal.gif,0.8041,SEM_MATCH
+948,Tríceps,Extensão De Tríceps Na Máquina Pegada,Tríceps Extensão De Tríceps Na Máquina Pegada,TRÍCEPS/Extensão de tríceps na máquina pegada neutra.gif,0.8315,SEM_MATCH
+949,Tríceps Francês,Tríceps Francês No Banco Inclinado,Tríceps Francês Tríceps Francês No Banco Inclinado,TRÍCEPS/Tríceps Francês Alternada com Halteres no Banco Inclinado.gif,0.785,SEM_MATCH
+950,Tríceps,Extensão De Tríceps No Cabo,Tríceps Extensão De Tríceps No Cabo,TRÍCEPS/Extensão de tríceps no cabo alto.gif,0.806,SEM_MATCH
+953,Elevação Lateral,Elevação Lateral Unilateral,Elevação Lateral Elevação Lateral Unilateral,OMBROS/Elevação lateral unilateral com cabo.gif,0.675,SEM_MATCH
+954,Remada,Remada De Deltoide Posterior Sentado,Remada Remada De Deltoide Posterior Sentado,OMBROS/Remada de deltoide posterior sentado com haltere.gif,0.7912,SEM_MATCH
+955,Elevação Lateral,Elevação Lateral Com Braço,Elevação Lateral Elevação Lateral Com Braço,OMBROS/Elevação lateral unilateral com cabo.gif,0.7848,SEM_MATCH
+956,Desenvolvimento,Desenvolvimento De Ombros Com Barra W Com Pegada,Desenvolvimento Desenvolvimento De Ombros Com Barra W Com Pegada,OMBROS/Desenvolvimento de ombros com barra W com pegada invertida.gif,0.7869,SEM_MATCH
+958,Desenvolvimento,Desenvolvimento Cubano Sentado,Desenvolvimento Desenvolvimento Cubano Sentado,OMBROS/Desenvolvimento de ombro com barra sentado.gif,0.75,SEM_MATCH
+960,Remada,Remada Inversa Com Cabos,Remada Remada Inversa Com Cabos,OMBROS/Remada inversa com cabos deitado.gif,0.7619,SEM_MATCH
+962,Elevação Lateral,Elevação Lateral De Halteres,Elevação Lateral Elevação Lateral De Halteres,OMBROS/Elevação lateral unilateral com halteres.gif,0.8,SEM_MATCH
+963,Elevação Lateral,Elevação Lateral Alternada,Elevação Lateral Elevação Lateral Alternada,OMBROS/Elevação lateral unilateral com halteres.gif,0.7229,SEM_MATCH
+965,Elevação Lateral,Elevação Lateral Cruzada,Elevação Lateral Elevação Lateral Cruzada,OMBROS/Elevação lateral unilateral com cabo.gif,0.7013,SEM_MATCH
+966,Remada,Remada Lateral Com Halteres,Remada Remada Lateral Com Halteres,OMBROS/Remada lateral com halteres sentado.gif,0.7826,SEM_MATCH
+967,Desenvolvimento,Desenvolvimento Militar Com Pegada,Desenvolvimento Desenvolvimento Militar Com Pegada,OMBROS/Desenvolvimento militar com pegada fechada.gif,0.7391,SEM_MATCH
+970,Desenvolvimento,Desenvolvimento Militar Com Barra No Chão,Desenvolvimento Desenvolvimento Militar Com Barra No Chão,OMBROS/Desenvolvimento militar com barra no chão ajoelhado.gif,0.7593,SEM_MATCH
+971,Elevação Lateral,Elevação Lateral E Frontal,Elevação Lateral Elevação Lateral E Frontal,OMBROS/Elevação lateral unilateral com cabo.gif,0.6835,SEM_MATCH
+973,Elevação Lateral,Elevação Lateral Unilateral Com Haltere,Elevação Lateral Elevação Lateral Unilateral Com Haltere,OMBROS/Elevação lateral unilateral com halteres.gif,0.8125,SEM_MATCH
+974,Elevação Lateral,Elevação Lateral De Braços,Elevação Lateral Elevação Lateral De Braços,OMBROS/Elevação lateral unilateral com cabo.gif,0.6835,SEM_MATCH
+978,Outros,Elevação Frontal Com Barra,Outros Elevação Frontal Com Barra,OMBROS/Elevação frontal com barra girando.gif,0.7761,SEM_MATCH
+984,Outros,Elevação Frontal Com Barra W,Outros Elevação Frontal Com Barra W,OMBROS/Elevação frontal com barra girando.gif,0.7826,SEM_MATCH
+988,Outros,Elevação Frontal,Outros Elevação Frontal,OMBROS/Elevação frontal com halteres.gif,0.6154,SEM_MATCH
+991,Elevação Lateral,Elevação Lateral,Elevação Lateral Elevação Lateral,OMBROS/Elevação lateral deitado.gif,0.7018,SEM_MATCH
+993,Desenvolvimento,Desenvolvimento De Ombro Com Barra,Desenvolvimento Desenvolvimento De Ombro Com Barra,OMBROS/Desenvolvimento de ombro com barra sentado.gif,0.7391,SEM_MATCH
+994,Remada,Remada Com Halteres Para A Posterior,Remada Remada Com Halteres Para A Posterior,OMBROS/Remada com halteres para a posterior de ombros.gif,0.809,SEM_MATCH
+995,Desenvolvimento,Desenvolvimento De Ombro,Desenvolvimento Desenvolvimento De Ombro,OMBROS/Desenvolvimento arnold com um braço.gif,0.6667,SEM_MATCH
+996,Desenvolvimento,Desenvolvimento De Ombros Com Rotação Alternada,Desenvolvimento Desenvolvimento De Ombros Com Rotação Alternada,OMBROS/Desenvolvimento de Ombros com Rotação Alternada com Halteres.gif,0.7642,SEM_MATCH
+997,Outros,Elevação Frontal Alternada,Outros Elevação Frontal Alternada,OMBROS/Elevação Frontal Alternada Com Halteres.gif,0.7222,SEM_MATCH
+998,Outros,Voador,Outros Voador,BÍCEPS/Rosca no Cabo.gif,0.5385,SEM_MATCH
+999,Desenvolvimento,Desenvolvimento De Ombro Alternada Em Pé,Desenvolvimento Desenvolvimento De Ombro Alternada Em Pé,OMBROS/Desenvolvimento de Ombro Alternada em Pé com Halteres.gif,0.7339,SEM_MATCH
+1001,Elevação Lateral,Elevação Lateral Com Tronco,Elevação Lateral Elevação Lateral Com Tronco,OMBROS/Elevação lateral unilateral com cabo.gif,0.75,SEM_MATCH
+1002,Desenvolvimento,Desenvolvimento Cubano,Desenvolvimento Desenvolvimento Cubano,OMBROS/Desenvolvimento de ombro com cabo.gif,0.7042,SEM_MATCH
+1003,Elevação Lateral,Elevação Lateral Com Halteres Para Deltoides Posteriores,Elevação Lateral Elevação Lateral Com Halteres Para Deltoides Posteriores,OMBROS/Elevação lateral com halteres para deltoides posteriores deitado.gif,0.8175,SEM_MATCH
+1004,Outros,Elevação Frontal Com Dois Braços,Outros Elevação Frontal Com Dois Braços,OMBROS/Elevação frontal com dois braços com halteres.gif,0.7619,SEM_MATCH
+1006,Desenvolvimento,Desenvolvimento De Ombro Unilateral,Desenvolvimento Desenvolvimento De Ombro Unilateral,GIFS TREINAMENTO FUNCIONAL/Desenvolvimento de ombro unilateral com banda.gif,0.7292,SEM_MATCH
+1007,Elevação Lateral,Elevação Lateral Com Halteres,Elevação Lateral Elevação Lateral Com Halteres,OMBROS/Elevação lateral unilateral com halteres.gif,0.8605,MATCH
+1009,Desenvolvimento,Desenvolvimento Militar De Uma Mão,Desenvolvimento Desenvolvimento Militar De Uma Mão,OMBROS/Desenvolvimento militar de uma mão com kettlebell.gif,0.6869,SEM_MATCH
+1010,Outros,Levantamento De Halteres De 3,Outros Levantamento De Halteres De 3,OMBROS/Levantamento de halteres de 3 maneiras.gif,0.7838,SEM_MATCH
+1011,Desenvolvimento,Desenvolvimento De Ombros Atrás Do Pescoço,Desenvolvimento Desenvolvimento De Ombros Atrás Do Pescoço,OMBROS/Desenvolvimento de ombros atrás do pescoço sentado.gif,0.7778,SEM_MATCH
+1015,Outros,Máquina Simulador,Outros Máquina Simulador,CARDIO ACADEMIA/Máquina Simulador Escada.gif,0.7083,SEM_MATCH
+1018,Outros,Bicicleta Ergométrica,Outros Bicicleta Ergométrica,CARDIO ACADEMIA/Corrida na Bicicleta Ergométrica.gif,0.8,SEM_MATCH
+1024,Outros,Elevação,Outros Elevação,GLÚTEOS/Glúteo Coice Na Alavanca.gif,0.5128,SEM_MATCH
+1030,Panturrilha,Levantamento De Panturrilha Com Apoio E,Panturrilha Levantamento De Panturrilha Com Apoio E,PANTURRILHAS/Levantamento de panturrilha com apoio de banco.gif,0.8041,SEM_MATCH
+1039,Agachamento,Agachamento Com Sustentação E Elevação,Agachamento Agachamento Com Sustentação E Elevação,GIFS TREINAMENTO FUNCIONAL/Agachamento com Sustentação e Elevação de Panturrilhas.gif,0.7308,SEM_MATCH
+1040,Panturrilha,Levantamento De Panturrilha,Panturrilha Levantamento De Panturrilha,PANTURRILHAS/Levantamento de panturrilha com alavanca.gif,0.6835,SEM_MATCH
+1041,Rosca,Rosca Concentrada Com Pegada Fechada,Rosca Rosca Concentrada Com Pegada Fechada,BÍCEPS/Rosca Concentrada com Pegada Fechada Sentado.gif,0.8372,SEM_MATCH
+1043,Rosca,Máquina De Rosca,Rosca Máquina De Rosca,BÍCEPS/Máquina de rosca direta.gif,0.7111,SEM_MATCH
+1045,Rosca,Rosca Inversa,Rosca Rosca Inversa,BÍCEPS/Rosca inversa com barra W.gif,0.5909,SEM_MATCH
+1048,Rosca,Rosca Direta Com Cabo,Rosca Rosca Direta Com Cabo,BÍCEPS/Rosca Direta com Cabo deitado.gif,0.75,SEM_MATCH
+1053,Rosca,Rosca Bíceps Alta,Rosca Rosca Bíceps Alta,BÍCEPS/Rosca bíceps com halteres.gif,0.6667,SEM_MATCH
+1056,Outros,Extensão De Quadril Em Pé,Outros Extensão De Quadril Em Pé,GLÚTEOS/Extensão de Quadril com Cabo.gif,0.7333,SEM_MATCH
+1058,Outros,Quatro,Outros Quatro,BÍCEPS/Rosca martelo.gif,0.5385,SEM_MATCH
+1060,Outros,Ponte,Outros Ponte,GLÚTEOS/Quatro Apoios.gif,0.56,SEM_MATCH
+1061,Glúteo,Glúteo Coice Na Máquina De Extensão,Glúteo Glúteo Coice Na Máquina De Extensão,GLÚTEOS/Glúteo Coice Na Máquina De Extensão De Pernas.gif,0.8046,SEM_MATCH
+1062,Outros,Extensão De Perna Na Máquina Smith,Outros Extensão De Perna Na Máquina Smith,GLÚTEOS/Extensão de Perna na Máquina Smith Reversa.gif,0.8193,SEM_MATCH
+1063,Outros,Elevação Pélvica Na Máquina De Extensão,Outros Elevação Pélvica Na Máquina De Extensão,GLÚTEOS/Elevação Pélvica na Máquina de Extensão de Pernas.gif,0.8211,SEM_MATCH
+1064,Agachamento,Agachamento Na Máquina,Agachamento Agachamento Na Máquina,GIFS CALISTENIA/Agachamento Pistola na Caixa.gif,0.6774,SEM_MATCH
+1066,Outros,Abdução Lateral Do Quadril,Outros Abdução Lateral Do Quadril,GLÚTEOS/Abdução Lateral do Quadril com Alavanca.gif,0.7222,SEM_MATCH
+1067,Puxada,Puxada De Cabo,Puxada Puxada De Cabo,GLÚTEOS/Puxada De Cabo Ajoelhada.gif,0.6222,SEM_MATCH
+1069,Glúteo,Glúteo Coice,Glúteo Glúteo Coice,GLÚTEOS/Glúteo Coice No Smith.gif,0.6,SEM_MATCH
+1071,Outros,Crunch En Banco,Outros Crunch En Banco,GIFS ABDOMINAIS/Crunch en banco declinado.gif,0.6383,SEM_MATCH
+1072,Outros,V-Up Com Bola,Outros V-Up Com Bola,GIFS ABDOMINAIS/Torção em Pé com Cabo.gif,0.6341,SEM_MATCH
+1077,Outros,Torção Com Tronco,Outros Torção Com Tronco,GIFS ABDOMINAIS/Torção com Tronco Inclinado.gif,0.6667,SEM_MATCH
+1079,Outros,Torção Com Cabo,Outros Torção Com Cabo,GIFS ABDOMINAIS/Torção em Pé com Cabo.gif,0.6977,SEM_MATCH
+1080,Outros,Toques Nos Dedos Com O Corpo,Outros Toques Nos Dedos Com O Corpo,GIFS ABDOMINAIS/Toques nos Dedos com o Corpo deitado.gif,0.7887,SEM_MATCH
+1083,Outros,Tesoura,Outros Tesoura,TRÍCEPS/Tríceps testa com barra.gif,0.5405,SEM_MATCH
+1084,Outros,Toque,Outros Toque,BÍCEPS/Rosca martelo.gif,0.48,SEM_MATCH
+1087,Prancha,Prancha Joelho Ao,Prancha Prancha Joelho Ao,GIFS ABDOMINAIS/Prancha joelho ao cotovelo.gif,0.6667,SEM_MATCH
+1088,Prancha,Prancha Com Movimento,Prancha Prancha Com Movimento,GIFS ABDOMINAIS/Prancha com Movimento de Aranha.gif,0.7,SEM_MATCH
+1090,Outros,Torção Com Barra,Outros Torção Com Barra,TRÍCEPS/Tríceps testa com barra.gif,0.6957,SEM_MATCH
+1094,Prancha,Prancha De Frente Para A Prancha,Prancha Prancha De Frente Para A Prancha,GIFS ABDOMINAIS/Prancha de frente para a prancha lateral.gif,0.8,SEM_MATCH
+1095,Outros,Máquina De Torção,Outros Máquina De Torção,GIFS ABDOMINAIS/Máquina de Torção Sentada.gif,0.6939,SEM_MATCH
+1098,Prancha,Prancha Com Abertura De Pernas - Perna,Prancha Prancha Com Abertura De Pernas - Perna,GIFS ABDOMINAIS/Prancha com Abertura de Pernas - Perna Estendida.gif,0.8,SEM_MATCH
+1099,Outros,Toque Nos Dedos Dos Pés Com Giro,Outros Toque Nos Dedos Dos Pés Com Giro,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Toque nos Dedos dos Pés em Pé.gif,0.7647,SEM_MATCH
+1100,Outros,Meio,Outros Meio,BÍCEPS/Rosca martelo.gif,0.5833,SEM_MATCH
+1102,Prancha,Prancha Lateral Com Flexão,Prancha Prancha Lateral Com Flexão,GIFS ABDOMINAIS/Prancha lateral com flexão do quadril.gif,0.7324,SEM_MATCH
+1106,Outros,Extensão Com Roda,Outros Extensão Com Roda,GIFS ABDOMINAIS/Extensão com Roda Abdominal.gif,0.6667,SEM_MATCH
+1107,Outros,Levantamento De Quadril Com Pernas Elevadas Em Banco,Outros Levantamento De Quadril Com Pernas Elevadas Em Banco,GIFS ABDOMINAIS/Levantamento de quadril com pernas elevadas em banco inclinado.gif,0.8595,MATCH
+1109,Outros,Posição,Outros Posição,GLÚTEOS/Quatro Apoios.gif,0.5926,SEM_MATCH
+1111,Abdominal,Máquina De Abdominal,Abdominal Máquina De Abdominal,GIFS ABDOMINAIS/Abdominal com Rolo Abdominal.gif,0.7586,SEM_MATCH
+1113,Outros,Inclinação Lateral Em Pé,Outros Inclinação Lateral Em Pé,GIFS ABDOMINAIS/Inclinação Lateral em Pé.gif,0.8727,MATCH
+1116,Outros,Máquina De Abdominais,Outros Máquina De Abdominais,GIFS ABDOMINAIS/Máquina de Abdominais Sentado.gif,0.7368,SEM_MATCH
+1117,Abdominal,Máquina Abdominal,Abdominal Máquina Abdominal,GIFS ABDOMINAIS/Abdominal com Rolo Abdominal.gif,0.7636,SEM_MATCH
+1121,Outros,Inclinação Lateral Com Peso Em Bola,Outros Inclinação Lateral Com Peso Em Bola,GIFS ABDOMINAIS/Inclinação Lateral com Peso em Bola de Estabilidade.gif,0.7527,SEM_MATCH
+1122,Abdominal,Exercício De Vácuo Abdominal Em Quatro,Abdominal Exercício De Vácuo Abdominal Em Quatro,GIFS ABDOMINAIS/Exercício de vácuo abdominal em quatro apoios.gif,0.8172,SEM_MATCH
+1124,Abdominal,Abdominal Infra No Solo Com Flexão,Abdominal Abdominal Infra No Solo Com Flexão,GIFS ABDOMINAIS/Abdominal infra no solo com flexão de joelho.gif,0.7727,SEM_MATCH
+1127,Outros,Encolhimento,Outros Encolhimento,GIFS ABDOMINAIS/Encolhimento Reverso.gif,0.6154,SEM_MATCH
+1128,Outros,Flexão De Joelho Com Bola,Outros Flexão De Joelho Com Bola,GIFS ABDOMINAIS/Flexão de Joelho com Bola de Estabilidade.gif,0.6849,SEM_MATCH
+1129,Puxada,Elevação De Joelhos Com Puxada,Puxada Elevação De Joelhos Com Puxada,GIFS ABDOMINAIS/Elevação de Joelhos com Puxada de Pernas.gif,0.7792,SEM_MATCH
+1134,Abdominal,Abdominal,Abdominal Abdominal,GIFS ABDOMINAIS/Abdominal com Rolo Abdominal.gif,0.8085,SEM_MATCH
+1136,Outros,Elevação Em V,Outros Elevação Em V,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rotação em Pé.gif,0.6061,SEM_MATCH
+1137,Outros,Giro Com Barra Na Máquina,Outros Giro Com Barra Na Máquina,GIFS ABDOMINAIS/Giro com Barra na Máquina Landmine.gif,0.7576,SEM_MATCH
+1138,Outros,Escalador Cruzado,Outros Escalador Cruzado,GIFS ABDOMINAIS/Escalador Cruzado de Montanha.gif,0.6415,SEM_MATCH
+1142,Outros,Arremesso Com Torção Russa Da Bola,Outros Arremesso Com Torção Russa Da Bola,GIFS ABDOMINAIS/Arremesso com Torção Russa da Bola com Parceiro.gif,0.7727,SEM_MATCH
+1145,Outros,Exercício,Outros Exercício,GIFS ABDOMINAIS/Exercício Teaser.gif,0.5625,SEM_MATCH
+1148,Abdominal,Abdominal Lateral No Banco,Abdominal Abdominal Lateral No Banco,GIFS ABDOMINAIS/Abdominal lateral no banco inclinado.gif,0.7222,SEM_MATCH
+1150,Prancha,Chutes No Prancha,Prancha Chutes No Prancha,GIFS ABDOMINAIS/Chutes no Prancha Invertida.gif,0.6538,SEM_MATCH
+1151,Outros,Elevação Alternada,Outros Elevação Alternada,GIFS ABDOMINAIS/Elevação Alternada de Pernas.gif,0.6792,SEM_MATCH
+1152,Outros,Chutes Alternados,Outros Chutes Alternados,GIFS ABDOMINAIS/Chutes Alternados Sentados.gif,0.68,SEM_MATCH
+1153,Abdominal,Abdominal Com Rolo,Abdominal Abdominal Com Rolo,GIFS ABDOMINAIS/Máquina Abdominal Coaster.gif,0.6792,SEM_MATCH
+1155,Outros,Abdução De Quadril No Apoio,Outros Abdução De Quadril No Apoio,GIFS ABDOMINAIS/Abdução de quadril no apoio lateral.gif,0.7826,SEM_MATCH
+1156,Abdominal,Abdominal Com Giro,Abdominal Abdominal Com Giro,GIFS ABDOMINAIS/Máquina Abdominal Coaster.gif,0.6792,SEM_MATCH
+1158,Outros,Elevação De Perna,Outros Elevação De Perna,GIFS ABDOMINAIS/Elevação de Pernas.gif,0.8095,SEM_MATCH
+1162,Abdominal,Abdominal Com Elevação,Abdominal Abdominal Com Elevação,GIFS ABDOMINAIS/Máquina de abdominal completo.gif,0.6885,SEM_MATCH
+1163,Abdominal,Abdominal Com Joelhos,Abdominal Abdominal Com Joelhos,GIFS ABDOMINAIS/Abdominal com joelhos dobrados.gif,0.6885,SEM_MATCH
+1164,Abdominal,Abdominal Com Bola,Abdominal Abdominal Com Bola,GIFS ABDOMINAIS/Máquina Abdominal Coaster.gif,0.6792,SEM_MATCH
+1165,Abdominal,Abdominal Com Braços,Abdominal Abdominal Com Braços,GIFS ABDOMINAIS/Abdominal com Braços Estendidos.gif,0.6557,SEM_MATCH
+1167,Outros,Inclinação,Outros Inclinação,CARDIO ACADEMIA/Esteira com Inclinação.gif,0.6154,SEM_MATCH
+1168,Outros,Levantamento De Braço Apoiado,Outros Levantamento De Braço Apoiado,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Levantamento de braço apoiado na parede.gif,0.7733,SEM_MATCH
+1172,Outros,Postura Da Virilha,Outros Postura Da Virilha,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Postura da Virilha Sentada.gif,0.7059,SEM_MATCH
+1174,Outros,Postura Da Cobra - Alongamento,Outros Postura Da Cobra - Alongamento,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Postura da Cobra - Alongamento Abdominal.gif,0.7671,SEM_MATCH
+1175,Outros,Exercício De Bailarina,Outros Exercício De Bailarina,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Exercício de bailarina sentada.gif,0.7458,SEM_MATCH
+1178,Outros,Torção Oblíqua,Outros Torção Oblíqua,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Torção Oblíqua Sentada.gif,0.6512,SEM_MATCH
+1186,Outros,Rotação Espinhal,Outros Rotação Espinhal,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rotação espinhal deitado.gif,0.6809,SEM_MATCH
+1188,Outros,Alongamento Do Peito E Parte Frontal Dos,Outros Alongamento Do Peito E Parte Frontal Dos,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento do Peito e Parte Frontal dos Ombros.gif,0.8511,MATCH
+1189,Outros,Toque Nos Dedos Dos Pés,Outros Toque Nos Dedos Dos Pés,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Toque nos Dedos dos Pés em Pé.gif,0.7797,SEM_MATCH
+1190,Outros,Rotação Para Trás,Outros Rotação Para Trás,GIFS TREINAMENTO FUNCIONAL/Corrida para Trás.gif,0.6829,SEM_MATCH
+1193,Outros,Exercício De Retração Escapular,Outros Exercício De Retração Escapular,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Exercício de retração escapular sentada.gif,0.8052,SEM_MATCH
+1196,Outros,Rotação Externa Do Ombro Deitado,Outros Rotação Externa Do Ombro Deitado,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rotação externa do ombro deitado com haltere.gif,0.7711,SEM_MATCH
+1199,Outros,Rotação Do Corpo Superior,Outros Rotação Do Corpo Superior,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rotação do corpo superior deitado.gif,0.7692,SEM_MATCH
+1201,Outros,Rotação Da Coluna Torácica,Outros Rotação Da Coluna Torácica,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rotação da coluna torácica de joelhos.gif,0.7429,SEM_MATCH
+1202,Outros,Dorsiflexão,Outros Dorsiflexão,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Dorsiflexão plantar.gif,0.5946,SEM_MATCH
+1203,Elevação Lateral,Elevação Lateral De Deltóide Posterior,Elevação Lateral Elevação Lateral De Deltóide Posterior,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Elevação lateral de deltóide posterior com halteres.gif,0.717,SEM_MATCH
+1204,Outros,Rotação Externa Com Cabo Em Posição,Outros Rotação Externa Com Cabo Em Posição,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rotação externa com cabo em posição de joelhos.gif,0.7955,SEM_MATCH
+1206,Outros,Quadrúpede Com Elevação De Braço E Perna,Outros Quadrúpede Com Elevação De Braço E Perna,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Quadrúpede com elevação de braço e perna contralateral.gif,0.7921,SEM_MATCH
+1208,Outros,Rolo De Espuma Para Ombro E Peito,Outros Rolo De Espuma Para Ombro E Peito,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rolo de espuma para ombro e peito frontal.gif,0.8148,SEM_MATCH
+1209,Outros,Contração,Outros Contração,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Círculos com um braço.gif,0.5405,SEM_MATCH
+1210,Outros,Rolo De Espuma Para Fascite,Outros Rolo De Espuma Para Fascite,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rolo de espuma para fascite plantar.gif,0.7826,SEM_MATCH
+1211,Outros,Rolo De Espuma Ombro,Outros Rolo De Espuma Ombro,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rolo de espuma ombro posterior.gif,0.7018,SEM_MATCH
+1212,Outros,Rolamento De Espuma Para,Outros Rolamento De Espuma Para,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rolamento de espuma nas costas.gif,0.7213,SEM_MATCH
+1213,Outros,Alongamento Em Círculos Nos,Outros Alongamento Em Círculos Nos,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento em Círculos nos Punhos.gif,0.7941,SEM_MATCH
+1217,Outros,Alongamento Dos Ombros Por Trás Das,Outros Alongamento Dos Ombros Por Trás Das,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento dos ombros por trás das costas.gif,0.8333,SEM_MATCH
+1220,Panturrilha,Alongamento Sentado Para A Panturrilha Com Perna,Panturrilha Alongamento Sentado Para A Panturrilha Com Perna,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento Sentado para a Panturrilha com Perna Esticada.gif,0.8205,SEM_MATCH
+1225,Outros,Alongamento,Outros Alongamento,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento de Punho.gif,0.5789,SEM_MATCH
+1226,Outros,Alongamento Dos Flexores Do Quadril Em Posição,Outros Alongamento Dos Flexores Do Quadril Em Posição,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento dos flexores do quadril em posição de joelho.gif,0.844,SEM_MATCH
+1227,Outros,Alongamento Do Peitoral Até As,Outros Alongamento Do Peitoral Até As,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento do Peitoral até as Costas.gif,0.8108,SEM_MATCH
+1228,Outros,Alongamento Dos Flexores De Quadril,Outros Alongamento Dos Flexores De Quadril,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento dos flexores de quadril ajoelhado.gif,0.8046,SEM_MATCH
+1231,Outros,Alongamentos De Pés E,Outros Alongamentos De Pés E,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamentos de pés e tornozelos.gif,0.7,SEM_MATCH
+1232,Outros,Alongamento Dos Adutores,Outros Alongamento Dos Adutores,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento dos adutores sentado.gif,0.7619,SEM_MATCH
+1233,Outros,Rolagem De Espuma Para,Outros Rolagem De Espuma Para,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rolagem de espuma para isquiotibiais.gif,0.6769,SEM_MATCH
+1234,Outros,Alongamento Dos Adutores Em Posição Sentada Com Pernas,Outros Alongamento Dos Adutores Em Posição Sentada Com Pernas,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento dos Adutores em Posição Sentada com Pernas Abertas.gif,0.878,MATCH
+1235,Outros,Rotação De Pé E,Outros Rotação De Pé E,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rotação em Pé.gif,0.6857,SEM_MATCH
+1236,Outros,Deslize De Parede Do Serrátil Com Rolo,Outros Deslize De Parede Do Serrátil Com Rolo,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Deslize de parede do serrátil com rolo de espuma.gif,0.8172,SEM_MATCH
+1238,Outros,Alongamento Do Trato Iliotibial Com Rolo,Outros Alongamento Do Trato Iliotibial Com Rolo,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento do trato iliotibial com rolo de espuma.gif,0.8247,SEM_MATCH
+1240,Outros,Alongamento Do Manguito,Outros Alongamento Do Manguito,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento do manguito rotador.gif,0.7541,SEM_MATCH
+1243,Outros,Rolamento De Espuma Nos,Outros Rolamento De Espuma Nos,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rolamento de espuma nas costas.gif,0.7667,SEM_MATCH
+1244,Outros,Alongamento Do Peito Com Rolo,Outros Alongamento Do Peito Com Rolo,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento do peito com rolo de espuma.gif,0.7733,SEM_MATCH
+1246,Outros,Alongamento Dos Isquiotibiais,Outros Alongamento Dos Isquiotibiais,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento dos isquiotibiais em pé.gif,0.8169,SEM_MATCH
+1248,Outros,Alongamento Do Tibial,Outros Alongamento Do Tibial,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento do tibial posterior.gif,0.7119,SEM_MATCH
+1249,Outros,Alongamento Dos Adutores Da Coxa Com Rolo,Outros Alongamento Dos Adutores Da Coxa Com Rolo,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento dos adutores da coxa com rolo de espuma.gif,0.8283,SEM_MATCH
+1250,Outros,Alongamento De Quadríceps Em Quatro,Outros Alongamento De Quadríceps Em Quatro,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento de Quadríceps em Quatro Apoios.gif,0.8333,SEM_MATCH
+1251,Outros,Rolamento De Espuma Nas,Outros Rolamento De Espuma Nas,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Rolamento de espuma nas costas.gif,0.7667,SEM_MATCH
+1254,Outros,Alongamento Dos Adutores Com A Perna Estendida,Outros Alongamento Dos Adutores Com A Perna Estendida,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento dos Adutores com a Perna Estendida ajoelhado.gif,0.844,SEM_MATCH
+1260,Outros,Alongamento Dinâmico,Outros Alongamento Dinâmico,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento Dinâmico do Peitoral.gif,0.678,SEM_MATCH
+1261,Outros,Alongamento Dos Isquiotibiais Em Pé,Outros Alongamento Dos Isquiotibiais Em Pé,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento dos isquiotibiais em pé.gif,0.9091,MATCH
+1262,Outros,Alongamento Do Piriforme,Outros Alongamento Do Piriforme,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento Piriforme.gif,0.8077,SEM_MATCH
+1263,Outros,Alongamento Do Gastrocnêmio Com Joelho,Outros Alongamento Do Gastrocnêmio Com Joelho,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento do Gastrocnêmio com Joelho Flexionado.gif,0.8085,SEM_MATCH
+1264,Outros,Alongamento Dos Isquiotibiais Em Pé Com A Perna,Outros Alongamento Dos Isquiotibiais Em Pé Com A Perna,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento dos isquiotibiais em pé com a perna cruzada.gif,0.8624,MATCH
+1265,Outros,Alongamento Do Ombro,Outros Alongamento Do Ombro,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento do ombro com toalha.gif,0.6897,SEM_MATCH
+1267,Panturrilha,Alongamento De Panturrilha,Panturrilha Alongamento De Panturrilha,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento de Panturrilha com Corda.gif,0.7027,SEM_MATCH
+1271,Outros,Alongamento De Quadríceps,Outros Alongamento De Quadríceps,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento em Pé dos Quadríceps.gif,0.75,SEM_MATCH
+1272,Outros,Alongamento De Isquiotibiais,Outros Alongamento De Isquiotibiais,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento de Isquiotibiais em Pé.gif,0.8116,SEM_MATCH
+1274,Outros,Alongamento De Ombro Com O Braço,Outros Alongamento De Ombro Com O Braço,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento de ombro com o braço cruzado.gif,0.8101,SEM_MATCH
+1276,Outros,Catavento,Outros Catavento,BÍCEPS/Rosca martelo.gif,0.5517,SEM_MATCH
+1278,Outros,Alongamento Da Parte Superior Das,Outros Alongamento Da Parte Superior Das,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento da parte superior das costas.gif,0.825,SEM_MATCH
+1279,Outros,Alongamento Das Costas Com Rolo,Outros Alongamento Das Costas Com Rolo,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento das Costas com Rolo de Espuma.gif,0.7848,SEM_MATCH
+1281,Glúteo,Alongamento De Glúteos,Glúteo Alongamento De Glúteos,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento de Glúteos Deitado.gif,0.7458,SEM_MATCH
+1282,Panturrilha,Alongamento Da Panturrilha Com Descida,Panturrilha Alongamento Da Panturrilha Com Descida,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento de Panturrilha com Corda.gif,0.7674,SEM_MATCH
+1284,Panturrilha,Alongamento Da Panturrilha,Panturrilha Alongamento Da Panturrilha,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento da panturrilha agachado.gif,0.7123,SEM_MATCH
+1290,Outros,Alongamento Do Peitoral,Outros Alongamento Do Peitoral,GIFS CALISTENIA/Alongamento do peitoral reverso.gif,0.7541,SEM_MATCH
+1291,Outros,Flexão De Punho,Outros Flexão De Punho,GIFS CALISTENIA/Flexão de Punho Fechado.gif,0.6667,SEM_MATCH
+1293,Outros,Flexão De Diamante,Outros Flexão De Diamante,GIFS CALISTENIA/Flexão de diamante de joelhos.gif,0.6667,SEM_MATCH
+1295,Outros,Barra Fixa Com Pegada Invertida,Outros Barra Fixa Com Pegada Invertida,GIFS CALISTENIA/Barra fixa com pegada invertida assistido.gif,0.7848,SEM_MATCH
+1296,Outros,Avanço Sem Peso,Outros Avanço Sem Peso,GIFS CALISTENIA/Avanço sem Peso Corporal.gif,0.6522,SEM_MATCH
+1297,Outros,Barra Fixa Com Pegada,Outros Barra Fixa Com Pegada,GIFS CALISTENIA/Barra Fixa com Pegada Fechada.gif,0.7368,SEM_MATCH
+1299,Outros,Flexão,Outros Flexão,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Dorsiflexão plantar.gif,0.5625,SEM_MATCH
+1300,Outros,Bandeira,Outros Bandeira,GIFS ABDOMINAIS/Tesoura deitada.gif,0.5333,SEM_MATCH
+1302,Outros,Barra Fixa Com Braços,Outros Barra Fixa Com Braços,GIFS CALISTENIA/Barra fixa com Arco.gif,0.766,SEM_MATCH
+1304,Outros,Flexão De Perna Com Halteres Em Decúbito,Outros Flexão De Perna Com Halteres Em Decúbito,GIFS CALISTENIA/Flexão de Perna com Halteres em Decúbito Dorsal.gif,0.8511,MATCH
+1313,Outros,Flexão De Braço Na Parede Com Pegada,Outros Flexão De Braço Na Parede Com Pegada,GIFS CALISTENIA/Flexão de Braço na Parede com Pegada Fechada.gif,0.8276,SEM_MATCH
+1314,Outros,Flexão De Braço Com Bola Medicinal Com Apoio Em Um Braço,Outros Flexão De Braço Com Bola Medicinal Com Apoio Em Um Braço,GIFS CALISTENIA/Flexão de Braço com Bola Medicinal com Apoio em Um Braço.gif,0.9412,MATCH
+1315,Agachamento,Agachamento Sissy Ajoelhado Com Peso,Agachamento Agachamento Sissy Ajoelhado Com Peso,GIFS CALISTENIA/Agachamento Sissy ajoelhado com Peso Corporal.gif,0.7742,SEM_MATCH
+1319,Outros,Flexão De Braços Com Apoio Dos Joelhos,Outros Flexão De Braços Com Apoio Dos Joelhos,GIFS CALISTENIA/Flexão de Braços com Apoio dos Joelhos Fechada.gif,0.8352,SEM_MATCH
+1320,Outros,Flexão De Braço Com Uma Perna,Outros Flexão De Braço Com Uma Perna,GIFS CALISTENIA/Flexão de Braço com Uma Perna.gif,0.8923,MATCH
+1321,Outros,Paralelas Entre,Outros Paralelas Entre,GIFS CALISTENIA/Paralelas entre Cadeiras.gif,0.6522,SEM_MATCH
+1324,Agachamento,Agachamento Pistola,Agachamento Agachamento Pistola,PERNAS/Agachamento no Smith.gif,0.6667,SEM_MATCH
+1325,Outros,Flexão De Braço Declinada Com Bola,Outros Flexão De Braço Declinada Com Bola,GIFS CALISTENIA/Flexão de Braço Declinada com Bola de Estabilidade.gif,0.7473,SEM_MATCH
+1326,Outros,Flexões De Apoio De Mão,Outros Flexões De Apoio De Mão,GIFS CALISTENIA/Flexões de apoio de mão na parede.gif,0.7302,SEM_MATCH
+1330,Outros,Mergulho,Outros Mergulho,BÍCEPS/Rosca martelo.gif,0.5714,SEM_MATCH
+1331,Outros,Suspensão,Outros Suspensão,GIFS ABDOMINAIS/Torção russa.gif,0.5714,SEM_MATCH
+1333,Outros,Wall Sit Com Inclinação,Outros Wall Sit Com Inclinação,GIFS TREINAMENTO FUNCIONAL/Wall Sit com Inclinação de Tronco.gif,0.7302,SEM_MATCH
+1335,Tríceps Francês,Tríceps Francês Em Pé,Tríceps Francês Tríceps Francês Em Pé,TRÍCEPS/Tríceps francês unilateral no cabo.gif,0.6197,SEM_MATCH
+1346,Agachamento,Salto Na Caixa Para Agachamento,Agachamento Salto Na Caixa Para Agachamento,GIFS TREINAMENTO FUNCIONAL/Salto na Caixa para Agachamento Pistola.gif,0.7561,SEM_MATCH
+1349,Agachamento,Agachamento No Banco Com Peso,Agachamento Agachamento No Banco Com Peso,GIFS TREINAMENTO FUNCIONAL/Agachamento no Banco com Peso Corporal.gif,0.7342,SEM_MATCH
+1353,Agachamento,Agachamento Dividido,Agachamento Agachamento Dividido,GIFS TREINAMENTO FUNCIONAL/Agachamento Dividido Profundo.gif,0.6557,SEM_MATCH
+1358,Outros,Flexão De Braço Com Bola,Outros Flexão De Braço Com Bola,GIFS CALISTENIA/Flexão de braço com palmas.gif,0.7719,SEM_MATCH
+1359,Agachamento,Agachamento Com Elevação Dos,Agachamento Agachamento Com Elevação Dos,GIFS TREINAMENTO FUNCIONAL/Agachamento com Elevação dos Joelhos.gif,0.7368,SEM_MATCH
+1361,Desenvolvimento,Desenvolvimento Militar Atrás Da Cabeça,Desenvolvimento Desenvolvimento Militar Atrás Da Cabeça,GIFS TREINAMENTO FUNCIONAL/Desenvolvimento militar atrás da cabeça com gymstick.gif,0.729,SEM_MATCH
+1362,Agachamento,Agachamento Com Chute Lateral E Toque,Agachamento Agachamento Com Chute Lateral E Toque,GIFS TREINAMENTO FUNCIONAL/Agachamento com Chute Lateral e Toque no Calcanhar.gif,0.7475,SEM_MATCH
+1363,Outros,Elevação Com Giro Do Cotovelo Oposto Para O,Outros Elevação Com Giro Do Cotovelo Oposto Para O,GIFS TREINAMENTO FUNCIONAL/Elevação com Giro do Cotovelo Oposto para o Joelho.gif,0.86,MATCH
+1366,Outros,Nave Seal,Outros Nave Seal,GIFS TREINAMENTO FUNCIONAL/Nave Seal Burpee.gif,0.5625,SEM_MATCH
+1368,Agachamento,Agachamento Com Faixa Elástica Em,Agachamento Agachamento Com Faixa Elástica Em,GIFS TREINAMENTO FUNCIONAL/Agachamento com Faixa Elástica em Afundo.gif,0.7765,SEM_MATCH
+1373,Outros,Salto Com Halteres,Outros Salto Com Halteres,BÍCEPS/Rosca bíceps alta com halteres.gif,0.7636,SEM_MATCH
+1375,Desenvolvimento,Desenvolvimento Lateral,Desenvolvimento Desenvolvimento Lateral,GIFS TREINAMENTO FUNCIONAL/Desenvolvimento de ombro unilateral com banda.gif,0.6905,SEM_MATCH
+1376,Outros,Salto Em Uma Perna Para A,Outros Salto Em Uma Perna Para A,GIFS TREINAMENTO FUNCIONAL/Salto em Uma Perna para a Frente.gif,0.7812,SEM_MATCH
+1379,Agachamento,Salto Em Agachamento Com Joelhos,Agachamento Salto Em Agachamento Com Joelhos,GIFS TREINAMENTO FUNCIONAL/Salto em Agachamento com Joelhos Flexionados.gif,0.7273,SEM_MATCH
+1380,Agachamento,Agachamento Búlgaro Com Peso,Agachamento Agachamento Búlgaro Com Peso,GIFS TREINAMENTO FUNCIONAL/Agachamento búlgaro com salto.gif,0.7536,SEM_MATCH
+1381,Remada,Remada Unilateral,Remada Remada Unilateral,COSTAS/Remada Unilateral com Cabo.gif,0.68,SEM_MATCH
+1382,Tríceps,Extensão De Tríceps Com Faixas Elá,Tríceps Extensão De Tríceps Com Faixas Elá,GIFS TREINAMENTO FUNCIONAL/Extensão de Tríceps com Faixas Elásticas.gif,0.8293,SEM_MATCH
+1385,Outros,Cruzado,Outros Cruzado,GIFS ABDOMINAIS/Abdominal Cruzado.gif,0.5806,SEM_MATCH
+1386,Outros,Corda,Outros Corda,TRÍCEPS/Tríceps pulley corda.gif,0.5625,SEM_MATCH
+1391,Remada,Remada Com Banda De Resistência Curvada Para Deltoides,Remada Remada Com Banda De Resistência Curvada Para Deltoides,GIFS TREINAMENTO FUNCIONAL/Remada com banda de resistência curvada para deltoides posterior.gif,0.864,MATCH
+1392,Outros,Gancho,Outros Gancho,TRÍCEPS/Tríceps no Banco.gif,0.5517,SEM_MATCH
+1396,Tríceps,Extensão De Tríceps Com Elástico Na Posição,Tríceps Extensão De Tríceps Com Elástico Na Posição,GIFS TREINAMENTO FUNCIONAL/Extensão de tríceps com elástico na posição horizontal.gif,0.819,SEM_MATCH
+1398,Outros,Cruz De Ferro,Outros Cruz De Ferro,GIFS TREINAMENTO FUNCIONAL/Cruz de ferro com halteres.gif,0.5652,SEM_MATCH
+1449,Outros,Flexão De Pernas Na Bola De Estabilidade,Outros Flexão De Pernas Na Bola De Estabilidade,GIFS TREINAMENTO FUNCIONAL/Flexão de Pernas na Bola de Estabilidade.gif,0.9195,MATCH
+1466,L Sit,Wall Sit,L Sit Wall Sit,GIFS TREINAMENTO FUNCIONAL/Wall Sit.gif,0.7273,SEM_MATCH
+1468,Outros,Subida No Step Com Elevação De Joelhos,Outros Subida No Step Com Elevação De Joelhos,GIFS TREINAMENTO FUNCIONAL/Subida no Step com Elevação de Joelhos.gif,0.9157,MATCH
+1509,Elevação Lateral,Elevação Lateral Alternada Com Halteres,Elevação Lateral Elevação Lateral Alternada Com Halteres,GIFS ABDOMINAIS/Elevação Lateral Alternada com Halteres.gif,0.8211,SEM_MATCH
+1547,Agachamento,Agachamento Com Sustentação E Elevação De Panturrilhas,Agachamento Agachamento Com Sustentação E Elevação De Panturrilhas,GIFS TREINAMENTO FUNCIONAL/Agachamento com Sustentação e Elevação de Panturrilhas.gif,0.9,MATCH
+1567,V Up,V Up Com Bola De Estabilidade,V Up V Up Com Bola De Estabilidade,GIFS ABDOMINAIS/V-Up com Bola de Estabilidade.gif,0.9206,MATCH
+1635,Outros,Superman,Outros Superman,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Superman.gif,0.6957,SEM_MATCH
+1698,Outros,Alongamento Do Peitoral Reverso,Outros Alongamento Do Peitoral Reverso,GIFS CALISTENIA/Alongamento do peitoral reverso.gif,0.8986,MATCH
+1707,Outros,Flexão De Joelhos,Outros Flexão De Joelhos,GIFS CALISTENIA/Flexão de joelhos.gif,0.8293,SEM_MATCH
+1710,Outros,Flexão De Pernas Com Toalha,Outros Flexão De Pernas Com Toalha,GIFS CALISTENIA/Flexão de pernas com toalha.gif,0.8852,MATCH
+1716,Outros,Flexão De Parede,Outros Flexão De Parede,GIFS CALISTENIA/Flexão de Parede.gif,0.8205,SEM_MATCH
+1718,Outros,Flexão De Braço Na Parede Com Pegada Fechada,Outros Flexão De Braço Na Parede Com Pegada Fechada,GIFS CALISTENIA/Flexão de Braço na Parede com Pegada Fechada.gif,0.9263,MATCH
+1720,Outros,Flexão De Braços Com Apoio Dos Joelhos Fechada,Outros Flexão De Braços Com Apoio Dos Joelhos Fechada,GIFS CALISTENIA/Flexão de Braços com Apoio dos Joelhos Fechada.gif,0.9293,MATCH
+1727,Outros,Flexão De Braço Declinada Com Bola De Estabilidade,Outros Flexão De Braço Declinada Com Bola De Estabilidade,GIFS CALISTENIA/Flexão de Braço Declinada com Bola de Estabilidade.gif,0.9346,MATCH
+1851,Alongamento,Alongamento Dos Isquiotibiais Em Pé,Alongamento Alongamento Dos Isquiotibiais Em Pé,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Alongamento dos isquiotibiais em pé.gif,0.8537,MATCH
+1874,Alongamento,Alongamento Do Peitoral Reverso,Alongamento Alongamento Do Peitoral Reverso,GIFS CALISTENIA/Alongamento do peitoral reverso.gif,0.8378,SEM_MATCH
+1880,Wall Sit,Wall Sit,Wall Sit Wall Sit,GIFS TREINAMENTO FUNCIONAL/Wall Sit.gif,0.64,SEM_MATCH
+1930,Superman,Superman,Superman Superman,GIFS MOBILIDADE ALONGAMENTO LIBERAÇÃO/Superman.gif,0.64,SEM_MATCH
+1934,Step Up,Subida No Step Com Elevação De Joelhos,Step Up Subida No Step Com Elevação De Joelhos,GIFS TREINAMENTO FUNCIONAL/Subida no Step com Elevação de Joelhos.gif,0.9048,MATCH

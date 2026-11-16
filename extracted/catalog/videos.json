@@ -1,0 +1,365 @@
+[
+{
+  "model": "core.videoexercicio",
+  "pk": 1,
+  "fields": {
+    "nome": "Supino",
+    "grupo_muscular": 1,
+    "gif": "",
+    "descricao": "Exercicio base para peitoral.",
+    "criado_em": "2026-04-27T17:20:55.353Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 2,
+  "fields": {
+    "nome": "Crucifixo",
+    "grupo_muscular": 1,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-04-27T17:20:55.405Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 3,
+  "fields": {
+    "nome": "Remada",
+    "grupo_muscular": 2,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-04-27T17:20:55.457Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 4,
+  "fields": {
+    "nome": "Puxada",
+    "grupo_muscular": 2,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-04-27T17:20:55.510Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 5,
+  "fields": {
+    "nome": "Flexão de braço",
+    "grupo_muscular": 1,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-04-29T16:25:02.290Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 6,
+  "fields": {
+    "nome": "Outros",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.021Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 7,
+  "fields": {
+    "nome": "Leg",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.036Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 8,
+  "fields": {
+    "nome": "Agachamento",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.051Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 9,
+  "fields": {
+    "nome": "Triceps",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.092Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 10,
+  "fields": {
+    "nome": "Desenvolvimento",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.175Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 11,
+  "fields": {
+    "nome": "Rosca",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.198Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 12,
+  "fields": {
+    "nome": "Elevacao lateral",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.212Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 13,
+  "fields": {
+    "nome": "Gluteo",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.249Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 14,
+  "fields": {
+    "nome": "Flexora",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.330Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 15,
+  "fields": {
+    "nome": "Panturrilha",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.352Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 16,
+  "fields": {
+    "nome": "Extensora",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T00:49:59.692Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 17,
+  "fields": {
+    "nome": "leg",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.615Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 18,
+  "fields": {
+    "nome": "agachamento",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.629Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 19,
+  "fields": {
+    "nome": "triceps",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.672Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 20,
+  "fields": {
+    "nome": "crucifixo",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.687Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 21,
+  "fields": {
+    "nome": "remada",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.736Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 22,
+  "fields": {
+    "nome": "desenvolvimento",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.770Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 23,
+  "fields": {
+    "nome": "rosca",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.793Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 24,
+  "fields": {
+    "nome": "elevacao lateral",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.807Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 25,
+  "fields": {
+    "nome": "puxada",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.828Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 26,
+  "fields": {
+    "nome": "gluteo",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.850Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 27,
+  "fields": {
+    "nome": "flexora",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.930Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 28,
+  "fields": {
+    "nome": "panturrilha",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:47.953Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 29,
+  "fields": {
+    "nome": "supino",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:48.207Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 30,
+  "fields": {
+    "nome": "extensora",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:26:48.310Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 31,
+  "fields": {
+    "nome": "Tríceps",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:34:38.582Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 32,
+  "fields": {
+    "nome": "Elevacao Lateral",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:34:38.677Z"
+  }
+},
+{
+  "model": "core.videoexercicio",
+  "pk": 33,
+  "fields": {
+    "nome": "Glúteo",
+    "grupo_muscular": 11,
+    "gif": "",
+    "descricao": "",
+    "criado_em": "2026-05-05T13:34:38.710Z"
+  }
+}
+]

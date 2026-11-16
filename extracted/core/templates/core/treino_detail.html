@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ treino.nome }}{% endblock %}
+
+{% block content %}
+<div class="fitflix-header-page treino-detail-header">
+    <div>
+        <h1>{{ treino.nome }}</h1>
+        <p>Aluno: {{ treino.aluno.nome }}</p>
+    </div>
+
+    <div class="acoes">
+        <a href="{% url 'core:editar_treino' treino.id %}" class="btn">Editar treino</a>
+        <a href="{% url 'core:painel_aluno' treino.aluno.id %}" class="btn btn-secondary">Voltar</a>
+    </div>
+</div>
+
+<div class="treino-detail-lista">
+    {% for item in itens %}
+        <div class="card treino-item-card">
+            <div class="treino-item-media">
+                {% if item.variacao.gif %}
+                    <img src="{{ item.variacao.gif.url }}" alt="{{ item.variacao.nome }}">
+                {% else %}
+                    <div class="treino-item-placeholder">Sem imagem</div>
+                {% endif %}
+            </div>
+
+            <div class="treino-item-content">
+                <h2>{{ item.exercicio.nome }}</h2>
+                <p>{{ item.variacao.nome }}</p>
+
+                <ul class="treino-item-meta">
+                    <li><strong>Séries:</strong> {{ item.series }}</li>
+                    <li><strong>Repetições:</strong> {{ item.repeticoes }}</li>
+                    <li><strong>Descanso:</strong> {{ item.descanso }}s</li>
+                    <li><strong>Carga:</strong> {{ item.carga|default:"-" }}</li>
+                </ul>
+            </div>
+        </div>
+    {% empty %}
+        <div class="card">
+            <p>Nenhum exercício cadastrado neste treino.</p>
+            <a href="{% url 'core:editar_treino' treino.id %}" class="btn">Adicionar exercícios</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<h1>Treinos de {{ aluno.nome }}</h1>
+
+<div class="treinos">
+
+    {% for treino in treinos %}
+        <div class="card card-bordered card-body">
+            <h2>{{ treino.nome }}</h2>
+            
+            <a href="{% url 'core:treino_detail' treino.id %}">
+                Ver treino
+            </a>
+        </div>
+    {% empty %}
+        <p>Nenhum treino cadastrado</p>
+    {% endfor %}
+        
+</div>
+
+    {% endblock %}
+

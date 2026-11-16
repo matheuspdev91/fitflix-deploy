@@ -1,0 +1,44 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+<div class="acoes">
+    <a href="{% url 'core:dashboard' avaliacao.id %}" class="btn btn-primary">
+        Ver Dashboard
+    </a>
+
+    <a href="{% url 'core:editar_avaliacao' avaliacao.id %}" class="btn btn-secondary">
+        Editar
+    </a>
+
+    <a href="{% url 'core:excluir_avaliacao' avaliacao.id %}"
+        class="btn btn-danger"
+        onclick="return confirm('Tem certeza que deseja excluir esta avaliação?')">
+        Excluir
+    </a>
+</div>
+
+<h1>{{ avaliacao.nome }}</h1>
+<p><strong>Percentual:</strong> {{ avaliacao.percentual|floatformat:2 }}%</p>
+<p><strong>Sexo:</strong> {{ avaliacao.get_sexo_display }}</p>
+<p><strong>Altura:</strong> {{ avaliacao.altura }}</p>
+<p><strong>Peso:</strong> {{ avaliacao.peso }}</p>
+
+<h5>Saúde muscular</h5>
+<p>
+    Panturrilha média: {{ avaliacao.idoso.panturrilha_media }} cm
+</p>
+    
+<p>
+    Diagnóstico:
+    {% if avaliacao.idoso.panturrilha_media < 31 %}
+    <span style="color: red; font-weight: bold;">
+        Risco de sarcopenia
+    </span>
+    {% else %}
+    <span style="color: Green;">
+        Normal
+    </span>
+    {% endif %}
+</p>
+
+{% endblock %}

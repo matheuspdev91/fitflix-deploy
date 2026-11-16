@@ -1,0 +1,48 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<h2>Gráfico do aluno</h2>
+
+<p><strong>Massa gorda:</strong> {{ avaliacao_atual.massa_gorda }}</p>
+<p><strong>Massa magra:</strong> {{ avaliacao_atual.massa_magra }}</p>
+
+<hr>
+
+<h3>Composição corporal</h3>
+<div style="width:350px; margin-top: 20px">
+    <canvas id="grafico_pizza"></canvas>
+
+</div>
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const ctx = document.getElementById('grafico_pizza').getContext('2D');
+
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Massa gorda', 'Massa magra'],
+            datasets: [{
+                data: [
+                    parseFloat('{{ avaliacao_atual.massa_gorda }})'.replace(",","."),
+                    parseFloat('{{ avaliacao_atual.massa_magra }})'.replace(",",".")
+                ],
+                backgroundColor: [
+                    '#ff6384',
+                    '#36a2eb'
+                ]
+            }]
+        }
+    });
+
+});
+</script>
+{% endblock %}

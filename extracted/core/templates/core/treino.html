@@ -1,0 +1,21 @@
+{% for item in itens %}
+<div class="card">
+
+        <img 
+        src="https://via.placeholder.com/200"
+        data-gif="{{ item.variacao.gif.url }}"
+        class="exercise-img"
+        width="200"
+    />
+        
+         
+    <h3>{{ item.exercicio.nome }}</h3>
+    <p>{{ item.variacao.nome }}</p>
+    
+    <p>Séries: {{ item.series }}</p>
+    <p>Reps: {{ item.repeticoes }}</p>
+    <p>Descanso: {{ item.descanso }}</p>
+    <p>Carga: {{ item.carga }}</p>
+
+</div>
+{% endfor %}

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Relatório - Correção do Matching de Variações e GIFs</title>
+  <style>
+    @page {
+      margin: 2cm;
+    }
+
+    body {
+      color: #1f2933;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12pt;
+      line-height: 1.45;
+    }
+
+    h1 {
+      color: #102a43;
+      font-size: 22pt;
+      margin: 0 0 6px;
+    }
+
+    h2 {
+      border-bottom: 1px solid #d9e2ec;
+      color: #243b53;
+      font-size: 15pt;
+      margin: 24px 0 10px;
+      padding-bottom: 4px;
+    }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    ul {
+      margin: 6px 0 12px 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    code, pre {
+      background: #f0f4f8;
+      border-radius: 4px;
+      color: #102a43;
+      font-family: "Courier New", monospace;
+    }
+
+    code {
+      padding: 1px 4px;
+    }
+
+    pre {
+      border: 1px solid #d9e2ec;
+      font-size: 10pt;
+      line-height: 1.35;
+      padding: 10px;
+      white-space: pre-wrap;
+    }
+
+    .meta {
+      color: #52606d;
+      font-size: 10.5pt;
+      margin-bottom: 20px;
+    }
+
+    .box {
+      background: #f8fafc;
+      border-left: 4px solid #2f80ed;
+      margin: 14px 0;
+      padding: 10px 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Relatório - Correção do Matching de Variações e GIFs</h1>
+  <p class="meta">Arquivo analisado e alterado: <code>popular_variacao.py</code></p>
+
+  <h2>Objetivo</h2>
+  <p>
+    Corrigir exclusivamente o matching entre <code>VariacaoExercicio</code> e os GIFs
+    armazenados no Cloudinary, sem alterar models, migrations, estrutura do projeto,
+    relacionamentos, tabelas ou dados existentes fora do campo <code>variacao.gif</code>.
+  </p>
+
+  <h2>Resumo do Problema</h2>
+  <p>
+    O script anterior fazia uma comparação frágil entre o nome da variação e o nome
+    do GIF. Isso falhava em casos com acentos, underscores, hífens, parênteses,
+    diferenças de caixa, caracteres especiais, sufixos aleatórios do Cloudinary e
+    variações com nomes genéricos como "Máquina" ou "Barra".
+  </p>
+  <p>
+    O caso principal corrigido foi a necessidade de comparar o nome completo:
+  </p>
+  <pre>exercicio.nome + variacao.nome</pre>
+  <p>Exemplo:</p>
+  <pre>Crucifixo + Inclinado halter
+= Crucifixo Inclinado halter
+= media/gifs/Crucifixo_Inclinado_Halter_xpto123</pre>
+
+  <h2>Alterações Realizadas</h2>
+  <ul>
+    <li>O fluxo passou a processar variação por variação, buscando o melhor GIF correspondente.</li>
+    <li>Foi criada uma montagem explícita do nome completo com <code>exercicio.nome</code> e <code>variacao.nome</code>.</li>
+    <li>Foi criada uma normalização mais robusta de texto.</li>
+    <li>Foi adicionada comparação por tokens com pontuação de similaridade.</li>
+    <li>Foi adicionada paginação na consulta ao Cloudinary usando <code>next_cursor</code>.</li>
+    <li>O salvamento passou a usar <code>public_id</code> no <code>FileField</code>, alinhado ao storage Cloudinary do projeto.</li>
+    <li>Os logs foram ajustados para mostrar o resultado por variação e o total associado.</li>
+  </ul>
+
+  <h2>Normalização Implementada</h2>
+  <p>A função de limpeza passou a tratar:</p>
+  <ul>
+    <li>remoção de acentos;</li>
+    <li>conversão para caixa baixa;</li>
+    <li>conversão de underscores, hífens, barras e parênteses para espaços;</li>
+    <li>remoção de caracteres especiais;</li>
+    <li>remoção da extensão do arquivo;</li>
+    <li>compactação de espaços repetidos;</li>
+    <li>remoção de sufixos aleatórios finais do Cloudinary quando parecem hashes, como <code>_xpto123</code>.</li>
+  </ul>
+
+  <h2>Tokens e Equivalências</h2>
+  <p>
+    Para aumentar a chance de match correto sem depender de substring literal,
+    o script agora compara tokens relevantes e remove palavras de baixo valor.
+  </p>
+  <p>Stopwords usadas:</p>
+  <pre>a, as, com, da, das, de, do, dos, e, em, na, no, para</pre>
+  <p>Equivalências adicionadas:</p>
+  <pre>halteres -> halter
+bracos -> braco
+cabos -> cabo
+ombros -> ombro
+gluteos -> gluteo</pre>
+
+  <h2>Regra de Pontuação</h2>
+  <p>
+    Foi adicionada a função <code>pontuar_match</code>. Ela atribui score para:
+  </p>
+  <ul>
+    <li>match exato normalizado;</li>
+    <li>match compacto, ignorando espaços;</li>
+    <li>match por cobertura alta de tokens.</li>
+  </ul>
+  <div class="box">
+    Casos fracos continuam sem associação, reduzindo o risco de vincular um GIF
+    errado a uma variação apenas porque compartilha uma palavra genérica.
+  </div>
+
+  <h2>Salvamento no Campo GIF</h2>
+  <p>Antes o script fazia:</p>
+  <pre>variacao.gif = item["secure_url"]</pre>
+  <p>Agora faz:</p>
+  <pre>variacao.gif.name = public_id
+variacao.save(update_fields=["gif"])</pre>
+  <p>
+    O motivo é que o projeto usa <code>MediaCloudinaryStorage</code> como storage padrão,
+    e o comando existente <code>upload_gifs_cloudinary.py</code> também salva
+    <code>public_id</code>. Esse formato é compatível com o uso de
+    <code>variacao.gif.url</code> nos templates.
+  </p>
+
+  <h2>Logs Esperados</h2>
+  <pre>OK -> Crucifixo Inclinado halter
+     GIF: media/gifs/Crucifixo_Inclinado_Halter_xpto123 (score 100)
+
+NÃO ASSOCIADO -> Wall Sit
+
+TOTAL ASSOCIADO: X</pre>
+
+  <h2>Validações Executadas</h2>
+  <p>Foi executada validação de sintaxe:</p>
+  <pre>venv/bin/python -m py_compile popular_variacao.py</pre>
+  <p>Resultado: o arquivo compilou sem erro.</p>
+  <p>Também foi feito um teste local da pontuação com casos simulados:</p>
+  <pre>Crucifixo Inclinado halter => Crucifixo_Inclinado_Halter_xpto123
+score 100
+
+Crucifixo Inclinado halter => Crucifixo_com_Halteres_Inclinado
+score 90
+
+Wall Sit => Crucifixo_Inclinado_Halter_xpto123
+score 0</pre>
+
+  <h2>Itens Não Alterados</h2>
+  <ul>
+    <li>Não alterei models.</li>
+    <li>Não alterei migrations.</li>
+    <li>Não criei tabelas.</li>
+    <li>Não alterei relacionamentos.</li>
+    <li>Não removi dados.</li>
+    <li>Não criei exercícios.</li>
+    <li>Não criei variações.</li>
+    <li>Não modifiquei a estrutura do projeto.</li>
+  </ul>
+
+  <h2>Observações</h2>
+  <p>
+    Durante a validação, o projeto imprimiu variáveis do Cloudinary por causa de
+    prints existentes em <code>projeto/settings.py</code>. Esses prints não foram
+    alterados, pois estavam fora do escopo solicitado.
+  </p>
+  <p>
+    Também foram observadas mudanças já existentes em <code>core/models.py</code> e uma
+    migration não rastreada. Esses arquivos foram deixados intocados.
+  </p>
+</body>
+</html>

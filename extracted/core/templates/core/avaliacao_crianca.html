@@ -1,0 +1,23 @@
+﻿{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card card-bordered card-body">
+        <h1 class="card-title">Avaliação - Criança</h1>
+
+        {% for avaliacao in avaliacoes %}
+            <div class="form-group">
+                <h3>{{ avaliacao.aluno.nome }}</h3>
+                <p><strong>Flexões:</strong> {{ avaliacao.flexoes }}</p>
+                <p><strong>Abdominais:</strong> {{ avaliacao.abdominais }}</p>
+                <p><strong>Corrida (tempo):</strong> {{ avaliacao.corrida_tempo }}s</p>
+                <p><strong>Nível motor:</strong> {{ avaliacao.nivel_motor }}</p>
+            </div>
+        {% empty %}
+            <div class="form-group">
+                <p>Nenhuma avaliação cadastrada.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

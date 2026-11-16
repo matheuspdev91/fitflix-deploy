@@ -1,0 +1,245 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   COMPONENTS - BUTTONS
+========================================================== */
+
+
+/*
+|--------------------------------------------------------------------------
+| BASE
+|--------------------------------------------------------------------------
+*/
+
+.btn {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+
+    padding: var(--space-3) var(--space-6);
+    min-height: 44px;
+
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+
+    font: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+
+    transition:
+        background-color var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-micro);
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| STATES
+|--------------------------------------------------------------------------
+*/
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+}
+
+.btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| PRIMARY
+|--------------------------------------------------------------------------
+*/
+
+.btn-primary {
+    background: var(--color-primary);
+    color: var(--color-black);
+}
+
+.btn-primary:hover {
+    background: var(--color-primary-hover);
+    box-shadow: var(--glow-md);
+}
+
+.btn-primary:active {
+    background: var(--color-primary-active);
+    box-shadow: var(--glow-sm);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SECONDARY
+|--------------------------------------------------------------------------
+*/
+
+.btn-secondary {
+    background: var(--color-surface-elevated);
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-border-hover);
+    background: var(--color-surface-overlay);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| OUTLINE
+|--------------------------------------------------------------------------
+*/
+
+.btn-outline {
+    background: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary-border);
+}
+
+.btn-outline:hover {
+    background: var(--color-primary-soft);
+    border-color: var(--color-primary);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| GHOST
+|--------------------------------------------------------------------------
+*/
+
+.btn-ghost {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border-color: transparent;
+}
+
+.btn-ghost:hover {
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| DANGER
+|--------------------------------------------------------------------------
+*/
+
+.btn-danger {
+    background: var(--color-danger);
+    color: var(--color-white);
+}
+
+.btn-danger:hover {
+    background: #E6454F;
+    box-shadow: 0 0 16px rgba(255, 77, 90, 0.20);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| FEEDBACK VARIANTS
+|--------------------------------------------------------------------------
+*/
+
+.btn-success {
+    background: var(--color-success);
+    color: var(--color-black);
+}
+
+.btn-warning {
+    background: var(--color-warning);
+    color: var(--color-black);
+}
+
+.btn-info {
+    background: var(--color-info);
+    color: var(--color-white);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SIZES
+|--------------------------------------------------------------------------
+*/
+
+.btn-sm {
+    padding: var(--space-2) var(--space-4);
+    min-height: 36px;
+    font-size: var(--font-size-xs);
+}
+
+.btn-lg {
+    padding: var(--space-4) var(--space-8);
+    min-height: 52px;
+    font-size: var(--font-size-md);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MODIFIERS
+|--------------------------------------------------------------------------
+*/
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-icon {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+}
+
+.btn-icon.btn-sm {
+    width: 36px;
+    height: 36px;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ICONS
+|--------------------------------------------------------------------------
+*/
+
+.btn > i,
+.btn > svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.btn-lg > i,
+.btn-lg > svg {
+    width: 20px;
+    height: 20px;
+}

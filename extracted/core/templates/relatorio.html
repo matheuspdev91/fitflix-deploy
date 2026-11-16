@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block title}Relatório{% endblock %}
+
+{% block content %}
+
+<h2>Avaliação física</h2>
+<p><strong>Nome:</strong> {{ avaliacao.nome }}</p>
+<p><strong>Peso:</strong> {{ avaliacao.peso }} kg</p>
+
+<p><strong>Percentual de gordura:</strong>
+    {{avaliacao.percentual_gordura|floatformat:2 }} %
+</p>
+
+<p><strong>Massa gorda:</strong>
+    {{ avaliacao.massa_gorda|floatformat:2 }} kg
+</p>
+
+<p><strong>Massa magra:</strong>
+    {{ avaliacao.massa_magra|floatformat2 }} kg
+</p>
+
+{% endblock %}

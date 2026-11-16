@@ -1,0 +1,316 @@
+id,exercicio,variacao
+666,Supino,Reto halter
+672,Crucifixo,Máquina
+673,Crucifixo,Cross (cabo)
+675,Remada,Unilateral halter
+677,Remada,Cavalinho
+678,Puxada,Frontal aberta
+679,Puxada,Frontal fechada
+680,Puxada,Neutra
+681,Puxada,Supinada
+687,Elevação lateral,Polia
+690,Elevação frontal,Halteres
+691,Elevação frontal,Polia
+696,Rosca,No cabo
+711,Abdução,Polia
+712,Abdução,Elástico
+713,Panturrilha,Em pé
+717,Agachamento,Livre
+719,Agachamento,Frontal
+725,Cadeira extensora,Unilateral
+726,Cadeira extensora,Bilateral
+730,Stiff,Halteres
+731,Stiff,Smith
+733,Afundo,Smith
+734,Afundo,Passada
+1163,Abdominal,Abdominal Com Joelhos
+841,Supino,Supino Inclinado
+834,Supino,Supino Inclinado Com Halteres E Pegada
+836,Supino,Supino Declinada
+837,Outros,Pullover Com Halteres Na Bola
+838,Supino,Supino Pegada
+839,Outros,Mergulho De Peito
+1164,Abdominal,Abdominal Com Bola
+846,Supino,Supino Invertido Com Pegada
+847,Supino,Supino Unilateral
+849,Supino,Supino Declinado Pegada
+851,Cross Over,Crossover
+852,Supino,Supino Declinado Unilateral Pegada Martelo
+854,Crucifixo,Crucifixo Com Cabo
+857,Supino,Supino Declinado
+858,Supino,Supino Unilateral Com Halteres Com Pegada
+859,Supino,Supino Inclinado Com Pegada
+860,Puxada,Puxada Alta Com Um Joelho
+864,Remada,Remada T Invertida
+865,Outros,Pullover Na Máquina
+867,Remada,Remada
+871,Remada,Remada T
+872,Outros,Pullover Com Barra W Pegada
+878,Puxada,Puxada Na Polia Alta Com Pegada
+880,Outros,Pullover Com Barra No Banco
+881,Puxada,Puxada Alta Unilateral Alta
+882,Agachamento,Agachamento Com Salto Usando Barra
+883,Outros,Flexão De Pernas Na Bola
+891,Outros,Avanço Invertido
+892,Agachamento,Agachamento Goblet
+895,Outros,Elevação De Perna Em Pé
+897,Outros,Elevação De Joelho
+899,Outros,Stiff Unilateral
+900,Outros,Elevação Com Barra Em
+901,Outros,Extensão De Perna
+902,Outros,Wall Sit
+904,Outros,Subida No Step Com Elevação
+905,Outros,Afundo
+906,Outros,Flexão De Pernas
+907,Leg Press,Leg Press
+908,Outros,Flexão De Pernas Com Halteres
+1165,Abdominal,Abdominal Com Braços
+910,Agachamento,Agachamento Unilateral Cruzado
+911,Outros,Pressão Unilateral Assistida Por
+916,Tríceps Francês,Tríceps Francês
+917,Tríceps,Extensão De Tríceps Com Cabo Em Posição
+923,Tríceps,Extensão De Tríceps Com Cabo
+924,Tríceps Francês,Tríceps Francês Alternada Com Halteres No Banco
+925,Outros,Extensão Concentrada Com Cabo
+928,Tríceps Francês,Tríceps Francês Com Halter
+929,Tríceps,Extensão De Tríceps Invertida
+930,Tríceps,Extensão De Tríceps Com Barra W
+935,Tríceps Testa,Tríceps Testa Pegada Neutra
+936,Tríceps Testa,Tríceps Testa Com Barra Pegada
+937,Tríceps,Tríceps Pulley Pegada
+938,Supino,Supino
+942,Tríceps Testa,Extensão De Tríceps Testa Declinado
+943,Tríceps Testa,Tríceps Testa Com Banco Declinado
+944,Tríceps,Extensão De Tríceps Com Pegada
+946,Tríceps Francês,Tríceps Francês Com Barra W Acima Da Cabeça
+947,Tríceps,Extensão De Tríceps Com Cabo Na Posição
+948,Tríceps,Extensão De Tríceps Na Máquina Pegada
+949,Tríceps Francês,Tríceps Francês No Banco Inclinado
+950,Tríceps,Extensão De Tríceps No Cabo
+953,Elevação Lateral,Elevação Lateral Unilateral
+954,Remada,Remada De Deltoide Posterior Sentado
+955,Elevação Lateral,Elevação Lateral Com Braço
+956,Desenvolvimento,Desenvolvimento De Ombros Com Barra W Com Pegada
+958,Desenvolvimento,Desenvolvimento Cubano Sentado
+960,Remada,Remada Inversa Com Cabos
+962,Elevação Lateral,Elevação Lateral De Halteres
+963,Elevação Lateral,Elevação Lateral Alternada
+965,Elevação Lateral,Elevação Lateral Cruzada
+966,Remada,Remada Lateral Com Halteres
+967,Desenvolvimento,Desenvolvimento Militar Com Pegada
+970,Desenvolvimento,Desenvolvimento Militar Com Barra No Chão
+971,Elevação Lateral,Elevação Lateral E Frontal
+973,Elevação Lateral,Elevação Lateral Unilateral Com Haltere
+974,Elevação Lateral,Elevação Lateral De Braços
+978,Outros,Elevação Frontal Com Barra
+984,Outros,Elevação Frontal Com Barra W
+988,Outros,Elevação Frontal
+991,Elevação Lateral,Elevação Lateral
+993,Desenvolvimento,Desenvolvimento De Ombro Com Barra
+994,Remada,Remada Com Halteres Para A Posterior
+995,Desenvolvimento,Desenvolvimento De Ombro
+996,Desenvolvimento,Desenvolvimento De Ombros Com Rotação Alternada
+997,Outros,Elevação Frontal Alternada
+998,Outros,Voador
+999,Desenvolvimento,Desenvolvimento De Ombro Alternada Em Pé
+1001,Elevação Lateral,Elevação Lateral Com Tronco
+1002,Desenvolvimento,Desenvolvimento Cubano
+1003,Elevação Lateral,Elevação Lateral Com Halteres Para Deltoides Posteriores
+1004,Outros,Elevação Frontal Com Dois Braços
+1006,Desenvolvimento,Desenvolvimento De Ombro Unilateral
+1007,Elevação Lateral,Elevação Lateral Com Halteres
+1009,Desenvolvimento,Desenvolvimento Militar De Uma Mão
+1010,Outros,Levantamento De Halteres De 3
+1011,Desenvolvimento,Desenvolvimento De Ombros Atrás Do Pescoço
+1015,Outros,Máquina Simulador
+1018,Outros,Bicicleta Ergométrica
+1024,Outros,Elevação
+1030,Panturrilha,Levantamento De Panturrilha Com Apoio E
+1293,Outros,Flexão De Diamante
+1039,Agachamento,Agachamento Com Sustentação E Elevação
+1040,Panturrilha,Levantamento De Panturrilha
+1041,Rosca,Rosca Concentrada Com Pegada Fechada
+1043,Rosca,Máquina De Rosca
+1045,Rosca,Rosca Inversa
+1048,Rosca,Rosca Direta Com Cabo
+1053,Rosca,Rosca Bíceps Alta
+1056,Outros,Extensão De Quadril Em Pé
+1058,Outros,Quatro
+1060,Outros,Ponte
+1061,Glúteo,Glúteo Coice Na Máquina De Extensão
+1062,Outros,Extensão De Perna Na Máquina Smith
+1063,Outros,Elevação Pélvica Na Máquina De Extensão
+1064,Agachamento,Agachamento Na Máquina
+1066,Outros,Abdução Lateral Do Quadril
+1067,Puxada,Puxada De Cabo
+1069,Glúteo,Glúteo Coice
+1071,Outros,Crunch En Banco
+1072,Outros,V-Up Com Bola
+1077,Outros,Torção Com Tronco
+1079,Outros,Torção Com Cabo
+1080,Outros,Toques Nos Dedos Com O Corpo
+1083,Outros,Tesoura
+1084,Outros,Toque
+1087,Prancha,Prancha Joelho Ao
+1088,Prancha,Prancha Com Movimento
+1090,Outros,Torção Com Barra
+1094,Prancha,Prancha De Frente Para A Prancha
+1095,Outros,Máquina De Torção
+1162,Abdominal,Abdominal Com Elevação
+1098,Prancha,Prancha Com Abertura De Pernas - Perna
+1099,Outros,Toque Nos Dedos Dos Pés Com Giro
+1100,Outros,Meio
+1102,Prancha,Prancha Lateral Com Flexão
+1106,Outros,Extensão Com Roda
+1107,Outros,Levantamento De Quadril Com Pernas Elevadas Em Banco
+1109,Outros,Posição
+1111,Abdominal,Máquina De Abdominal
+1113,Outros,Inclinação Lateral Em Pé
+1116,Outros,Máquina De Abdominais
+1117,Abdominal,Máquina Abdominal
+1121,Outros,Inclinação Lateral Com Peso Em Bola
+1122,Abdominal,Exercício De Vácuo Abdominal Em Quatro
+1124,Abdominal,Abdominal Infra No Solo Com Flexão
+1127,Outros,Encolhimento
+1128,Outros,Flexão De Joelho Com Bola
+1129,Puxada,Elevação De Joelhos Com Puxada
+1134,Abdominal,Abdominal
+1136,Outros,Elevação Em V
+1137,Outros,Giro Com Barra Na Máquina
+1138,Outros,Escalador Cruzado
+1142,Outros,Arremesso Com Torção Russa Da Bola
+1145,Outros,Exercício
+1148,Abdominal,Abdominal Lateral No Banco
+1150,Prancha,Chutes No Prancha
+1151,Outros,Elevação Alternada
+1152,Outros,Chutes Alternados
+1153,Abdominal,Abdominal Com Rolo
+1155,Outros,Abdução De Quadril No Apoio
+1156,Abdominal,Abdominal Com Giro
+1158,Outros,Elevação De Perna
+1167,Outros,Inclinação
+1168,Outros,Levantamento De Braço Apoiado
+1172,Outros,Postura Da Virilha
+1174,Outros,Postura Da Cobra - Alongamento
+1175,Outros,Exercício De Bailarina
+1178,Outros,Torção Oblíqua
+1186,Outros,Rotação Espinhal
+1188,Outros,Alongamento Do Peito E Parte Frontal Dos
+1189,Outros,Toque Nos Dedos Dos Pés
+1190,Outros,Rotação Para Trás
+1193,Outros,Exercício De Retração Escapular
+1196,Outros,Rotação Externa Do Ombro Deitado
+1199,Outros,Rotação Do Corpo Superior
+1201,Outros,Rotação Da Coluna Torácica
+1202,Outros,Dorsiflexão
+1203,Elevação Lateral,Elevação Lateral De Deltóide Posterior
+1204,Outros,Rotação Externa Com Cabo Em Posição
+1206,Outros,Quadrúpede Com Elevação De Braço E Perna
+1208,Outros,Rolo De Espuma Para Ombro E Peito
+1209,Outros,Contração
+1210,Outros,Rolo De Espuma Para Fascite
+1211,Outros,Rolo De Espuma Ombro
+1212,Outros,Rolamento De Espuma Para
+1213,Outros,Alongamento Em Círculos Nos
+1217,Outros,Alongamento Dos Ombros Por Trás Das
+1220,Panturrilha,Alongamento Sentado Para A Panturrilha Com Perna
+1225,Outros,Alongamento
+1226,Outros,Alongamento Dos Flexores Do Quadril Em Posição
+1227,Outros,Alongamento Do Peitoral Até As
+1228,Outros,Alongamento Dos Flexores De Quadril
+1231,Outros,Alongamentos De Pés E
+1232,Outros,Alongamento Dos Adutores
+1233,Outros,Rolagem De Espuma Para
+1234,Outros,Alongamento Dos Adutores Em Posição Sentada Com Pernas
+1235,Outros,Rotação De Pé E
+1236,Outros,Deslize De Parede Do Serrátil Com Rolo
+1238,Outros,Alongamento Do Trato Iliotibial Com Rolo
+1240,Outros,Alongamento Do Manguito
+1243,Outros,Rolamento De Espuma Nos
+1244,Outros,Alongamento Do Peito Com Rolo
+1246,Outros,Alongamento Dos Isquiotibiais
+1248,Outros,Alongamento Do Tibial
+1249,Outros,Alongamento Dos Adutores Da Coxa Com Rolo
+1250,Outros,Alongamento De Quadríceps Em Quatro
+1251,Outros,Rolamento De Espuma Nas
+1254,Outros,Alongamento Dos Adutores Com A Perna Estendida
+1260,Outros,Alongamento Dinâmico
+1261,Outros,Alongamento Dos Isquiotibiais Em Pé
+1262,Outros,Alongamento Do Piriforme
+1263,Outros,Alongamento Do Gastrocnêmio Com Joelho
+1264,Outros,Alongamento Dos Isquiotibiais Em Pé Com A Perna
+1265,Outros,Alongamento Do Ombro
+1267,Panturrilha,Alongamento De Panturrilha
+1271,Outros,Alongamento De Quadríceps
+1272,Outros,Alongamento De Isquiotibiais
+1274,Outros,Alongamento De Ombro Com O Braço
+1276,Outros,Catavento
+1278,Outros,Alongamento Da Parte Superior Das
+1279,Outros,Alongamento Das Costas Com Rolo
+1281,Glúteo,Alongamento De Glúteos
+1282,Panturrilha,Alongamento Da Panturrilha Com Descida
+1284,Panturrilha,Alongamento Da Panturrilha
+1290,Outros,Alongamento Do Peitoral
+1291,Outros,Flexão De Punho
+1295,Outros,Barra Fixa Com Pegada Invertida
+1296,Outros,Avanço Sem Peso
+1297,Outros,Barra Fixa Com Pegada
+1299,Outros,Flexão
+1300,Outros,Bandeira
+1302,Outros,Barra Fixa Com Braços
+1304,Outros,Flexão De Perna Com Halteres Em Decúbito
+1313,Outros,Flexão De Braço Na Parede Com Pegada
+1314,Outros,Flexão De Braço Com Bola Medicinal Com Apoio Em Um Braço
+1315,Agachamento,Agachamento Sissy Ajoelhado Com Peso
+1319,Outros,Flexão De Braços Com Apoio Dos Joelhos
+1320,Outros,Flexão De Braço Com Uma Perna
+1321,Outros,Paralelas Entre
+1324,Agachamento,Agachamento Pistola
+1325,Outros,Flexão De Braço Declinada Com Bola
+1326,Outros,Flexões De Apoio De Mão
+1330,Outros,Mergulho
+1331,Outros,Suspensão
+1333,Outros,Wall Sit Com Inclinação
+1335,Tríceps Francês,Tríceps Francês Em Pé
+1346,Agachamento,Salto Na Caixa Para Agachamento
+1349,Agachamento,Agachamento No Banco Com Peso
+1353,Agachamento,Agachamento Dividido
+1358,Outros,Flexão De Braço Com Bola
+1359,Agachamento,Agachamento Com Elevação Dos
+1361,Desenvolvimento,Desenvolvimento Militar Atrás Da Cabeça
+1362,Agachamento,Agachamento Com Chute Lateral E Toque
+1363,Outros,Elevação Com Giro Do Cotovelo Oposto Para O
+1366,Outros,Nave Seal
+1368,Agachamento,Agachamento Com Faixa Elástica Em
+1373,Outros,Salto Com Halteres
+1375,Desenvolvimento,Desenvolvimento Lateral
+1376,Outros,Salto Em Uma Perna Para A
+1379,Agachamento,Salto Em Agachamento Com Joelhos
+1380,Agachamento,Agachamento Búlgaro Com Peso
+1381,Remada,Remada Unilateral
+1382,Tríceps,Extensão De Tríceps Com Faixas Elá
+1385,Outros,Cruzado
+1386,Outros,Corda
+1391,Remada,Remada Com Banda De Resistência Curvada Para Deltoides
+1392,Outros,Gancho
+1396,Tríceps,Extensão De Tríceps Com Elástico Na Posição
+1398,Outros,Cruz De Ferro
+1449,Outros,Flexão De Pernas Na Bola De Estabilidade
+1466,L Sit,Wall Sit
+1468,Outros,Subida No Step Com Elevação De Joelhos
+1509,Elevação Lateral,Elevação Lateral Alternada Com Halteres
+1547,Agachamento,Agachamento Com Sustentação E Elevação De Panturrilhas
+1567,V Up,V Up Com Bola De Estabilidade
+1635,Outros,Superman
+1698,Outros,Alongamento Do Peitoral Reverso
+1707,Outros,Flexão De Joelhos
+1710,Outros,Flexão De Pernas Com Toalha
+1716,Outros,Flexão De Parede
+1718,Outros,Flexão De Braço Na Parede Com Pegada Fechada
+1720,Outros,Flexão De Braços Com Apoio Dos Joelhos Fechada
+1727,Outros,Flexão De Braço Declinada Com Bola De Estabilidade
+1851,Alongamento,Alongamento Dos Isquiotibiais Em Pé
+1874,Alongamento,Alongamento Do Peitoral Reverso
+1880,Wall Sit,Wall Sit
+1930,Superman,Superman
+1934,Step Up,Subida No Step Com Elevação De Joelhos

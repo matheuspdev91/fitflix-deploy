@@ -1,0 +1,1701 @@
+/* ========================================
+   FITFLIX UI REFRESH
+   Mantem as classes existentes e adiciona
+   uma camada visual estilo Netflix/YouTube.
+   ======================================== */
+
+:root {
+    --green-neon: #00ff88;
+    --bg-dark: #0a0a0a;
+    --bg-card: #111;
+    --text-main: #fff;
+    --text-muted: #aaa;
+
+    --verde: var(--green-neon);
+    --verde-escuro: #00cc6d;
+    --verde-claro: #7dffc2;
+    --fitflix-bg: #050505;
+    --fitflix-surface: #101010;
+    --fitflix-surface-soft: #171717;
+    --fitflix-border: rgba(255, 255, 255, 0.08);
+    --fitflix-text: var(--text-main);
+    --fitflix-text-soft: var(--text-muted);
+    --fitflix-shadow: 0 18px 42px rgba(0, 0, 0, 0.45);
+    --fitflix-shadow-strong: 0 26px 60px rgba(0, 0, 0, 0.58);
+    --fitflix-glow: 0 0 0 1px rgba(0, 255, 136, 0.25), 0 0 24px rgba(0, 255, 136, 0.14);
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--green-neon) #050505;
+}
+
+html::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+html::-webkit-scrollbar-track {
+    background: #050505;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--green-neon), #00bf66);
+    border-radius: 999px;
+}
+
+body {
+    background:
+        radial-gradient(circle at top right, rgba(0, 255, 136, 0.12), transparent 18%),
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 20%),
+        linear-gradient(180deg, #070707 0%, #020202 100%);
+    color: var(--text-main);
+}
+
+.fitflix-layout {
+    min-height: 100vh;
+}
+
+.fitflix-main {
+    padding: 32px;
+    background: transparent;
+}
+
+/* Sidebar mais limpa, com aparência de app */
+.fitflix-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 28px 20px;
+    background:
+        linear-gradient(180deg, rgba(10, 10, 10, 0.98), rgba(4, 4, 4, 0.98));
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+}
+
+.fitflix-logo a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
+    font-size: 1.95rem;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.18);
+}
+
+.fitflix-logo .flix {
+    color: var(--text-main);
+}
+
+.fitflix-nav {
+    display: grid;
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.fitflix-nav-title {
+    margin-bottom: 10px;
+    font-size: 0.76rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.fitflix-nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px 12px 16px;
+    border-radius: 14px;
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+    transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fitflix-nav-link::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    border-radius: 999px;
+    background: transparent;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fitflix-nav-link:hover,
+.fitflix-nav-link.active {
+    color: var(--text-main);
+    background: rgba(0, 255, 136, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(0, 255, 136, 0.1);
+    transform: translateX(4px);
+}
+
+.fitflix-nav-link:hover::before,
+.fitflix-nav-link.active::before {
+    background: var(--green-neon);
+    box-shadow: 0 0 14px rgba(0, 255, 136, 0.7);
+}
+
+.fitflix-user {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fitflix-user-avatar {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c6ffea, var(--green-neon));
+    color: #032010;
+    font-weight: 800;
+    box-shadow: 0 10px 24px rgba(0, 255, 136, 0.2);
+}
+
+.fitflix-user-name {
+    display: inline-block;
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.fitflix-messages {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.fitflix-message {
+    padding: 14px 16px;
+    border: 1px solid rgba(0, 255, 136, 0.16);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+}
+
+.btn,
+.btn-novo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    background: linear-gradient(135deg, #b6ffd9, var(--green-neon));
+    color: #032010 !important;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 14px 28px rgba(0, 255, 136, 0.18);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.btn:hover,
+.btn-novo:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.03);
+    box-shadow: 0 18px 32px rgba(0, 255, 136, 0.26);
+}
+
+.card,
+.fitflix-card {
+    width: 100%;
+    padding: 24px;
+    border-radius: 22px;
+    border: 1px solid var(--fitflix-border);
+    background: linear-gradient(180deg, rgba(20, 20, 20, 0.96), rgba(12, 12, 12, 0.98));
+    box-shadow: var(--fitflix-shadow);
+}
+
+.fitflix-form-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.fitflix-title {
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 136, 0.22);
+    background: #101b15;
+    color: #fff;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--green-neon);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.16);
+}
+
+.fitflix-page,
+.fitflix-container {
+    width: 100%;
+    max-width: 1340px;
+    margin: 0 auto;
+}
+
+.fitflix-page {
+    display: grid;
+    gap: 26px;
+}
+
+.fitflix-page-header,
+.fitflix-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.fitflix-page-title,
+.fitflix-header h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+}
+
+.fitflix-section-title {
+    margin: 0 0 14px;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+}
+
+.fitflix-eyebrow {
+    margin-bottom: 10px;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-neon);
+}
+
+.fitflix-page-subtitle {
+    max-width: 760px;
+    color: rgba(255, 255, 255, 0.66);
+    line-height: 1.6;
+}
+
+/* Formularios premium alinhados com o visual do catalogo */
+.fitflix-form-page {
+    display: flex;
+    justify-content: center;
+}
+
+.fitflix-form-shell {
+    width: 100%;
+    max-width: 900px;
+    display: grid;
+    gap: 24px;
+}
+
+.fitflix-form-heading {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.fitflix-form-card {
+    padding: 28px;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background:
+        radial-gradient(circle at top right, rgba(0, 255, 136, 0.08), transparent 38%),
+        linear-gradient(180deg, rgba(17, 17, 17, 0.98), rgba(11, 11, 11, 0.98));
+    box-shadow: 0 0 40px rgba(0, 255, 136, 0.05), 0 24px 50px rgba(0, 0, 0, 0.35);
+}
+
+.fitflix-premium-form {
+    display: grid;
+    gap: 20px;
+}
+
+.fitflix-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.fitflix-field-group {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 0;
+}
+
+.fitflix-field-group label {
+    margin-bottom: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.fitflix-main input,
+.fitflix-main select,
+.fitflix-main textarea {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #00583a;
+    color: #f1f9f5;
+    transition: border-color 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+
+select {
+    background-image:
+        linear-gradient(45deg, transparent 50%, rgba(255, 255, 255, 0.75) 50%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.75) 50%, transparent 50%);
+    background-position:
+        calc(100% - 18px) calc(50% - 2px),
+        calc(100% - 12px) calc(50% - 2px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 36px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.36);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--green-neon);
+    box-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
+    background: #1d1d1d;
+}
+
+.fitflix-button-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.fitflix-btn-wide {
+    min-width: 200px;
+    flex: 1 1 200px;
+}
+
+.fitflix-btn-primary {
+    box-shadow: 0 14px 28px rgba(0, 255, 136, 0.18);
+}
+
+.fitflix-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 24px rgba(0, 255, 136, 0.22), 0 18px 34px rgba(0, 255, 136, 0.22);
+}
+
+.fitflix-btn-secondary {
+    background: transparent;
+    color: var(--green-neon) !important;
+    border: 1px solid rgba(0, 255, 136, 0.35);
+    box-shadow: inset 0 0 0 1px rgba(0, 255, 136, 0.08);
+}
+
+.fitflix-btn-secondary:hover {
+    background: rgba(0, 255, 136, 0.06);
+    box-shadow: 0 0 18px rgba(0, 255, 136, 0.12);
+}
+
+/* Nova estrutura de layout para adicionar exercício */
+.ff-add-exercise-page {
+    padding: 10px 0 24px;
+}
+
+.ff-add-exercise-shell {
+    display: grid;
+    gap: 28px;
+}
+
+.ff-add-exercise-heading {
+    gap: 12px;
+}
+
+.ff-heading-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.ff-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 255, 136, 0.24);
+    background: rgba(0, 255, 136, 0.08);
+    color: #e8fff3;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.ff-add-exercise-card {
+    display: grid;
+    gap: 22px;
+}
+
+.ff-card {
+    padding: 22px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0.98), rgba(20, 20, 20, 0.96));
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+}
+
+.ff-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.ff-card-title,
+.ff-panel-title {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+}
+
+.ff-card-copy,
+.ff-preview-copy,
+.ff-config-copy {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.62);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.ff-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.ff-layout-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 20px;
+}
+
+.ff-preview-panel,
+.ff-config-panel {
+    display: grid;
+    gap: 14px;
+}
+
+.ff-panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.ff-preview-frame {
+    display: grid;
+    gap: 14px;
+}
+
+.ff-preview-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(0, 255, 136, 0.08);
+    color: #b5ffe3;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.ff-preview-box {
+    min-height: 260px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 136, 0.12);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.ff-preview-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.ff-config-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.ff-action-bar {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 4px;
+}
+
+.ff-btn-primary {
+    min-width: 220px;
+}
+
+.ff-btn-secondary {
+    min-width: 180px;
+}
+
+@media (max-width: 1100px) {
+    .ff-selection-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ff-layout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .fitflix-form-shell {
+        max-width: 100%;
+    }
+
+    .ff-card,
+    .fitflix-form-card {
+        padding: 20px;
+    }
+
+    .ff-preview-box {
+        min-height: 220px;
+    }
+
+    .ff-config-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ff-action-bar {
+        justify-content: stretch;
+    }
+}
+
+.fitflix-student-shell {
+    width: 100%;
+    max-width: 980px;
+    margin: 32px auto 0;
+}
+
+.fitflix-student-card {
+    position: relative;
+    overflow: hidden;
+    padding: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    background:
+        radial-gradient(circle at top right, rgba(0, 255, 136, 0.12), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(0, 255, 136, 0.06), transparent 24%),
+        linear-gradient(180deg, rgba(15, 15, 15, 0.98), rgba(8, 8, 8, 0.98));
+    box-shadow:
+        0 32px 70px rgba(0, 0, 0, 0.46),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.fitflix-student-card__intro {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 28px;
+    max-width: 620px;
+}
+
+.fitflix-student-card__eyebrow {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 255, 136, 0.18);
+    background: rgba(0, 255, 136, 0.08);
+    color: #8affc2;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.fitflix-student-card__intro h2 {
+    margin: 0;
+    font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+    letter-spacing: -0.03em;
+}
+
+.fitflix-student-card__intro p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.62);
+    line-height: 1.6;
+}
+
+.fitflix-student-form {
+    display: grid;
+    gap: 24px;
+}
+
+.fitflix-student-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.fitflix-student-form .form-group {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+}
+
+.fitflix-student-form .form-group--span-2 {
+    grid-column: span 2;
+}
+
+.fitflix-student-form .form-label {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.56);
+}
+
+.fitflix-student-form .input-field {
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background:
+        linear-gradient(180deg, rgba(23, 23, 23, 0.96), rgba(14, 14, 14, 0.98));
+    color: #f5fff9;
+    font-size: 0.97rem;
+    line-height: 1.4;
+    transition:
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        transform 0.18s ease,
+        background-color 0.22s ease;
+}
+
+.fitflix-student-form .input-field:hover {
+    border-color: rgba(0, 255, 136, 0.18);
+    background: linear-gradient(180deg, rgba(26, 26, 26, 0.98), rgba(16, 16, 16, 1));
+}
+
+.fitflix-student-form .input-field:focus {
+    outline: none;
+    border-color: rgba(0, 255, 136, 0.75);
+    box-shadow:
+        0 0 0 1px rgba(0, 255, 136, 0.28),
+        0 0 0 4px rgba(0, 255, 136, 0.1),
+        0 0 24px rgba(0, 255, 136, 0.12);
+    transform: translateY(-1px);
+}
+
+.fitflix-student-form .input-field::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.fitflix-student-form select.input-field {
+    padding-right: 42px;
+    background-image:
+        linear-gradient(45deg, transparent 50%, rgba(255, 255, 255, 0.75) 50%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.75) 50%, transparent 50%),
+        linear-gradient(180deg, rgba(23, 23, 23, 0.96), rgba(14, 14, 14, 0.98));
+    background-position:
+        calc(100% - 20px) calc(50% - 1px),
+        calc(100% - 14px) calc(50% - 1px),
+        0 0;
+    background-size: 6px 6px, 6px 6px, 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.fitflix-student-form input[type="date"].input-field {
+    color-scheme: dark;
+}
+
+.fitflix-student-form input[type="date"].input-field::-webkit-calendar-picker-indicator {
+    opacity: 0.82;
+    cursor: pointer;
+    filter: invert(78%) sepia(68%) saturate(728%) hue-rotate(87deg) brightness(102%) contrast(108%);
+}
+
+.fitflix-student-form textarea.input-field {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.fitflix-student-form .form-hint {
+    margin: -2px 0 0;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.42);
+}
+
+.fitflix-student-form .form-feedback,
+.fitflix-student-card > .form-feedback {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+.fitflix-student-form .form-feedback--error,
+.fitflix-student-card > .form-feedback--error {
+    border: 1px solid rgba(255, 88, 88, 0.2);
+    background: rgba(255, 88, 88, 0.08);
+    color: #ffb3b3;
+}
+
+.fitflix-student-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-top: 6px;
+}
+
+.fitflix-student-submit {
+    min-width: 180px;
+}
+
+.fitflix-student-actions__meta {
+    color: rgba(255, 255, 255, 0.46);
+    font-size: 0.88rem;
+}
+
+@media (max-width: 860px) {
+    .fitflix-student-card {
+        padding: 24px;
+        border-radius: 22px;
+    }
+
+    .fitflix-student-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fitflix-student-form .form-group--span-2 {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 520px) {
+    .fitflix-student-shell {
+        margin-top: 20px;
+    }
+
+    .fitflix-student-card {
+        padding: 20px;
+    }
+
+    .fitflix-student-actions {
+        align-items: stretch;
+    }
+
+    .fitflix-student-submit {
+        width: 100%;
+    }
+}
+
+.fitflix-actions,
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.fitflix-grid,
+.fitflix-list,
+.fitflix-list--catalog,
+.fitflix-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+}
+
+.fitflix-grid,
+.fitflix-list {
+    margin-top: 15px;
+}
+
+.fitflix-card-link {
+    display: block;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.fitflix-main a.fitflix-card-link {
+    width: 100%;
+}
+
+.fitflix-hover-effect,
+.fitflix-item,
+.fitflix-detail-card {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, #161616 0%, #0d0d0d 100%);
+    box-shadow: var(--fitflix-shadow);
+    cursor: pointer;
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease, filter 0.28s ease;
+}
+
+.fitflix-card-link:hover .fitflix-item,
+.fitflix-item:hover,
+.fitflix-detail-card:hover,
+.fitflix-hover-effect:hover {
+    transform: translateY(-8px) scale(1.03);
+    border-color: rgba(0, 255, 136, 0.28);
+    box-shadow: var(--fitflix-shadow-strong), var(--fitflix-glow);
+    filter: saturate(1.06);
+}
+
+.fitflix-exercise-image,
+.fitflix-detail-media {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #171717, #090909);
+}
+
+.fitflix-item .fitflix-exercise-image {
+    aspect-ratio: 16 / 9;
+    min-height: 210px;
+}
+
+.fitflix-detail-media {
+    aspect-ratio: 16 / 9;
+    min-height: 180px;
+}
+
+.fitflix-exercise-thumb,
+.fitflix-exercise-gif,
+.fitflix-detail-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.38s ease, filter 0.38s ease;
+}
+
+.fitflix-card-link:hover .fitflix-exercise-thumb,
+.fitflix-detail-card:hover .fitflix-detail-image {
+    transform: scale(1.06);
+    filter: brightness(0.98);
+}
+
+/* Overlay estilo Netflix para título e leitura da imagem */
+.fitflix-card-overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 2;
+    padding: 20px 18px 18px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(5, 5, 5, 0.28) 22%, rgba(5, 5, 5, 0.95) 100%);
+}
+
+.fitflix-card-overlay h3 {
+    margin: 0;
+    font-size: 1.14rem;
+    font-weight: 800;
+    color: var(--text-main);
+    text-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.fitflix-card-overlay p {
+    margin: 8px 0 0;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.45;
+}
+
+.fitflix-item-body,
+.fitflix-exercise-info,
+.fitflix-detail-body {
+    display: grid;
+    gap: 8px;
+    padding: 16px 18px 20px;
+}
+
+.fitflix-item--exercise .fitflix-item-body {
+    min-height: 120px;
+    align-content: start;
+}
+
+.fitflix-item-body h3,
+.fitflix-exercise-info h3,
+.fitflix-detail-body h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--text-main);
+}
+
+.fitflix-item-body p,
+.fitflix-exercise-info p,
+.fitflix-detail-body p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.66);
+    line-height: 1.55;
+}
+
+.fitflix-exercise-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(10, 10, 10, 0.9)),
+        repeating-linear-gradient(
+            -45deg,
+            rgba(255, 255, 255, 0.04) 0,
+            rgba(255, 255, 255, 0.04) 12px,
+            transparent 12px,
+            transparent 24px
+        );
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* Hero principal do detalhe, com destaque de mídia */
+.fitflix-detail-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.8fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+.fitflix-detail-player {
+    position: relative;
+    min-height: 420px;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0b0b0b;
+    box-shadow: var(--fitflix-shadow-strong);
+}
+
+.fitflix-detail-player .fitflix-detail-image,
+.fitflix-detail-player .fitflix-exercise-placeholder {
+    position: absolute;
+    inset: 0;
+}
+
+.fitflix-detail-player::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.22) 45%, rgba(0, 0, 0, 0.85) 100%);
+    pointer-events: none;
+}
+
+.fitflix-detail-hero-content {
+    display: grid;
+    gap: 18px;
+    align-content: center;
+    padding: 28px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(10, 10, 10, 0.98));
+    box-shadow: var(--fitflix-shadow);
+}
+
+.fitflix-detail-hero-content h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 2.4vw, 2.4rem);
+    line-height: 1.05;
+}
+
+.fitflix-detail-hero-content p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.68);
+    line-height: 1.7;
+}
+
+.fitflix-detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.fitflix-detail-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 255, 136, 0.18);
+    background: rgba(0, 255, 136, 0.06);
+    color: #dffff0;
+    font-weight: 600;
+}
+
+.fitflix-detail-card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.fitflix-empty-state {
+    grid-column: 1 / -1;
+    padding: 32px;
+    border: 1px dashed rgba(0, 255, 136, 0.2);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.03);
+    text-align: center;
+}
+
+.fitflix-empty-state h2 {
+    margin-bottom: 10px;
+}
+
+.fitflix-empty-state p {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.fitflix-footer {
+    margin-left: 250px;
+    padding: 0 32px 24px;
+    color: rgba(255, 255, 255, 0.46);
+}
+
+@media (max-width: 1180px) {
+    .fitflix-detail-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .fitflix-detail-player {
+        min-height: 360px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .fitflix-main {
+        padding: 24px;
+    }
+
+    .fitflix-grid,
+    .fitflix-list,
+    .fitflix-list--catalog,
+    .fitflix-detail-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .fitflix-main {
+        margin-left: 70px;
+        padding: 20px;
+    }
+
+    .fitflix-sidebar {
+        width: 70px;
+        padding: 20px 12px;
+    }
+
+    .fitflix-logo a,
+    .fitflix-user-name,
+    .fitflix-nav-title,
+    .fitflix-nav-link span {
+        display: none;
+    }
+
+    .fitflix-nav-link {
+        justify-content: center;
+        padding: 12px;
+    }
+
+    .fitflix-item .fitflix-exercise-image,
+    .fitflix-detail-media {
+        min-height: 180px;
+    }
+
+    .fitflix-detail-player {
+        min-height: 280px;
+        border-radius: 18px;
+    }
+
+    .fitflix-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fitflix-detail-hero-content {
+        padding: 22px;
+        border-radius: 18px;
+    }
+
+    .fitflix-footer {
+        margin-left: 70px;
+        padding: 0 20px 20px;
+    }
+}
+
+@media (max-width: 540px) {
+    .fitflix-grid,
+    .fitflix-list,
+    .fitflix-list--catalog,
+    .fitflix-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fitflix-page-title,
+    .fitflix-header h1 {
+        font-size: 2rem;
+    }
+}
+
+
+/* FITFLIX CARD:HOVER */
+
+.fitflix-card:hover {
+    transform: scale(1.06);
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 255, 150, 0.25);
+}
+
+/* FITFLIX HERO E AFTER */
+
+.fitflix-hero {
+    position: relative;
+}
+
+.fitflix-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #000 20%, transparent 60%);
+}
+
+
+/* FITFLIX BADGE */
+
+.fitflix-badge {
+    background: rgba(0,255,150,0.1);
+    border: 1px solid #00ff95;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+}
+
+
+/* HERO */
+
+.hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding: 60px;
+    background: radial-gradient(circle at right, #002d1a, #000);
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.hero-subtitle {
+    margin-top: 12px;
+    font-size: 18px;
+    color: #00ff95;
+}
+
+.hero-description {
+    margin-top: 12px;
+    font-size: 16px;
+    color: #aaa;
+}
+
+.hero-buttons {
+    margin-top: 24px;
+    display: flex;
+    gap: 16px
+}
+
+.btn-primary {
+    background: #00ff95;
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.btn-secondary {
+    border: 1px solid #00ff95;
+    color: #00ff95;
+    padding: 12px 24px;
+    border-radius: 8px;
+}
+
+
+/* FORM CONTAINER */
+
+.form-container {
+    max-width: 600px;
+     margin: 40px auto;
+    padding: 30px;
+    background: #0a0a0a;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* INPUTS E SELECT */
+
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #1f1f1f;
+    background: #111;
+    color: #fff;
+    margin-bottom: 16px;
+}
+
+.form-container input:focus,
+.form-container select:focus {
+    outline: none;
+    border-color: #00ff95;
+    box-shadow: 0 0 0 2px rgba(0,255,150,0.2);
+}
+
+/* AJUSTE BOTÃO */
+
+.btn-submit {
+    background: #00ff88;
+    color: #000;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-submit:hover {
+    background: #00cc6a;
+    transform: scale(1.03);
+}
+
+.btn-secondary {
+    display: inline-block;
+    margin-top: 10px;
+    color: #00ff88;
+    text-decoration: none;
+}
+
+.treino-editor form {
+    display: grid;
+    gap: 24px;
+}
+
+.treino-editor-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.treino-field {
+    display: grid;
+    gap: 10px;
+}
+
+.treino-field-full {
+    grid-column: 1 / -1;
+}
+
+.treino-field label {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.treino-choice-card {
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+}
+
+.treino-choice-card h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+.treino-input {
+    min-height: 52px;
+    padding: 14px 16px;
+    border-radius: 14px;
+}
+
+.treino-help-text {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.62);
+    line-height: 1.6;
+}
+
+.form-errors,
+.field-errors {
+    color: #ffd5d5;
+}
+
+.treino-editor-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.treino-btn-primary {
+    box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.16), 0 18px 34px rgba(0, 255, 136, 0.22);
+}
+
+@media (max-width: 768px) {
+    .treino-editor-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* 2. Select desabilitado — visual consistente com o tema */
+.fitflix-form-card select:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.fitflix-preview {
+    min-height: 200px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* 4. Separação visual entre seleção do exercício e configuração da série.*/
+
+.fitflix-form-card .fitflix-form-grid:first-of-type {
+    margin-top: 8px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* 5. Espaçamento entre grupos de campos — um pouco mais de respiro */
+.fitflix-form-card .fitflix-premium-form {
+    gap: 20px;
+}
+
+/* 6. Responsividade mobile */
+@media (max-width: 540px) {
+    .fitflix-form-card {
+        padding: 16px;
+    }
+
+    .fitflix-btn-wide {
+        min-width: 0;
+        flex: 1 1 120px;
+    }
+}
+
+/* Nova estrutura de layout para adicionar exercício */
+.ff-add-exercise-page {
+    padding: 10px 0 24px;
+}
+
+.ff-add-exercise-shell {
+    display: grid;
+    gap: 28px;
+}
+
+.ff-add-exercise-heading {
+    gap: 12px;
+}
+
+.ff-heading-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.ff-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 255, 136, 0.24);
+    background: rgba(0, 255, 136, 0.08);
+    color: #e8fff3;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.ff-add-exercise-card {
+    display: grid;
+    gap: 22px;
+}
+
+.ff-card {
+    padding: 22px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0.98), rgba(20, 20, 20, 0.96));
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+}
+
+.ff-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.ff-card-title,
+.ff-panel-title {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+}
+
+.ff-card-copy,
+.ff-preview-copy,
+.ff-config-copy {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.62);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.ff-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.ff-layout-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 20px;
+}
+
+.ff-preview-panel,
+.ff-config-panel {
+    display: grid;
+    gap: 14px;
+}
+
+.ff-panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.ff-preview-frame {
+    display: grid;
+    gap: 14px;
+}
+
+.ff-preview-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(0, 255, 136, 0.08);
+    color: #b5ffe3;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.ff-preview-box {
+    min-height: 260px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 136, 0.12);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.ff-preview-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.ff-config-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.ff-action-bar {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 4px;
+}
+
+.ff-btn-primary {
+    min-width: 220px;
+}
+
+.ff-btn-secondary {
+    min-width: 180px;
+}
+
+@media (max-width: 1100px) {
+    .ff-selection-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ff-layout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .fitflix-form-shell {
+        max-width: 100%;
+    }
+
+    .ff-card,
+    .fitflix-form-card {
+        padding: 20px;
+    }
+
+    .ff-preview-box {
+        min-height: 220px;
+    }
+
+    .ff-config-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ff-action-bar {
+        justify-content: stretch;
+    }
+}
+
+input[type="hidden"] {
+    display: none !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+ 
+/* Grade de chips */
+.ff-muscle-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+ 
+/* Chip individual */
+.ff-muscle-chip {
+    -webkit-appearance: none;
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+ 
+.ff-muscle-chip:hover {
+    border-color: rgba(0, 255, 136, 0.35);
+    background: rgba(0, 255, 136, 0.06);
+    color: #fff;
+}
+ 
+.ff-muscle-chip.active {
+    border-color: var(--green-neon);
+    background: rgba(0, 255, 136, 0.12);
+    color: var(--green-neon);
+    box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.2), 0 0 16px rgba(0, 255, 136, 0.14);
+}
+ 

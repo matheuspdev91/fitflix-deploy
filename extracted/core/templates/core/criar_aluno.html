@@ -1,0 +1,86 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="fitflix-header-page">
+    <h1>Cadastrar aluno</h1>
+    <p>Crie o acesso do aluno com uma experiência mais fluida, organizada e pronta para o dia a dia do FitFlix.</p>
+</div>
+
+<section class="fitflix-student-shell">
+    <div class="fitflix-student-card">
+        <div class="fitflix-student-card__intro">
+            <span class="fitflix-student-card__eyebrow">Novo aluno</span>
+            <h2>Perfil inicial</h2>
+            <p>Preencha os dados essenciais para liberar acesso, acompanhar metas e manter o histórico bem organizado.</p>
+        </div>
+
+        <form method="post" class="fitflix-student-form">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form-feedback form-feedback--error">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="fitflix-student-grid">
+            <div class="form-group form-group--span-2">
+                <label class="form-label" for="{{ form.nome.id_for_label }}">Nome completo</label>
+                {{ form.nome }}
+                <p class="form-hint">Use o nome que o aluno reconhece facilmente no app.</p>
+                {% if form.nome.errors %}
+                    <div class="form-feedback form-feedback--error">{{ form.nome.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="{{ form.email.id_for_label }}">Email</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="form-feedback form-feedback--error">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="{{ form.telefone.id_for_label }}">Telefone</label>
+                {{ form.telefone }}
+                <p class="form-hint">Opcional, mas ajuda no contato rápido e no suporte.</p>
+                {% if form.telefone.errors %}
+                    <div class="form-feedback form-feedback--error">{{ form.telefone.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="{{ form.data_nascimento.id_for_label }}">Data de nascimento</label>
+                {{ form.data_nascimento }}
+                {% if form.data_nascimento.errors %}
+                    <div class="form-feedback form-feedback--error">{{ form.data_nascimento.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group form-group--span-2">
+                <label class="form-label" for="{{ form.objetivo.id_for_label }}">Objetivo principal</label>
+                {{ form.objetivo }}
+                {% if form.objetivo.errors %}
+                    <div class="form-feedback form-feedback--error">{{ form.objetivo.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group form-group--span-2">
+                <label class="form-label" for="{{ form.observacoes.id_for_label }}">Observações</label>
+                {{ form.observacoes }}
+                <p class="form-hint">Informações úteis, restrições, rotina ou preferências do aluno.</p>
+                {% if form.observacoes.errors %}
+                    <div class="form-feedback form-feedback--error">{{ form.observacoes.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="fitflix-student-actions">
+            <button type="submit" class="btn fitflix-student-submit">Criar aluno</button>
+            <span class="fitflix-student-actions__meta">Os dados ficam salvos no ecossistema FitFlix.</span>
+        </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

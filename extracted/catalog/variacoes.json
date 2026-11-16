@@ -1,0 +1,172 @@
+[
+{
+  "model": "core.variacaoexercicio",
+  "pk": 1,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Reto barra",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 2,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Reto halter",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 3,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Inclinado barra",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 4,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Inclinado halter",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 5,
+  "fields": {
+    "exercicio": 1,
+    "nome": "Máquina",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 6,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Reto halter",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 7,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Inclinado halter",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 8,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Máquina",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 9,
+  "fields": {
+    "exercicio": 2,
+    "nome": "Cross (cabo)",
+    "gif": "",
+    "grupo_muscular": 1
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 10,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Curvada barra",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 11,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Unilateral halter",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 12,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Máquina",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 13,
+  "fields": {
+    "exercicio": 3,
+    "nome": "Cavalinho",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 14,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Frontal aberta",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 15,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Frontal fechada",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 16,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Neutra",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+},
+{
+  "model": "core.variacaoexercicio",
+  "pk": 17,
+  "fields": {
+    "exercicio": 4,
+    "nome": "Supinada",
+    "gif": "",
+    "grupo_muscular": 2
+  }
+}
+]

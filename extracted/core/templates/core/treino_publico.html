@@ -1,0 +1,32 @@
+{% extends 'core/base_publica.html' %}
+
+{% block content %}
+<main class="page-content container" style="margin-top: var(--space-8);">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Treino Público</h1>
+        </div>
+        
+        <div class="card-body">
+            {% if treino.exercicios.exists %}
+                <div class="grid" style="grid-template-columns: 1fr;">
+                    {% for item in treino.exercicios.all|dictsort:"ordem" %}
+                        <div class="card card-bordered">
+                            <div class="card-body">
+                                <strong>{{ item.exercicio.nome }}</strong><br>
+                                Série: {{ item.series }} |
+                                Reps: {{ item.repeticoes }} |
+                                Descanso: {{ item.descanso }}s
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <p class="empty-state-text">Nenhum exercício cadastrado.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</main>
+{% endblock %}

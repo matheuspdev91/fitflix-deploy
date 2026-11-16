@@ -1,0 +1,210 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   COMPONENTS - PROGRESS STEPPER
+========================================================== */
+
+
+/*
+|--------------------------------------------------------------------------
+| CONTAINER
+|--------------------------------------------------------------------------
+*/
+
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: var(--space-6) var(--space-4);
+    width: 100%;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| STEP
+|--------------------------------------------------------------------------
+*/
+
+.stepper-step {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    position: relative;
+}
+
+.stepper-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+
+    transition: all var(--transition-base);
+    position: relative;
+    z-index: 1;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| CONNECTOR LINE
+|--------------------------------------------------------------------------
+*/
+
+.stepper-connector {
+    width: 60px;
+    height: 1px;
+    background: var(--color-border);
+    flex-shrink: 0;
+    transition: background var(--transition-base);
+}
+
+@media (max-width: 576px) {
+    .stepper-connector {
+        width: 24px;
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| STEP LABEL
+|--------------------------------------------------------------------------
+*/
+
+.stepper-label {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+
+    font-size: var(--font-size-2xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+
+    transition: color var(--transition-base);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| STATES
+|--------------------------------------------------------------------------
+*/
+
+/* Completed */
+.stepper-step.completed .stepper-indicator {
+    background: var(--color-primary-soft);
+    border-color: rgba(0, 255, 136, 0.20);
+    color: var(--color-primary);
+}
+
+.stepper-step.completed .stepper-label {
+    color: var(--color-text-secondary);
+}
+
+.stepper-step.completed + .stepper-connector {
+    background: rgba(0, 255, 136, 0.25);
+}
+
+/* Active / Current */
+.stepper-step.active .stepper-indicator {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-black);
+    box-shadow: var(--glow-md);
+}
+
+.stepper-step.active .stepper-label {
+    color: var(--color-primary);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| PROGRESS BAR (linear)
+|--------------------------------------------------------------------------
+*/
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--color-surface-elevated);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-slow);
+    box-shadow: var(--glow-sm);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| CIRCULAR PROGRESS
+|--------------------------------------------------------------------------
+*/
+
+.progress-ring {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-ring svg {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-track {
+    fill: none;
+    stroke: var(--color-surface-elevated);
+    stroke-width: 4;
+}
+
+.progress-ring-fill {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 4;
+    stroke-linecap: round;
+    transition: stroke-dashoffset var(--transition-slow);
+    filter: drop-shadow(0 0 4px rgba(0, 255, 136, 0.3));
+}
+
+.progress-ring-text {
+    position: absolute;
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+}
+
+.progress-ring-label {
+    position: absolute;
+    bottom: 22%;
+    font-size: var(--font-size-2xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}

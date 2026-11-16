@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Hub de Avaliações{% endblock %}
+
+{% block content %}
+<div style="max-width: 1000px; margin: 0 auto; padding: var(--space-8) var(--space-4);">
+    
+    <div style="text-align: center; margin-bottom: var(--space-8);">
+        <h1 style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-2); color: var(--color-text);">Hub de Avaliações</h1>
+        <p style="color: var(--color-text-muted); font-size: var(--font-size-md);">Selecione o perfil do aluno para iniciar o protocolo de testes adequado.</p>
+    </div>
+
+    <div class="grid-3">
+        <!-- AVALIAÇÃO ADULTO -->
+        <div class="card card-bordered" style="transition: transform 0.25s ease, border-color 0.25s ease; cursor: default;">
+            <div class="card-body d-flex flex-column items-center" style="text-align: center; padding: var(--space-6) var(--space-4);">
+                <div style="font-size: 3.5rem; margin-bottom: var(--space-4); text-shadow: 0 0 20px rgba(0, 255, 136, 0.2);">🧍</div>
+                <h3 class="card-title" style="margin-bottom: var(--space-2);">Adulto</h3>
+                <p class="card-subtitle" style="margin: 0; min-height: 45px; line-height: 1.5;">Avaliação antropométrica completa e protocolos metabólicos padrão.</p>
+            </div>
+            <div class="card-footer" style="justify-content: center; border-top: 1px solid rgba(255,255,255,0.05); padding: var(--space-4);">
+                <a href="{% url 'core:criar_avaliacao' %}" class="btn btn-primary w-full justify-center">Acessar Protocolo</a>
+            </div>
+        </div>
+
+        <!-- AVALIAÇÃO IDOSO -->
+        <div class="card card-bordered" style="transition: transform 0.25s ease, border-color 0.25s ease; cursor: default;">
+            <div class="card-body d-flex flex-column items-center" style="text-align: center; padding: var(--space-6) var(--space-4);">
+                <div style="font-size: 3.5rem; margin-bottom: var(--space-4); text-shadow: 0 0 20px rgba(0, 255, 136, 0.2);">🧓</div>
+                <h3 class="card-title" style="margin-bottom: var(--space-2);">Idoso</h3>
+                <p class="card-subtitle" style="margin: 0; min-height: 45px; line-height: 1.5;">Testes funcionais focados em autonomia, mobilidade e prevenção.</p>
+            </div>
+            <div class="card-footer" style="justify-content: center; border-top: 1px solid rgba(255,255,255,0.05); padding: var(--space-4);">
+                <a href="{% url 'core:criar_avaliacao_idoso' %}" class="btn btn-primary w-full justify-center">Acessar Protocolo</a>
+            </div>
+        </div>
+
+        <!-- AVALIAÇÃO CRIANÇA -->
+        <div class="card card-bordered" style="transition: transform 0.25s ease, border-color 0.25s ease; cursor: default;">
+            <div class="card-body d-flex flex-column items-center" style="text-align: center; padding: var(--space-6) var(--space-4);">
+                <div style="font-size: 3.5rem; margin-bottom: var(--space-4); text-shadow: 0 0 20px rgba(0, 255, 136, 0.2);">🧒</div>
+                <h3 class="card-title" style="margin-bottom: var(--space-2);">Criança</h3>
+                <p class="card-subtitle" style="margin: 0; min-height: 45px; line-height: 1.5;">Testes de coordenação motora, agilidade e aptidão física infantil.</p>
+            </div>
+            <div class="card-footer" style="justify-content: center; border-top: 1px solid rgba(255,255,255,0.05); padding: var(--space-4);">
+                <a href="{% url 'core:criar_avaliacao_crianca' %}" class="btn btn-primary w-full justify-center">Acessar Protocolo</a>
+            </div>
+        </div>
+    </div>
+    
+    <div style="margin-top: var(--space-8); text-align: center;">
+        <a href="{% url 'core:avaliacoes' %}" class="btn action-btn">Voltar para lista de avaliações</a>
+    </div>
+
+</div>
+{% endblock %}

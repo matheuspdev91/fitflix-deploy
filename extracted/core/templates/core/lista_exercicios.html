@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Exercícios | FitFlix{% endblock %}
+
+{% block content %}
+<section class="fitflix-page">
+    <div class="fitflix-page-header">
+        <div>
+            <p class="fitflix-eyebrow">Biblioteca</p>
+            <h1 class="fitflix-page-title">Exercícios</h1>
+            <p class="fitflix-page-subtitle">Selecione um exercício para visualizar as variações disponíveis.</p>
+        </div>
+    </div>
+
+    <h2 class="fitflix-section-title">Treinos em destaque</h2>
+
+    <div class="fitflix-grid fitflix-list fitflix-list--catalog">
+        {% for exercicio in exercicios %}
+        <a href="{% url 'core:exercicio_detalhe' exercicio.id %}" class="card card-bordered card-body" style="text-decoration: none; color: inherit;">
+            <article class="fitflix-item fitflix-item--exercise fitflix-hover-effect">
+                <div class="fitflix-exercise-image">
+                    {% with exercicio.variacoes.first as variacao %}
+                        {% if variacao and variacao.gif %}
+                            <img src="{{ variacao.gif.url }}" class="fitflix-exercise-thumb" alt="{{ exercicio.nome }}">
+                        {% else %}
+                            <div class="fitflix-exercise-placeholder">
+                                <span>Sem mídia</span>
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+
+                    <div class="fitflix-card-overlay">
+                        <h3>{{ exercicio.nome }}</h3>
+                    </div>
+                </div>
+
+                <div class="fitflix-item-body">
+                    <p>{{ exercicio.descricao|default:"Exercício disponível na biblioteca FitFlix." }}</p>
+                </div>
+            </article>
+        </a>
+        {% empty %}
+        <div class="fitflix-empty-state">
+            <h2>Nenhum exercício encontrado</h2>
+            <p>Cadastre novos exercícios para preencher esta biblioteca.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

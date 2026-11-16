@@ -1,0 +1,178 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   COMPONENTS - HERO
+========================================================== */
+
+.hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align content to bottom */
+    align-items: center;
+    
+    min-height: 100vh;
+    min-height: 100dvh; /* Better mobile viewport support */
+    background-color: var(--color-background);
+    
+    overflow: hidden;
+    padding: var(--space-8) var(--space-6);
+    padding-bottom: var(--space-16);
+}
+
+.hero-visual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+.hero-kv {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    
+    animation: fadeInKv 1.5s ease-out forwards;
+}
+
+/* NOVO: CTAs no canto superior direito */
+.hero-actions-top {
+    position: absolute;
+    top: var(--space-8);
+    right: var(--space-8);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+
+
+/* Animations */
+@keyframes fadeInKv {
+    from { opacity: 0; transform: scale(1.05); }
+    to { opacity: 0.95; transform: scale(1); }
+}
+
+/*
+|--------------------------------------------------------------------------
+| DASHBOARD HERO
+|--------------------------------------------------------------------------
+*/
+
+.dashboard-hero {
+    position: relative;
+    width: 100%;
+    min-height: 320px;
+    margin-bottom: var(--space-8);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.dashboard-hero-visual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.dashboard-hero-content {
+    position: relative;
+    z-index: 10;
+    padding: var(--space-8);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.dashboard-hero-header h1 {
+    margin: 0;
+    margin-bottom: var(--space-2);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.dashboard-hero-header p {
+    margin: 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    font-size: var(--text-lg);
+    font-weight: 500;
+}
+
+.dashboard-hero-actions {
+    display: flex;
+    gap: var(--space-4);
+}
+
+.dashboard-hero-kv {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    /* Soft blend into background at the bottom */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+    animation: fadeInKv 1s ease-out forwards;
+}
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero {
+        padding: var(--space-4) var(--space-4);
+        padding-bottom: var(--space-10);
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+    
+    .hero-kv {
+        object-position: center 30%; /* Focus more on the top/center where logo usually is */
+    }
+    
+    .hero-actions-top {
+        top: var(--space-4);
+        right: var(--space-4);
+        gap: var(--space-2);
+        flex-direction: column;
+        align-items: flex-end; /* Keep aligned to right so it doesn't cover center logo */
+    }
+
+    /* Reduzir ligeiramente os botões no mobile para não ocupar tanta tela */
+    .hero-actions-top .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .dashboard-hero {
+        min-height: 250px; /* Mais compacto no mobile */
+        margin-bottom: var(--space-6);
+        border-radius: var(--radius-md);
+    }
+    
+    .dashboard-hero-content {
+        padding: var(--space-4);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-4);
+    }
+    
+    .dashboard-hero-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .dashboard-hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

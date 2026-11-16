@@ -1,0 +1,26 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   FOUNDATION - DESIGN TOKENS
+========================================================== */
+
+/*
+|--------------------------------------------------------------------------
+| DESIGN TOKENS
+|--------------------------------------------------------------------------
+|
+| Centraliza a importação de todos os tokens da Foundation.
+| Nenhuma variável deve ser declarada neste arquivo.
+|
+| Cada categoria possui seu próprio arquivo para facilitar
+| manutenção, escalabilidade e reutilização.
+|
+*/
+
+@import "./colors.css";
+@import "./spacing.css";
+@import "./typography.css";
+@import "./radius.css";
+@import "./shadows.css";
+@import "./transitions.css";
+@import "./layout.css";
+@import "./z-index.css";

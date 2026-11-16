@@ -1,0 +1,126 @@
+[33m3aad071[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m atualização do fitflix
+[33m5fdd4df[m refatorando o fitflix
+[33m9de6bfb[m melhorando a arquitetura fitflix
+[33mf6ce6a3[m ux melhorado dia 23/06/26
+[33m3ea9ba1[m ajustes de ux e segurança
+[33mc0b36e3[m melhorando a segurança
+[33m3ff8188[m correção de UX e adicinado funcionalidade de comparação
+[33m9d8e95b[m ux ajustado dia 19/06/2026
+[33m4063df0[m UX melhorada dia 19/06/2026
+[33m406e4fb[m ajuste layout adicionar exercicio
+[33m9d6e2db[m backup ux adicionar exercicio
+[33m5a09482[m[33m ([m[1;32mredesign-adicionar-exercicio[m[33m)[m ajustando UX do fitflix dia 18/06/2026
+[33mb77cadd[m Corrigindo as gifs no dia 18/06/2026
+[33mc6b5c1f[m fix das gifs desincronizadas do cloudinary 15/06/26
+[33ma72874f[m corrigindo cloudinary storage  em 13/06/26
+[33m189791c[m[33m ([m[1;32mredesign-fitflix[m[33m)[m ajustabdo o banco
+[33m6227ba6[m fix java e select
+[33m226c741[m ajustando JS
+[33mf999ac2[m corrigindo variacoes
+[33m532a755[m Corrigindo filtros
+[33m871fc50[m corrigindo os filtros
+[33mc7efcf2[m atualizando o seed
+[33m0e80e05[m ajustando banco de dados dos exercicios
+[33m34ef179[m ajustando o script
+[33m6f8b466[m remove duplicação
+[33mc39ebb5[m debug cloudinary
+[33mc3ebd9b[m reconstrucao completa do banco e scripts
+[33md77c7e4[m backup variações
+[33m815b382[m corrigindo caminho das gifs
+[33m9e4353e[m teste staticfiles
+[33m81b26c6[m fix: config da produção
+[33m18594c8[m testando o DEBUG
+[33m6c9abc6[m fix da settings
+[33m53545ec[m fix da settings
+[33mcf72c46[m fix databse url
+[33m0c13cd6[m[33m ([m[1;32mbackup-bugado[m[33m)[m migrar gif para cloudinary
+[33m7f613ab[m increase gif path max length
+[33m3420e8b[m force alter value
+[33md26353c[m sync models
+[33m98a1abd[m increase variacao exercicio nome length
+[33madeaaef[m add exercise fixtures
+[33m4279d04[m adicionando o dockerignore
+[33m5fc3e9b[m ativando o debug
+[33mc0b20b6[m force redeploy
+[33m8147481[m fix migrations
+[33m9e7879f[m fix settings
+[33m3c1526a[m enviando o settings.py
+[33mecd9667[m ajustando o rail fix
+[33mb4d2ef8[m fix railway deply
+[33m89b3a9a[m fix remove submodulo quebrado
+[33m3c595f0[m fix requirements.txt
+[33mec1bada[m backup antes do cloudinary
+[33m3868911[m corrigindo bug de mídia
+[33m3b44dc0[m ajustando os fixs
+[33m6117501[m ajustando grupos musculares
+[33mdd3f77b[m ajustando o seed
+[33m4b438c6[m fix do seed
+[33m4954ed2[m subindo o seed.py
+[33m291e847[m fix do fix
+[33me8a37e0[m fix downgrade
+[33m3d0ebfd[m downgrade python para compatibilidade
+[33m7378658[m restaure views e alinhamento com url
+[33m6bc3c17[m testando o decortarator
+[33m0d1d3d7[m testando o js
+[33m3d0879a[m novo deploy
+[33m6ede4f8[m corrigindo o amdin.py
+[33mb37b886[m fix do login adm
+[33m2c6410e[m criando superuser
+[33m679a95c[m logando adm
+[33maf0a9fe[m testando de novo
+[33m44fa833[m adicionando automações de gifs, exercicíos e etc
+[33m562691d[m corrigindo o endblock
+[33m294913a[m fix link de treino
+[33m6516db7[m erro besta corrigido
+[33mf9d71e6[m fix do link de envio
+[33m11e3eb2[m ajustando a view ver_treino
+[33m2d30069[m fix do link
+[33m74bb70c[m salvando avaliaçõs
+[33m3e98f48[m correção de erros e fix do manage.py
+[33m16372c7[m fix migrate render
+[33mfbc2b77[m Corrigindo exercicio_treino
+[33m2217546[m adicionando tokens de criação
+[33me892111[m correção de css e implementação do botão whatsapp
+[33ma102ce2[m adicionando envio de treino por link
+[33m65cc476[m fix: estrutura commands + reset_db
+[33m7249836[m corrigindo o fix db
+[33m9883011[m reset db fix
+[33mbe75261[m trigger deploy clean db
+[33m2d5349f[m fix da settings
+[33mf130642[m Fix: sincoronizando migrações
+[33m64e771b[m Atualizando o UIX
+[33m2889077[m fitflix css corrigido
+[33m3c6b21b[m corrigindo o css
+[33m227c19c[m fix do css
+[33m22b797b[m fix: usar fitflix.css
+[33mee3f28d[m Corrigindo caminho da pasta satic no build.sh
+[33m9d675ad[m Corrigindo a home.html
+[33mb71ba01[m Corrigindo o DOCTYPE do base.html
+[33m121100b[m fix config banco de dados
+[33mef6708a[m Corrigindo arquivos estaticos pra produção
+[33m346202d[m fix static com withenoise
+[33mb9a72ad[m fix static files path
+[33m561b5c7[m fix requirements.txt, nome certo
+[33m8581574[m corrigindo a repo
+[33m9c25716[m primeiro commit
+[33m3bb3cec[m fix python version
+[33m5eedcc9[m fix: requirements corrigido de forma definitiva
+[33mca34f0c[m fix: adicionando o certifi no requirements
+[33ma7908e0[m fix: removendo requirements duplicado
+[33m6a9ecb4[m atualizando o Fitflix
+[33m1f5abf3[m SaaS 1.0 funcionando
+[33m78292c2[m resolvendo bugs
+[33m3066782[m Finalização quase concluida
+[33m9729fa0[m Salvando ajsustes finais
+[33mde20acc[m Atualização do sistema
+[33m94a3e23[m adicionando o fitflix e preparando a produção
+[33m998f605[m docs: adicionando preview
+[33mdf255ac[m FitFlix funcionando com models e gif
+[33m418a738[m[33m ([m[1;33mtag: [m[1;33mv0.0.1.1[m[33m)[m v0.0.1.1 - versão melhorada do SaaS
+[33m558e678[m Fix DATABASES
+[33mee490fd[m Migrando o banco para PostgresSQL (Neon) e ajuste settings
+[33m66f021f[m Atualizando requirements com gunicorn
+[33mc17cbe4[m Removendo o requirements antigo
+[33me6859c2[m Corrigindo nome do requeriments
+[33m449cf0c[m Configuração para deploy" git push pip freeze > requeriments.txt git add requeriments.txt git commit -m "Adicionando requeriments.txt
+[33m7f3204b[m Primeira versão SaaS Avaliação Física

@@ -1,0 +1,76 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   MAIN STYLESHEET
+========================================================== */
+
+
+/*
+|--------------------------------------------------------------------------
+| DESIGN TOKENS
+|--------------------------------------------------------------------------
+*/
+
+@import url("./foundation/abstracts/tokens.css");
+
+
+/*
+|--------------------------------------------------------------------------
+| BASE
+|--------------------------------------------------------------------------
+*/
+
+@import url("./foundation/base/reset.css");
+@import url("./foundation/base/base.css");
+
+
+/*
+|--------------------------------------------------------------------------
+| LAYOUT
+|--------------------------------------------------------------------------
+*/
+
+@import url("./foundation/layout/container.css");
+@import url("./foundation/layout/grid.css");
+@import url("./foundation/layout/app-shell.css");
+@import url("./foundation/layout/sidebar.css");
+@import url("./foundation/layout/topbar.css");
+@import url("./foundation/layout/footer.css");
+
+
+/*
+|--------------------------------------------------------------------------
+| UTILITIES
+|--------------------------------------------------------------------------
+*/
+
+@import url("./foundation/utilities/utilities.css");
+@import url("./foundation/utilities/animations.css");
+
+
+/*
+|--------------------------------------------------------------------------
+| COMPONENTS
+|--------------------------------------------------------------------------
+*/
+
+@import url("./foundation/components/alerts.css");
+@import url("./foundation/components/badges.css");
+@import url("./foundation/components/breadcrumb.css");
+@import url("./foundation/components/buttons.css");
+@import url("./foundation/components/cards.css");
+@import url("./foundation/components/chips.css");
+@import url("./foundation/components/dropdown.css");
+@import url("./foundation/components/empty-state.css");
+@import url("./foundation/components/form-control.css");
+@import url("./foundation/components/forms.css");
+@import url("./foundation/components/hero.css");
+@import url("./foundation/components/inputs.css");
+@import url("./foundation/components/modal.css");
+@import url("./foundation/components/pagination.css");
+@import url("./foundation/components/selects.css");
+@import url("./foundation/components/spinners.css");
+@import url("./foundation/components/tables.css");
+@import url("./foundation/components/tabs.css");
+@import url("./foundation/components/textarea.css");
+@import url("./foundation/components/tooltips.css");
+@import url("./foundation/components/progress.css");

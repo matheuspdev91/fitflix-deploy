@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="card card-bordered card-body">
+            <h1 class="card-title">Nova Avaliação</h1>
+
+            <div class="form-group">
+                <label for="tipo">Tipo de Avaliação</label>
+                <select name="tipo" id="tipo">
+                    <option value="adulto" selected>Adulto</option>
+                    <option value="crianca">Criança</option>
+                    <option value="idoso">Idoso</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="card card-bordered card-body">
+            <h2 class="card-title">Dados Pessoais</h2>
+            {% for field in avaliacao_form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="card card-bordered card-body">
+            <h2 class="card-title">Circunferências</h2>
+            {% for field in circ_form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="card card-bordered card-body">
+            <h2 class="card-title">Adipometria</h2>
+            {% for field in adip_form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="card card-bordered card-body">
+            <div class="form-group">
+                <button type="submit" class="btn">Salvar avaliação</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+document.getElementById('tipo').addEventListener('change', function() {
+    const tipo = this.value;
+
+    if (tipo === 'crianca') {
+        window.location.href = "{% url 'core:criar_avaliacao_crianca' %}";
+    }
+
+    if (tipo === 'idoso') {
+        window.location.href = "{% url 'core:criar_avaliacao_idoso' %}";
+    }
+
+    if (tipo === 'adulto') {
+        window.location.href = "{% url 'core:criar_avaliacao' %}";
+    }
+});
+</script>
+{% endblock %}

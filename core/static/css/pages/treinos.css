@@ -1,0 +1,207 @@
+/* ==========================================================
+   FITFLIX - GERENCIAMENTO DE TREINOS
+========================================================== */
+
+.ff-workout-editor {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    width: 100%;
+}
+
+.ff-workout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.ff-workout-title {
+    color: var(--color-text);
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.ff-workout-subtitle {
+    color: var(--color-text-secondary);
+    margin-top: var(--space-2);
+}
+
+.ff-workout-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: center;
+}
+
+.ff-workout-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+}
+
+.ff-workout-info p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    overflow-wrap: anywhere;
+}
+
+.ff-workout-layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+    gap: var(--space-5);
+    align-items: start;
+}
+
+.ff-division-panel,
+.ff-exercises-panel {
+    min-width: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: var(--space-5);
+}
+
+.ff-panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.ff-panel-heading h2,
+.ff-panel-heading h3 {
+    color: var(--color-text);
+    margin: 0;
+}
+
+.ff-division-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.ff-division-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    padding: var(--space-3);
+    color: var(--color-text-secondary);
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 9px;
+    text-decoration: none;
+    transition: border-color 180ms ease, background 180ms ease;
+}
+
+.ff-division-item:hover,
+.ff-division-item.active {
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+    border-color: var(--color-primary-border);
+}
+
+.ff-exercise-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.ff-exercise-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3);
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    min-width: 0;
+}
+
+.ff-exercise-card img {
+    width: 88px;
+    height: 88px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 8px;
+    background: var(--color-background);
+}
+
+.ff-exercise-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.ff-exercise-card-content h3 {
+    color: var(--color-text);
+    font-size: 1rem;
+    margin: 0 0 var(--space-2);
+}
+
+.ff-exercise-card-content p {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.ff-exercise-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.ff-workout-empty {
+    padding: var(--space-8) var(--space-4);
+    text-align: center;
+    color: var(--color-text-muted);
+    background: var(--color-background-subtle);
+    border: 1px dashed var(--color-border);
+    border-radius: 10px;
+}
+
+.ff-unassigned-section {
+    margin-top: var(--space-5);
+    padding: var(--space-4);
+    border: 1px dashed var(--color-border-hover);
+    border-radius: 12px;
+}
+
+.ff-unassigned-section h3 {
+    color: var(--color-text);
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .ff-workout-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ff-division-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ff-exercise-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .ff-exercise-card img {
+        width: 72px;
+        height: 72px;
+    }
+
+    .ff-workout-title {
+        font-size: 1.65rem;
+    }
+}

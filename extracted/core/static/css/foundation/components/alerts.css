@@ -1,0 +1,146 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   COMPONENTS - ALERTS
+========================================================== */
+
+
+/*
+|--------------------------------------------------------------------------
+| BASE
+|--------------------------------------------------------------------------
+*/
+
+.alert {
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: var(--space-2);
+
+    width: 100%;
+
+    padding: var(--space-6);
+
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ICON
+|--------------------------------------------------------------------------
+*/
+
+.alert-icon {
+
+    flex-shrink: 0;
+
+    font-size: 1.2rem;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| CONTENT
+|--------------------------------------------------------------------------
+*/
+
+.alert-content {
+
+    flex: 1;
+
+}
+
+.alert-title {
+
+    margin-bottom: var(--space-1);
+
+    font-weight: var(--font-weight-semibold);
+
+    color: inherit;
+
+}
+
+.alert-text {
+
+    margin: 0;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| VARIANTS
+|--------------------------------------------------------------------------
+*/
+
+.alert-success {
+
+    background: var(--color-success-soft);
+    border-color: var(--color-success-border);
+
+    color: var(--color-success);
+
+}
+
+.alert-warning {
+
+    background: var(--color-warning-soft);
+    border-color: var(--color-warning-border);
+
+    color: var(--color-warning);
+
+}
+
+.alert-danger {
+
+    background: var(--color-danger-soft);
+    border-color: var(--color-danger-border);
+
+    color: var(--color-danger);
+
+}
+
+.alert-info {
+
+    background: var(--color-info-soft);
+    border-color: var(--color-info-border);
+
+    color: var(--color-info);
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| DISMISSIBLE
+|--------------------------------------------------------------------------
+*/
+
+.alert-dismissible {
+
+    justify-content: space-between;
+
+}
+
+.alert-close {
+
+    cursor: pointer;
+
+    opacity: .7;
+
+    transition: opacity var(--transition-fast);
+
+}
+
+.alert-close:hover {
+
+    opacity: 1;
+
+}

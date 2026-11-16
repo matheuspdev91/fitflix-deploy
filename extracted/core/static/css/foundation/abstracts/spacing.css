@@ -1,0 +1,36 @@
+/* ==========================================================
+   FITFLIX DESIGN SYSTEM
+   FOUNDATION - SPACING
+========================================================== */
+
+:root {
+
+    /*
+    |--------------------------------------------------------------------------
+    | SPACING SCALE
+    |--------------------------------------------------------------------------
+    */
+
+    --space-0: 0;
+
+    /* Micro-spacing */
+    --space-1: 0.25rem;   /* 4px */
+    --space-2: 0.50rem;   /* 8px */
+    --space-3: 0.75rem;   /* 12px */
+    
+    /* Component spacing */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.25rem;   /* 20px */
+    --space-6: 1.5rem;    /* 24px */
+    
+    /* Section spacing */
+    --space-8: 2rem;      /* 32px */
+    --space-10: 2.5rem;   /* 40px */
+    --space-12: 3rem;     /* 48px */
+    
+    /* Composition spacing */
+    --space-16: 4rem;     /* 64px */
+    --space-20: 5rem;     /* 80px */
+    --space-24: 6rem;     /* 96px */
+
+}
