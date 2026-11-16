@@ -35,7 +35,7 @@ class Usuario(AbstractUser):
         default="PERSONAL",
 )
 
-    
+
 
 
 # ========================
@@ -265,12 +265,12 @@ class VideoExercicio(models.Model):
 
 class VariacaoExercicio(models.Model):
     exercicio = models.ForeignKey(
-    VideoExercicio, 
+    VideoExercicio,
     on_delete=models.CASCADE, related_name="variacoes"
     )
     nome = models.CharField(max_length=300)
     gif = models.FileField(
-        upload_to='gifs/', 
+        upload_to='gifs/',
         max_length=300,
         null=True,
         blank=True)
@@ -287,7 +287,6 @@ class VariacaoExercicio(models.Model):
 # TREINO
 # ========================
 
-
 class Treino(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     nome = models.CharField(max_length=100)
@@ -302,10 +301,42 @@ class Treino(models.Model):
         return f"{self.nome} - {self.aluno.nome}"
 
 
+class DivisaoTreino(models.Model):
+    treino = models.ForeignKey(
+        Treino,
+        on_delete=models.CASCADE,
+        related_name="divisoes",
+    )
+
+    nome = models.CharField(max_length=50)
+    descricao = models.CharField(max_length=200, blank=True)
+
+    ordem = models.PositiveIntegerField(default=1)
+
+    criado_em = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["ordem", "id"]
+        verbose_name = "Divisão de treino"
+        verbose_name_plural = "Divisões de treino"
+        unique_together = ("treino", "nome")
+
+    def __str__(self):
+        return f"{self.treino.nome} - {self.nome}"
+
 class ExercicioTreino(models.Model):
     treino = models.ForeignKey(
         Treino, on_delete=models.CASCADE, related_name="exercicios"
     )
+
+    divisao = models.ForeignKey(
+        DivisaoTreino,
+        on_delete=models.SET_NULL,
+        related_name="exercicios",
+        null=True,
+        blank=True,
+    )
+
     exercicio = models.ForeignKey(VideoExercicio, on_delete=models.CASCADE)
     variacao = models.ForeignKey(VariacaoExercicio, on_delete=models.CASCADE)
 
@@ -313,7 +344,6 @@ class ExercicioTreino(models.Model):
     repeticoes = models.IntegerField()
     descanso = models.IntegerField(help_text="em segundos")
     carga = models.CharField(max_length=50, blank=True)
-
     ordem = models.IntegerField()
 
     def clean(self):
@@ -330,13 +360,18 @@ class ExercicioTreino(models.Model):
                 {"variacao": "A variação deve pertencer ao exercício selecionado."}
             )
 
+        if self.divisao_id and self.treino_id:
+            if self.divisao.treino_id != self.treino_id:
+                raise ValidationError(
+                    {"divisao": "A divisão deve pertencer ao mesmo treino do exercício."}
+                )
+
     def save(self, *args, **kwargs):
         self.clean()
         return super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.treino.nome} - {self.exercicio.nome}"
-
 
 # ============
 # Exercício

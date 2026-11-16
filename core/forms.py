@@ -1,4 +1,4 @@
-﻿from django import forms
+from django import forms
 from django.contrib.auth import get_user_model
 from django.forms import inlineformset_factory
 
@@ -9,6 +9,7 @@ from .models import (
     AvaliacaoFisica,
     AvaliacaoIdoso,
     Circunferencia,
+    DivisaoTreino,
     ExercicioTreino,
     Treino,
     VariacaoExercicio,
@@ -197,6 +198,111 @@ class TreinoForm(forms.ModelForm):
         return cleaned_data
 
 CriarTreinoForm = TreinoForm
+
+
+# ========================
+# DIVISÃO DE TREINO FORM
+# ========================
+
+
+class DivisaoTreinoForm(forms.ModelForm):
+    class Meta:
+        model = DivisaoTreino
+        fields = ["nome", "descricao", "ordem"]
+        labels = {
+            "nome": "Nome da divisão",
+            "descricao": "Descrição",
+            "ordem": "Ordem de exibição",
+        }
+        widgets = {
+            "nome": forms.TextInput(
+                attrs={"placeholder": "Ex: Treino A"}
+            ),
+            "descricao": forms.TextInput(
+                attrs={"placeholder": "Ex: Peito e Tríceps (opcional)"}
+            ),
+            "ordem": forms.NumberInput(
+                attrs={"min": 1}
+            ),
+        }
+
+    def __init__(self, *args, treino=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if treino is None and self.instance and getattr(self.instance, "treino_id", None):
+            treino = self.instance.treino
+
+        if treino is None:
+            raise ValueError(
+                "O parâmetro 'treino' é obrigatório para instanciar DivisaoTreinoForm."
+            )
+
+        if self.instance and self.instance.pk:
+            if self.instance.treino_id != treino.pk:
+                raise ValueError(
+                    f"A divisão pertence ao treino ID {self.instance.treino_id}, "
+                    f"mas o treino informado possui ID {treino.pk}. "
+                    "Não é permitido alterar o treino de uma divisão existente."
+                )
+
+        self.treino = treino
+
+        field_classes = "form-control"
+        for field in self.fields.values():
+            existing_class = field.widget.attrs.get("class", "").strip()
+            field.widget.attrs["class"] = (
+                f"{existing_class} {field_classes}".strip()
+            )
+
+        self.fields["descricao"].required = False
+
+    def clean_nome(self):
+        nome = (self.cleaned_data.get("nome") or "").strip()
+        if not nome:
+            raise forms.ValidationError("O nome da divisão não pode ficar em branco.")
+
+        if not self.treino:
+            raise forms.ValidationError(
+                "Contexto de treino não definido para esta divisão."
+            )
+
+        qs = DivisaoTreino.objects.filter(
+            treino=self.treino,
+            nome__iexact=nome,
+        )
+
+        if self.instance and self.instance.pk:
+            qs = qs.exclude(pk=self.instance.pk)
+
+        if qs.exists():
+            raise forms.ValidationError(
+                f"Já existe uma divisão chamada '{nome}' neste treino."
+            )
+
+        return nome
+
+    def clean_descricao(self):
+        descricao = (self.cleaned_data.get("descricao") or "").strip()
+        return descricao
+
+    def clean_ordem(self):
+        ordem = self.cleaned_data.get("ordem")
+        if ordem is None or ordem < 1:
+            raise forms.ValidationError(
+                "A ordem deve ser um número inteiro positivo maior ou igual a 1."
+            )
+        return ordem
+
+    def save(self, commit=True):
+        divisao = super().save(commit=False)
+        if divisao.pk and divisao.treino_id != self.treino.pk:
+            raise ValueError(
+                "Não é permitido transferir uma divisão existente para outro treino."
+            )
+        divisao.treino = self.treino
+        if commit:
+            divisao.save()
+        return divisao
 
 
 # ===================
