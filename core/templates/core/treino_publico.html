@@ -1,32 +1,76 @@
 {% extends 'core/base_publica.html' %}
 
 {% block content %}
-<main class="page-content container" style="margin-top: var(--space-8);">
-    <div class="card">
-        <div class="card-header">
-            <h1 class="card-title">Treino Público</h1>
+<main class="fitflix-student-shell">
+    <div class="fitflix-student-card">
+        <div class="fitflix-student-card__intro">
+            <p class="fitflix-student-card__eyebrow">Treino</p>
+            <h2>{{ treino.nome }}</h2>
+            <p>Acesse o treino completo e navegue pelas divisões.</p>
         </div>
-        
-        <div class="card-body">
-            {% if treino.exercicios.exists %}
-                <div class="grid" style="grid-template-columns: 1fr;">
-                    {% for item in treino.exercicios.all|dictsort:"ordem" %}
-                        <div class="card card-bordered">
-                            <div class="card-body">
-                                <strong>{{ item.exercicio.nome }}</strong><br>
-                                Série: {{ item.series }} |
-                                Reps: {{ item.repeticoes }} |
-                                Descanso: {{ item.descanso }}s
-                            </div>
-                        </div>
-                    {% endfor %}
+
+        <div class="fitflix-section-title">Divisões</div>
+
+        <div class="fitflix-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;">
+            <a href="?divisao=" class="fitflix-detail-card fitflix-hover-effect">
+                <div class="fitflix-detail-body" style="justify-content: center; align-items: center;">
+                    <span style="font-weight: 800; color: var(--text-main);">Todos</span>
                 </div>
-            {% else %}
-                <div class="empty-state">
-                    <p class="empty-state-text">Nenhum exercício cadastrado.</p>
+            </a>
+            {% for divisao in divisoes %}
+            <a href="?divisao={{ divisao.id }}" class="fitflix-detail-card fitflix-hover-effect" style="{% if divisao_selecionada and divisao.id == divisao_selecionada.id %}background: rgba(0, 255, 136, .12); border: 1px solid var(--verde);{% endif %}">
+                <div class="fitflix-detail-body" style="justify-content: center; align-items: center;">
+                    <span style="font-weight: 800; color: var(--text-main);">{{ divisao.nome }}</span>
                 </div>
-            {% endif %}
+            </a>
+            {% endfor %}
         </div>
+
+        <div class="fitflix-section-title" style="margin-top: 24px;">Exercícios</div>
+
+        {% if exercicios_treino %}
+        <div class="fitflix-grid">
+            {% for item in exercicios_treino %}
+            <div class="fitflix-detail-card fitflix-hover-effect">
+                <div class="fitflix-detail-body">
+                    <h3 style="margin: 0 0 4px;">{{ item.exercicio.nome }}</h3>
+                                        {% if item.variacao.gif %}
+                                        <img src="{{ item.variacao.gif.url }}" alt="{{ item.variacao.nome }}" class="student-gif">
+                                        {% elif item.exercicio.gif %}
+                                        <img src="{{ item.exercicio.gif.url }}" alt="{{ item.exercicio.nome }}" class="student-gif">
+                                        {% endif %}
+                                        <p style="margin: 0 0 4px;">Séries: {{ item.series }} | Reps: {{ item.repeticoes }} | Descanso: {{ item.descanso }}s</p>
+                    {% if item.carga %}
+                    <p style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.66);">Carga: {{ item.carga }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="fitflix-empty-state">
+            <p style="color: rgba(255,255,255,0.65);">Nenhum exercício nesta divisão.</p>
+        </div>
+        {% endif %}
+
+        {% if exercicios_sem_divisao %}
+        <div class="fitflix-section-title" style="margin-top: 24px;">Sem divisão</div>
+        <div class="fitflix-grid">
+            {% for item in exercicios_sem_divisao %}
+            <div class="fitflix-detail-card fitflix-hover-effect">
+                <div class="fitflix-detail-body">
+                    <h3 style="margin: 0 0 4px;">{{ item.exercicio.nome }}</h3>
+                                        {% if item.variacao.gif %}
+                                        <img src="{{ item.variacao.gif.url }}" alt="{{ item.variacao.nome }}" class="student-gif">
+                                        {% elif item.exercicio.gif %}
+                                        <img src="{{ item.exercicio.gif.url }}" alt="{{ item.exercicio.nome }}" class="student-gif">
+                                        {% endif %}
+                                        <p style="margin: 0 0 4px;">Séries: {{ item.series }} | Reps: {{ item.repeticoes }} | Descanso: {{ item.descanso }}s</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
 </main>
 {% endblock %}

@@ -1,0 +1,233 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Editar exercício | FitFlix{% endblock %}
+
+{% block content %}
+<section class="fitflix-form-page ff-add-exercise-page">
+    <div class="container">
+        <div class="fitflix-form-heading ff-add-exercise-heading">
+            <div class="ff-heading-meta">
+                <p class="fitflix-eyebrow">Treino</p>
+                <span class="badge badge-primary">{{ treino.nome }}</span>
+            </div>
+
+            <h1 class="fitflix-page-title">Editar exercício</h1>
+
+            <p class="fitflix-page-subtitle">
+                Altere os dados do exercício, sua variação e a configuração de
+                carga dentro deste treino.
+            </p>
+        </div>
+
+        <div class="card card-bordered card-body">
+            <form method="post" class="fitflix-premium-form ff-add-exercise-form">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-error">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="card card-bordered card-body">
+                    <div class="ff-layout-grid">
+                        <section class="ff-config-panel">
+                            <div class="ff-panel-header">
+                                <div>
+                                    <p class="fitflix-eyebrow" style="color: var(--color-primary); font-weight: var(--font-weight-bold); font-size: 1.2rem;">02</p>
+                                    <h3 class="ff-panel-title">Configuração do treino</h3>
+                                </div>
+                            </div>
+
+                            <div class="ff-config-grid">
+                                <div class="fitflix-field-group">
+                                    <label for="id_series">Séries</label>
+                                    <input
+                                        type="number"
+                                        name="series"
+                                        id="id_series"
+                                        class="form-control"
+                                        min="1"
+                                        value="{{ form.series.value|default_if_none:'' }}"
+                                        required
+                                    >
+                                    {% if form.series.errors %}
+                                    <div class="error-message">
+                                        {% for error in form.series.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="fitflix-field-group">
+                                    <label for="id_repeticoes">Repetições</label>
+                                    <input
+                                        type="number"
+                                        name="repeticoes"
+                                        id="id_repeticoes"
+                                        class="form-control"
+                                        min="1"
+                                        value="{{ form.repeticoes.value|default_if_none:'' }}"
+                                        required
+                                    >
+                                    {% if form.repeticoes.errors %}
+                                    <div class="error-message">
+                                        {% for error in form.repeticoes.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="fitflix-field-group">
+                                    <label for="id_descanso">Descanso (segundos)</label>
+                                    <input
+                                        type="number"
+                                        name="descanso"
+                                        id="id_descanso"
+                                        class="form-control"
+                                        min="0"
+                                        value="{{ form.descanso.value|default_if_none:'' }}"
+                                        required
+                                    >
+                                    {% if form.descanso.errors %}
+                                    <div class="error-message">
+                                        {% for error in form.descanso.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="fitflix-field-group">
+                                    <label for="id_carga">Carga</label>
+                                    <input
+                                        type="text"
+                                        name="carga"
+                                        id="id_carga"
+                                        class="form-control"
+                                        value="{{ form.carga.value|default_if_none:'' }}"
+                                    >
+                                    {% if form.carga.errors %}
+                                    <div class="error-message">
+                                        {% for error in form.carga.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="ff-selection-panel">
+                            <div class="ff-selection-grid">
+                                <div class="fitflix-field-group">
+                                    <label for="id_exercicio">Exercício</label>
+                                    <select name="exercicio" id="id_exercicio" class="form-control" required>
+                                        <option value="">Selecione</option>
+                                        {% for exercicio in exercicios %}
+                                            <option value="{{ exercicio.id }}" {% if form.exercicio.value|stringformat:"s" == exercicio.id|stringformat:"s" %}selected{% endif %}>
+                                                {{ exercicio.nome }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    {% if form.exercicio.errors %}
+                                    <div class="error-message">
+                                        {% for error in form.exercicio.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="fitflix-field-group">
+                                    <label for="id_variacao">Variação</label>
+                                    <select name="variacao" id="id_variacao" class="form-control" required>
+                                        <option value="">Selecione um exercício primeiro</option>
+                                        {% for variacao in form.variacao.field.queryset %}
+                                            <option value="{{ variacao.id }}" {% if variacao.id|stringformat:"s" == form.variacao.value|stringformat:"s" %}selected{% endif %}>
+                                                {{ variacao.nome }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    {% if form.variacao.errors %}
+                                    <div class="error-message">
+                                        {% for error in form.variacao.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="fitflix-field-group">
+                                    <label for="id_divisao">Divisão de destino</label>
+                                    <select name="divisao" id="id_divisao" class="form-control">
+                                        <option value="">Sem divisão</option>
+                                        {% for divisao in form.divisao.field.queryset %}
+                                            <option value="{{ divisao.id }}" {% if divisao.id|stringformat:"s" == form.divisao.value|stringformat:"s" %}selected{% endif %}>
+                                                {{ divisao.nome }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    {% if form.divisao.errors %}
+                                    <div class="error-message">
+                                        {% for error in form.divisao.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                {% if form.errors %}
+                <div class="alert alert-error">
+                    <p>Por favor, corrija os erros indicados para continuar.</p>
+                </div>
+                {% endif %}
+
+                <div class="fitflix-form-actions">
+                    <button type="submit" class="btn btn-submit">Salvar alterações</button>
+                </div>
+            </form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const exercicioSelect = document.getElementById("id_exercicio");
+        const variacaoSelect = document.getElementById("id_variacao");
+
+        exercicioSelect.addEventListener("change", async function () {
+            const exercicioId = this.value;
+
+            variacaoSelect.innerHTML = '<option value="">Selecione um exercício primeiro</option>';
+            variacaoSelect.disabled = true;
+
+            if (!exercicioId) {
+                return;
+            }
+
+            try {
+                const response = await fetch("/api/variacoes/" + exercicioId + "/");
+                const variacoes = await response.json();
+
+                variacaoSelect.innerHTML = '<option value="">Selecione</option>';
+                variacoes.forEach(function (variacao) {
+                    const option = document.createElement("option");
+                    option.value = variacao.id;
+                    option.textContent = variacao.nome;
+                    option.dataset.gif = variacao.gif;
+                    variacaoSelect.appendChild(option);
+                });
+            } catch (error) {
+                variacaoSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+                console.error(error);
+            }
+        });
+    });
+</script>
+{% endblock %}

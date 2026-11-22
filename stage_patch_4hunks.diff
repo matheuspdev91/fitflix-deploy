@@ -1,0 +1,20 @@
+diff --git a/core/tests.py b/core/tests.py
+--- a/core/tests.py
++++ b/core/tests.py
+@@ -310,6 +311,7 @@ class IsolamentoMultiTenantTests(TestCase):
+         self.assertTrue(AvaliacaoFisica.objects.filter(pk=self.avaliacao_b.pk).exists())
+ 
+     def test_token_inexistente_nao_revela_treino(self):
++        self.client.force_login(self.personal_a)
+         response = self.client.get(
+             reverse("core:ver_treino", args=["00000000-0000-0000-0000-000000000000"])
+         )
+@@ -692,7 +694,7 @@ class IsolamentoMultiTenantTests(TestCase):
+         self.assertEqual(response.status_code, 200)
+         self.assertTemplateUsed(response, "core/treino_publico.html")
+         self.assertEqual(response.context["treino"], self.treino_b)
+-        self.assertContains(response, "Treino Público")
++        self.assertContains(response, self.treino_b.nome)
+ 
+     def test_ver_treino_aluno_outro_personal_retorna_404(self):
+         aluno_a_user = self.user_model.objects.create_user(

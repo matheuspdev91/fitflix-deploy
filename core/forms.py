@@ -400,6 +400,11 @@ class ExercicioTreinoForm(forms.ModelForm):
         fields = [
             "exercicio",
             "variacao",
+            "series",
+            "repeticoes",
+            "descanso",
+            "carga",
+            "divisao",
         ]
 
         labels = {
@@ -409,6 +414,7 @@ class ExercicioTreinoForm(forms.ModelForm):
             "repeticoes": "Repetições",
             "descanso": "Descanso (segundos)",
             "carga": "Carga",
+            "divisao": "Divisão de destino",
         }
 
         widgets = {
@@ -417,9 +423,8 @@ class ExercicioTreinoForm(forms.ModelForm):
             "series": forms.NumberInput(attrs={"min": 1}),
             "repeticoes": forms.NumberInput(attrs={"min": 1}),
             "descanso": forms.NumberInput(attrs={"min": 0}),
-            "carga": forms.TextInput(
-                attrs={"placeholder": "Ex: 20kg"}
-            ),
+            "carga": forms.TextInput(attrs={"placeholder": "Ex: 20kg"}),
+            "divisao": forms.Select(),
         }
 
     def __init__(self, *args, **kwargs):
@@ -432,6 +437,22 @@ class ExercicioTreinoForm(forms.ModelForm):
         self.fields["variacao"].queryset = (
             VariacaoExercicio.objects.none()
         )
+
+        # Divisão: somente divisões do treino em que o exercício está
+        # inserido. O POST é rejeitado caso o ID de divisão pertença a
+        # outro treino, já que o queryset só contém divisões válidas.
+        if self.instance and self.instance.treino_id:
+            self.fields["divisao"].queryset = (
+                DivisaoTreino.objects.filter(
+                    treino_id=self.instance.treino_id
+                ).order_by("nome")
+            )
+        else:
+            self.fields["divisao"].queryset = (
+                DivisaoTreino.objects.none()
+            )
+
+        self.fields["divisao"].empty_label = "Sem divisão"
 
         if "exercicio" in self.data:
 

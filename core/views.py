@@ -39,6 +39,7 @@ from .models import (
     AvaliacaoCrianca,
     AvaliacaoIdoso,
     ExercicioTreino,
+    DivisaoTreino,
 )
 
 from .forms import (
@@ -50,6 +51,8 @@ from .forms import (
     AvaliacaoIdosoForm,
     CriarAlunoForm,
     CircunferenciaIdosoForm,
+    DivisaoTreinoForm,
+    ExercicioTreinoForm,
 )
 
 from .email_service import enviar_email_acesso_aluno
@@ -637,69 +640,6 @@ def criar_avaliacao_crianca(request):
 
 @login_required
 @apenas_personal
-def adicionar_exercicio(request, treino_id):
-    treino = get_object_or_404(
-        Treino, id=treino_id, aluno__personal=request.user)
-    exercicios = (
-        VideoExercicio.objects.filter(variacoes__gif__isnull=False)
-        .exclude(variacoes__gif="")
-        .distinct()
-        .prefetch_related("variacoes")
-        .order_by("nome")
-    )
-
-    grupos = GrupoMuscular.objects.order_by("nome")
-
-    if request.method == "POST":
-        exercicio_id = request.POST.get("exercicio")
-        variacao_id = request.POST.get("variacao")
-        series = request.POST.get("series") or 3
-        repeticoes = request.POST.get("repeticoes") or 12
-        descanso = request.POST.get("descanso") or 60
-        carga = request.POST.get("carga", "").strip()
-
-        if not exercicio_id or not variacao_id:
-            messages.error(request, "Selecione um exercício e uma variação.")
-            return render(
-                request,
-                "core/adicionar_exercicio.html",
-                {
-                    "treino": treino,
-                    "exercicios": exercicios,
-                    "grupos": grupos,
-                },
-            )
-
-        exercicio = get_object_or_404(VideoExercicio, id=exercicio_id)
-        variacao = get_object_or_404(
-            VariacaoExercicio,
-            id=variacao_id,
-            exercicio=exercicio,
-        )
-
-        ExercicioTreino.objects.create(
-            treino=treino,
-            exercicio=exercicio,
-            variacao=variacao,
-            series=int(series),
-            repeticoes=int(repeticoes),
-            descanso=int(descanso),
-            carga=carga,
-            ordem=treino.exercicios.count() + 1,
-        )
-
-        return redirect("core:editar_treino", treino_id=treino.id)
-
-    return render(
-        request,
-        "core/adicionar_exercicio.html",
-        {
-            "treino": treino,
-            "exercicios": exercicios,
-            "grupos": grupos,
-        },
-    )
-
 
 # =====================
 # CRIAR EXERCÍCIO
@@ -787,10 +727,60 @@ def editar_treino(request, treino_id):
     treino = get_object_or_404(
         Treino, id=treino_id, aluno__personal=request.user)
 
-    exercicios_treino = treino.exercicios.select_related(
-        "exercicio",
-        "variacao",
-    ).order_by("ordem")
+    # Todas as divisões pertencentes ao treino autorizado, na ordem
+    # definida no modelo (ordem, id).
+    divisoes = DivisaoTreino.objects.filter(treino=treino).order_by("ordem", "id")
+
+    # Identifica a divisão selecionada pelo parâmetro GET "divisao",
+    # validando estritamente que ela pertence ao treino atual. Valores
+    # inválidos (não numéricos, fora de escopo) resultam em None.
+    divisao_id = request.GET.get("divisao")
+    divisao_selecionada = None
+
+    # Verifica se o parâmetro ?divisao= foi informado na URL.
+    parametro_fornecido = divisao_id is not None
+
+    if divisao_id:
+        try:
+            divisao_id = int(divisao_id)
+        except (TypeError, ValueError):
+            divisao_id = None
+
+        if divisao_id:
+            divisao_selecionada = divisoes.filter(
+                id=divisao_id
+            ).first()
+
+    # Parâmetro fornecido mas inválido ou de outro treino: usar a primeira
+    # divisão do treino autorizado. Quando nenhum parâmetro foi informado,
+    # `divisao_selecionada` permanece None, e `exercicios_treino` fica vazio
+    # (seção "Sem divisão").
+    if parametro_fornecido and divisao_selecionada is None and divisoes.exists():
+        divisao_selecionada = divisoes.first()
+    # Exercícios do treino, opcionalmente filtrados pela divisão selecionada.
+    # Quando nenhuma divisão estiver selecionada, `exercicios_treino` fica
+    # vazio, de modo que exercícios sem divisão não apareçam duplicados
+    # na lista principal.
+    exercicios_treino = treino.exercicios.none()
+
+    if divisao_selecionada is not None:
+        exercicios_treino = (
+            treino.exercicios
+            .filter(divisao=divisao_selecionada)
+            .select_related("exercicio", "variacao")
+            .order_by("ordem")
+        )
+
+    # Exercícios que ainda não possuem divisão. Esse conjunto é sempre
+    # independente do filtro acima: com divisão selecionada ele mantém
+    # somente os exercícios sem divisão; sem divisão, `exercicios_treino`
+    # já começa vazio, então não há sobreposição entre os dois conjuntos.
+    exercicios_sem_divisao = (
+        treino.exercicios
+        .filter(divisao__isnull=True)
+        .select_related("exercicio", "variacao")
+        .order_by("ordem")
+    )
 
     treino_url = request.build_absolute_uri(treino.get_link())
     whatsapp_message = f"💪 Seu treino está pronto! Acesse aqui: {treino_url}"
@@ -798,12 +788,374 @@ def editar_treino(request, treino_id):
 
     context = {
         "treino": treino,
+        "divisoes": divisoes,
+        "divisao_selecionada": divisao_selecionada,
         "exercicios_treino": exercicios_treino,
+        "exercicios_sem_divisao": exercicios_sem_divisao,
         "treino_url": treino_url,
         "whatsapp_url": whatsapp_url,
     }
 
     return render(request, "core/editar_treino.html", context)
+
+
+# =========================
+# DIVISÕES DE TREINO
+# =========================
+
+
+@login_required
+@apenas_personal
+def criar_divisao(request, treino_id):
+    treino = get_object_or_404(
+        Treino, id=treino_id, aluno__personal=request.user
+    )
+
+    if request.method == "POST":
+        form = DivisaoTreinoForm(request.POST, treino=treino)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Divisão criada com sucesso.")
+            return redirect("core:editar_treino", treino_id=treino.id)
+        messages.error(request, "Corrija os erros para criar a divisão.")
+        return render(
+            request,
+            "core/editar_divisao.html",
+            {"treino": treino, "form": form},
+        )
+
+    return redirect("core:editar_treino", treino_id=treino.id)
+
+
+@login_required
+@apenas_personal
+def editar_divisao(request, treino_id, divisao_id):
+    treino = get_object_or_404(
+        Treino, id=treino_id, aluno__personal=request.user
+    )
+    divisao = get_object_or_404(
+        DivisaoTreino, id=divisao_id, treino=treino
+    )
+
+    if request.method == "POST":
+        form = DivisaoTreinoForm(
+            request.POST, instance=divisao, treino=treino
+        )
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Divisão atualizada com sucesso.")
+            return redirect("core:editar_treino", treino_id=treino.id)
+        messages.error(request, "Corrija os erros para atualizar a divisão.")
+
+    else:
+        form = DivisaoTreinoForm(instance=divisao, treino=treino)
+    return render(
+        request,
+        "core/editar_divisao.html",
+        {"treino": treino, "divisao": divisao, "form": form},
+    )
+
+
+@login_required
+@apenas_personal
+@require_POST
+def excluir_divisao(request, treino_id, divisao_id):
+    treino = get_object_or_404(
+        Treino, id=treino_id, aluno__personal=request.user
+    )
+    divisao = get_object_or_404(
+        DivisaoTreino, id=divisao_id, treino=treino
+    )
+    divisao.delete()
+    messages.success(request, "Divisão excluída.")
+    return redirect("core:editar_treino", treino_id=treino.id)
+
+
+@login_required
+@apenas_personal
+@require_POST
+def reordenar_divisoes(request, treino_id):
+    treino = get_object_or_404(
+        Treino, id=treino_id, aluno__personal=request.user
+    )
+    ordem_ids = request.POST.getlist("divisao-ordens")
+
+    # Validação: só aceitar IDs numéricos. Valores não numéricos são
+    # rejeitados sem gerar erro 500.
+    try:
+        ids_numeros = [int(x) for x in ordem_ids if x.strip()]
+    except ValueError:
+        messages.error(request, "A ordem das divisões informada é inválida.")
+        return redirect("core:editar_treino", treino_id=treino.id)
+
+    # Validação: rejeitar IDs duplicados.
+    if len(ids_numeros) != len(set(ids_numeros)):
+        messages.error(request, "A ordem das divisões contém IDs duplicados.")
+        return redirect("core:editar_treino", treino_id=treino.id)
+
+    # Confirmação de que todos os IDs pertencem à divisão do treino
+    # autorizado (a consulta abaixo só afeta divisões do treino corrente).
+    divisoes = DivisaoTreino.objects.filter(treino=treino)
+    IDs_validos = set(divisoes.values_list("id", flat=True))
+    if not set(ids_numeros).issubset(IDs_validos):
+        messages.error(request, "Algum ID de divisão não pertence a este treino.")
+        return redirect("core:editar_treino", treino_id=treino.id)
+
+    # Atualização atômica.
+    try:
+        with transaction.atomic():
+            for index, divisao_id in enumerate(ids_numeros, start=1):
+                DivisaoTreino.objects.filter(
+                    id=divisao_id, treino=treino
+                ).update(ordem=index)
+    except Exception:
+        messages.error(request, "Não foi possível reordenar as divisões.")
+        return redirect("core:editar_treino", treino_id=treino.id)
+
+    messages.success(request, "Ordem das divisões atualizada.")
+    return redirect("core:editar_treino", treino_id=treino.id)
+
+
+@login_required
+@apenas_personal
+def adicionar_exercicio(request, treino_id):
+    treino = get_object_or_404(
+        Treino, id=treino_id, aluno__personal=request.user
+    )
+    divisoes = DivisaoTreino.objects.filter(treino=treino)
+
+    divisao_selecionada = None
+    if request.method == "GET" and request.GET.get("divisao"):
+        try:
+            divisao_id = int(request.GET["divisao"])
+            divisao_selecionada = divisoes.filter(id=divisao_id).first()
+        except (TypeError, ValueError):
+            divisao_selecionada = None
+
+    exercicios = (
+        VideoExercicio.objects
+        .all()
+        .prefetch_related("variacoes")
+        .order_by("nome")
+    )
+    grupos = GrupoMuscular.objects.order_by("nome")
+
+    if request.method == "POST":
+        exercicio_id = request.POST.get("exercicio")
+        variacao_id = request.POST.get("variacao")
+        divisao_id = request.POST.get("divisao")
+        series = request.POST.get("series") or 3
+        repeticoes = request.POST.get("repeticoes") or 12
+        descanso = request.POST.get("descanso") or 60
+        carga = request.POST.get("carga", "").strip()
+
+        if not exercicio_id or not variacao_id:
+            messages.error(request, "Selecione um exercício e uma variação.")
+            return render(
+                request,
+                "core/adicionar_exercicio.html",
+                {
+                    "treino": treino,
+                    "exercicios": exercicios,
+                    "grupos": grupos,
+                    "divisoes": divisoes,
+                    "divisao_selecionada": divisao_selecionada,
+                },
+            )
+
+        exercicio = get_object_or_404(VideoExercicio, id=exercicio_id)
+        variacao = get_object_or_404(
+            VariacaoExercicio, id=variacao_id, exercicio=exercicio
+        )
+
+        if divisao_id:
+            divisao_selecionada = divisoes.filter(id=divisao_id).first()
+            if divisao_selecionada is None:
+                messages.error(request, "Selecione uma divisão válida para este treino.")
+                return render(
+                    request,
+                    "core/adicionar_exercicio.html",
+                    {
+                        "treino": treino,
+                        "exercicios": exercicios,
+                        "grupos": grupos,
+                        "divisoes": divisoes,
+                        "divisao_selecionada": divisao_selecionada,
+                    },
+                )
+
+        # Validação dos valores numéricos (séries, repetições, descanso)
+        # e dos limites permitidos. Valores inválidos ou negativos não
+        # geram erro 500; retornam ao formulário com mensagem de erro.
+        try:
+            series_int = int(series)
+            repeticoes_int = int(repeticoes)
+            descanso_int = int(descanso)
+        except (TypeError, ValueError):
+            messages.error(request, "Séries, repetições e descanso devem ser números inteiros.")
+            return render(
+                request,
+                "core/adicionar_exercicio.html",
+                {
+                    "treino": treino,
+                    "exercicios": exercicios,
+                    "grupos": grupos,
+                    "divisoes": divisoes,
+                    "divisao_selecionada": divisao_selecionada,
+                    "series": series,
+                    "repeticoes": repeticoes,
+                    "descanso": descanso,
+                    "carga": carga,
+                },
+            )
+
+        if series_int < 1:
+            messages.error(request, "O número de séries deve ser no mínimo 1.")
+            return render(
+                request,
+                "core/adicionar_exercicio.html",
+                {
+                    "treino": treino,
+                    "exercicios": exercicios,
+                    "grupos": grupos,
+                    "divisoes": divisoes,
+                    "divisao_selecionada": divisao_selecionada,
+                    "series": series,
+                    "repeticoes": repeticoes,
+                    "descanso": descanso,
+                    "carga": carga,
+                },
+            )
+
+        if repeticoes_int < 1:
+            messages.error(request, "O número de repetições deve ser no mínimo 1.")
+            return render(
+                request,
+                "core/adicionar_exercicio.html",
+                {
+                    "treino": treino,
+                    "exercicios": exercicios,
+                    "grupos": grupos,
+                    "divisoes": divisoes,
+                    "divisao_selecionada": divisao_selecionada,
+                    "series": series,
+                    "repeticoes": repeticoes,
+                    "descanso": descanso,
+                    "carga": carga,
+                },
+            )
+
+        if descanso_int < 0:
+            messages.error(request, "O descanso não pode ser negativo.")
+            return render(
+                request,
+                "core/adicionar_exercicio.html",
+                {
+                    "treino": treino,
+                    "exercicios": exercicios,
+                    "grupos": grupos,
+                    "divisoes": divisoes,
+                    "divisao_selecionada": divisao_selecionada,
+                    "series": series,
+                    "repeticoes": repeticoes,
+                    "descanso": descanso,
+                    "carga": carga,
+                },
+            )
+
+        ExercicioTreino.objects.create(
+            treino=treino,
+            exercicio=exercicio,
+            variacao=variacao,
+            series=series_int,
+            repeticoes=repeticoes_int,
+            descanso=descanso_int,
+            carga=carga,
+            divisao=divisao_selecionada,
+            ordem=treino.exercicios.count() + 1,
+        )
+
+        messages.success(request, "Exercício adicionado à divisão.")
+        return redirect("core:editar_treino", treino_id=treino.id)
+
+    return render(
+        request,
+        "core/adicionar_exercicio.html",
+        {
+            "treino": treino,
+            "exercicios": exercicios,
+            "grupos": grupos,
+            "divisoes": divisoes,
+            "divisao_selecionada": divisao_selecionada,
+        },
+    )
+
+
+@login_required
+@apenas_personal
+def editar_exercicio(request, treino_id, exercicio_id):
+    treino = get_object_or_404(
+        Treino, id=treino_id, aluno__personal=request.user
+    )
+
+    # Busca o ExercicioTreino dentro do treino autorizado.
+    # Nunca buscamos só pelo ID recebido na URL; sempre filtramos
+    # pelo treino autorizado para garantir o isolamento entre
+    # personalidades.
+    exercicio_treino = get_object_or_404(
+        ExercicioTreino, id=exercicio_id, treino=treino
+    )
+
+    divisoes = DivisaoTreino.objects.filter(treino=treino)
+    exercicios = (
+        VideoExercicio.objects.order_by("nome")
+    )
+
+    # Variações do exercício atual.
+    variacoes_do_exercicio = (
+        VariacaoExercicio.objects.filter(exercicio=exercicio_treino.exercicio)
+        .order_by("nome")
+    )
+
+    if request.method == "POST":
+        form = ExercicioTreinoForm(
+            request.POST, instance=exercicio_treino
+        )
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Exercício atualizado com sucesso.")
+            return redirect("core:editar_treino", treino_id=treino.id)
+        messages.error(request, "Corrija os erros para atualizar o exercício.")
+
+        # Formulário inválido: manter as opções de variação do
+        # exercício enviado e preservar a seleção do usuário.
+        variacoes_do_exercicio = form.fields["variacao"].queryset
+        selected_variacao = form.data.get("variacao")
+
+    else:
+        form = ExercicioTreinoForm(instance=exercicio_treino)
+        variacoes_do_exercicio = (
+            VariacaoExercicio.objects.filter(exercicio=exercicio_treino.exercicio)
+            .order_by("nome")
+        )
+        selected_variacao = exercicio_treino.variacao.id
+
+    return render(
+        request,
+        "core/editar_exercicio.html",
+        {
+            "treino": treino,
+            "exercicio_treino": exercicio_treino,
+            "form": form,
+            "divisoes": divisoes,
+            "exercicios": exercicios,
+            "variacoes_do_exercicio": variacoes_do_exercicio,
+            "selected_variacao": selected_variacao,
+        },
+    )
+
+
+@login_required
 
 
 # =====================
@@ -845,9 +1197,9 @@ def treino_detail(request, treino_id):
     )
 
 
-# ================
+# ===============
 # VER TREINO
-# ================
+# ===============
 
 
 @login_required
@@ -861,13 +1213,74 @@ def ver_treino(request, token):
         # Aluno diferente, personal ou admin: 404
         raise Http404
 
-    # Renderizar o treino publico para o aluno proprietário.
+    # Renderizar o treino público para o aluno proprietário.
+    divisoes = DivisaoTreino.objects.filter(treino=treino)
+
+    # Identifica a divisão selecionada pelo parâmetro GET "divisao",
+    # validando estritamente que ela pertence ao treino atual. Valores
+    # inválidos (não numéricos, fora de escopo) resultam em None.
+    divisao_id = request.GET.get("divisao")
+    divisao_selecionada = None
+    modo_todos = (divisao_id == "")
+
+    if divisao_id and not modo_todos:
+        try:
+            divisao_id = int(divisao_id)
+        except (TypeError, ValueError):
+            divisao_id = None
+        if divisao_id:
+            divisao_selecionada = divisoes.filter(id=divisao_id).first()
+
+    # Primeira abertura sem parâmetro ou parâmetro inválido: seleciona a
+    # divisão A (case-insensitive). Caso não exista, a primeira divisão
+    # conforme a ordenação do modelo (ordem, id).
+    if divisao_selecionada is None and divisoes.exists() and not modo_todos:
+        divisao_a = divisoes.filter(nome__iexact="a").first()
+        if divisao_a is not None:
+            divisao_selecionada = divisao_a
+        else:
+            divisao_selecionada = divisoes.first()
+
+    # Exercícios da área principal, sem duplicação com a seção "Sem divisão".
+    if divisao_selecionada is not None:
+        # Cenário 1: divisão selecionada -> somente exercícios dessa divisão.
+        exercicios_treino = (
+            treino.exercicios
+            .filter(divisao=divisao_selecionada)
+            .select_related("exercicio", "variacao")
+            .order_by("ordem")
+        )
+    else:
+        # Cenário 2/3: modo "Todos" ou treino sem divisões.
+        # Main: somente exercícios que possuem divisão (evita duplicar a
+        # seção "Sem divisão").
+        exercicios_treino = (
+            treino.exercicios
+            .filter(divisao__isnull=False)
+            .select_related("exercicio", "variacao")
+            .order_by("ordem")
+        )
+
+    # Exercícios sem divisão. Carregados independentemente de todos os
+    # cenários, com divisao__isnull=True. A seção "Sem divisão" no template
+    # só renderiza se não estiver vazia.
+    exercicios_sem_divisao = (
+        treino.exercicios
+        .filter(divisao__isnull=True)
+        .select_related("exercicio", "variacao")
+        .order_by("ordem")
+    )
+
     return render(
         request,
         "core/treino_publico.html",
         {
             "treino": treino,
             "link": request.build_absolute_uri(treino.get_link()),
+            "divisoes": divisoes,
+            "divisao_selecionada": divisao_selecionada,
+            "exercicios_treino": exercicios_treino,
+            "exercicios_sem_divisao": exercicios_sem_divisao,
         },
     )
 
@@ -880,11 +1293,21 @@ def ver_treino(request, token):
 def buscar_variacoes(request, exercicio_id):
     variacoes = []
 
-    for v in VariacaoExercicio.objects.filter(
-        exercicio_id=exercicio_id, gif__isnull=False
-    ).exclude(gif=""):
+    for v in VariacaoExercicio.objects.filter(exercicio_id=exercicio_id):
+        # Usa .url (gerado pelo storage, ex: Cloudinary ou FileSystemStorage)
+        # em vez de .name. .name retorna caminho do banco (não é URL).
+        # Se o campo não possui arquivo associado, retorna string vazia.
+        gif_url = ""
+        if v.gif:
+            try:
+                gif_url = v.gif.url
+            except Exception:
+                # Fallback: nem toda instância de FileField expõe .url
+                # corretamente em todos os backends. Se falhar, retorna
+                # string vazia invisível ao navegador.
+                gif_url = ""
         variacoes.append(
-            {"id": v.id, "nome": v.nome, "gif": v.gif.url if v.gif else ""}
+            {"id": v.id, "nome": v.nome, "gif": gif_url}
         )
 
     return JsonResponse(variacoes, safe=False)

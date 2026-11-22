@@ -6,7 +6,7 @@ from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
 
-from .forms import CriarAlunoForm
+from .forms import CriarAlunoForm, DivisaoTreinoForm
 from .models import (
     Aluno,
     AvaliacaoFisica,
@@ -15,6 +15,7 @@ from .models import (
     Treino,
     VariacaoExercicio,
     VideoExercicio,
+    DivisaoTreino,
 )
 from .views import gerar_senha_aleatoria
 
@@ -720,6 +721,321 @@ class IsolamentoMultiTenantTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "core/criar_treino.html")
 
+class EditarTreinoDivisaoTests(TestCase):
+    """Verifica a navegação e o contexto da view editar_treino com divisões."""
+
+    def setUp(self):
+        self.user_model = get_user_model()
+        self.personal = self.user_model.objects.create_user(
+            username="personal-divisao@example.com",
+            email="personal-divisao@example.com",
+            password="Senha123",
+            tipo_usuario="PERSONAL",
+        )
+        self.aluno_user = self.user_model.objects.create_user(
+            username="aluno-divisao@example.com",
+            email="aluno-divisao@example.com",
+            password="Senha123",
+            tipo_usuario="ALUNO",
+        )
+        self.aluno = Aluno.objects.create(
+            personal=self.personal,
+            user=self.aluno_user,
+            nome="Aluno Divisao",
+            data_nascimento="2000-01-01",
+        )
+        self.treino = Treino.objects.create(
+            aluno=self.aluno,
+            nome="Treino Divisao",
+            descricao="",
+        )
+
+        self.divisao_a = DivisaoTreino.objects.create(
+            treino=self.treino,
+            nome="Treino A",
+            ordem=1,
+        )
+        self.divisao_b = DivisaoTreino.objects.create(
+            treino=self.treino,
+            nome="Treino B",
+            ordem=2,
+        )
+
+        # Divisão de outro treino, para validar que não é aceita.
+        outro_user = self.user_model.objects.create_user(
+            username="outro-divisao@example.com",
+            email="outro-divisao@example.com",
+            password="Senha123",
+            tipo_usuario="ALUNO",
+        )
+        self.outro_aluno = Aluno.objects.create(
+            personal=self.personal,
+            user=outro_user,
+            nome="Outro Aluno",
+            data_nascimento="2000-01-01",
+        )
+        self.outro_treino = Treino.objects.create(
+            aluno=self.outro_aluno,
+            nome="Treino Outro",
+            descricao="",
+        )
+        self.outro_divisao = DivisaoTreino.objects.create(
+            treino=self.outro_treino,
+            nome="Outro Treino",
+            ordem=1,
+        )
+
+        self.grupo = GrupoMuscular.objects.create(nome="Teste")
+        self.exercicio = VideoExercicio.objects.create(
+            nome="Exercício Teste",
+            grupo_muscular=self.grupo,
+            gif="",
+        )
+        self.variacao = VariacaoExercicio.objects.create(
+            exercicio=self.exercicio,
+            nome="Variação 1",
+            gif="",
+        )
+
+        self.exercicio_sem_divisao = ExercicioTreino.objects.create(
+            treino=self.treino,
+            exercicio=self.exercicio,
+            variacao=self.variacao,
+            series=3,
+            repeticoes=10,
+            descanso=60,
+            ordem=1,
+        )
+        self.exercicio_na_divisao_a = ExercicioTreino.objects.create(
+            treino=self.treino,
+            exercicio=self.exercicio,
+            variacao=self.variacao,
+            series=3,
+            repeticoes=10,
+            descanso=60,
+            ordem=2,
+            divisao=self.divisao_a,
+        )
+        self.exercicio_na_divisao_b = ExercicioTreino.objects.create(
+            treino=self.treino,
+            exercicio=self.exercicio,
+            variacao=self.variacao,
+            series=3,
+            repeticoes=10,
+            descanso=60,
+            ordem=3,
+            divisao=self.divisao_b,
+        )
+
+    def test_contexto_inclui_divisoes_e_exercicios_sem_divisao(self):
+        self.client.force_login(self.personal)
+        response = self.client.get(
+            reverse("core:editar_treino", args=[self.treino.id])
+        )
+        self.assertEqual(response.status_code, 200)
+
+        context = response.context
+        self.assertIn("divisoes", context)
+        self.assertIn("divisao_selecionada", context)
+        self.assertIn("exercicios_treino", context)
+        self.assertIn("exercicios_sem_divisao", context)
+
+        self.assertQuerySetEqual(
+            context["divisoes"].order_by("id"),
+            [self.divisao_a, self.divisao_b],
+            transform=lambda d: d,
+        )
+        self.assertIn(self.exercicio_sem_divisao, context["exercicios_sem_divisao"])
+
+    def test_divisao_selecionada_filtra_exercicios(self):
+        self.client.force_login(self.personal)
+        response = self.client.get(
+            reverse("core:editar_treino", args=[self.treino.id])
+            + f"?divisao={self.divisao_a.id}"
+        )
+        self.assertEqual(response.status_code, 200)
+
+        exercicios_treino = response.context["exercicios_treino"]
+        self.assertQuerySetEqual(
+            exercicios_treino.order_by("id"),
+            [self.exercicio_na_divisao_a],
+            transform=lambda e: e,
+        )
+
+    def test_divisao_de_outro_treino_nao_filtra_exercicios(self):
+        self.client.force_login(self.personal)
+        response = self.client.get(
+            reverse("core:editar_treino", args=[self.treino.id])
+            + f"?divisao={self.outro_divisao.id}"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+        response.context["divisao_selecionada"],
+        self.divisao_a,
+    )
+        self.assertQuerySetEqual(
+        response.context["exercicios_treino"],
+        [self.exercicio_na_divisao_a],
+        transform=lambda e: e,
+    )
+
+    def test_parametro_divisao_invalido_nao_filtra_exercicios(self):
+        self.client.force_login(self.personal)
+
+        response = self.client.get(
+            reverse("core:editar_treino", args=[self.treino.id])
+            + "?divisao=abc"
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+        self.assertEqual(
+            response.context["divisao_selecionada"],
+            self.divisao_a,
+        )
+
+        self.assertQuerySetEqual(
+            response.context["exercicios_treino"],
+            [self.exercicio_na_divisao_a],
+            transform=lambda e: e,
+        )
+
+class TestEditarTreinoSemDuplicacaoExercicio(TestCase):
+    """Verifica que os conjuntos exercicios_treino e exercicios_sem_divisao são
+    disjuntos, respeitando o comportamento esperado conforme divisão selecionada."""
+
+    def setUp(self):
+        self.user_model = get_user_model()
+        self.personal = self.user_model.objects.create_user(
+            username="personal-duplicacao@example.com",
+            email="personal-duplicacao@example.com",
+            password="Senha123",
+            tipo_usuario="PERSONAL",
+        )
+        self.aluno_user = self.user_model.objects.create_user(
+            username="aluno-duplicacao@example.com",
+            email="aluno-duplicacao@example.com",
+            password="Senha123",
+            tipo_usuario="ALUNO",
+        )
+        self.aluno = Aluno.objects.create(
+            personal=self.personal,
+            user=self.aluno_user,
+            nome="Aluno Duplicacao",
+            data_nascimento="2000-01-01",
+        )
+        self.treino = Treino.objects.create(
+            aluno=self.aluno,
+            nome="Treino Duplicacao",
+            descricao="",
+        )
+
+        self.divisao_a = DivisaoTreino.objects.create(
+            treino=self.treino,
+            nome="Treino A",
+            ordem=1,
+        )
+        self.divisao_b = DivisaoTreino.objects.create(
+            treino=self.treino,
+            nome="Treino B",
+            ordem=2,
+        )
+
+        self.exercicio = VideoExercicio.objects.create(
+            nome="Exercício Teste",
+            grupo_muscular=GrupoMuscular.objects.create(nome="Teste"),
+            gif="",
+        )
+        self.variacao = VariacaoExercicio.objects.create(
+            exercicio=self.exercicio,
+            nome="Variação 1",
+            gif="",
+        )
+
+        # Sem divisão.
+        self.sem_divisao = ExercicioTreino.objects.create(
+            treino=self.treino,
+            exercicio=self.exercicio,
+            variacao=self.variacao,
+            series=3,
+            repeticoes=10,
+            descanso=60,
+            ordem=1,
+        )
+        # Com divisão A.
+        self.com_divisao_a = ExercicioTreino.objects.create(
+            treino=self.treino,
+            exercicio=self.exercicio,
+            variacao=self.variacao,
+            series=3,
+            repeticoes=10,
+            descanso=60,
+            ordem=2,
+            divisao=self.divisao_a,
+        )
+        # Com divisão B.
+        self.com_divisao_b = ExercicioTreino.objects.create(
+            treino=self.treino,
+            exercicio=self.exercicio,
+            variacao=self.variacao,
+            series=3,
+            repeticoes=10,
+            descanso=60,
+            ordem=3,
+            divisao=self.divisao_b,
+        )
+
+    def _get(self, divisao=None):
+        url = reverse("core:editar_treino", args=[self.treino.id])
+        if divisao is not None:
+            url += f"?divisao={divisao.id}"
+        self.client.force_login(self.personal)
+        return self.client.get(url)
+
+    def test_sem_divisao_selecionada_exercicios_treino_vazio(self):
+        response = self._get()
+        self.assertEqual(len(response.context["exercicios_treino"]), 0)
+
+    def test_sem_divisao_exercicios_sem_divisao_apenas_aqui(self):
+        response = self._get()
+        context = response.context
+        self.assertIn(self.sem_divisao, context["exercicios_sem_divisao"])
+        self.assertNotIn(self.sem_divisao, context["exercicios_treino"])
+        self.assertNotIn(self.com_divisao_a, context["exercicios_sem_divisao"])
+        self.assertNotIn(self.com_divisao_b, context["exercicios_sem_divisao"])
+
+    def test_com_divisao_selecionada_apenas_divisao_filtra(self):
+        response = self._get(divisao=self.divisao_a)
+        self.assertQuerySetEqual(
+            response.context["exercicios_treino"].order_by("id"),
+            [self.com_divisao_a],
+            transform=lambda e: e,
+        )
+        self.assertNotIn(self.sem_divisao, response.context["exercicios_treino"])
+
+    def test_exercicios_sem_divisao_sempre_separados(self):
+        # Sem divisão.
+        response = self._get()
+        self.assertNotIn(self.com_divisao_a, response.context["exercicios_sem_divisao"])
+        self.assertNotIn(self.com_divisao_b, response.context["exercicios_sem_divisao"])
+        # Com divisão A.
+        response = self._get(divisao=self.divisao_a)
+        self.assertNotIn(self.com_divisao_a, response.context["exercicios_sem_divisao"])
+        self.assertNotIn(self.com_divisao_b, response.context["exercicios_sem_divisao"])
+        self.assertIn(self.sem_divisao, response.context["exercicios_sem_divisao"])
+
+    def test_nenhum_exercicio_em_ambos_conjuntos(self):
+        response = self._get()
+        treino = set(response.context["exercicios_treino"])
+        sem = set(response.context["exercicios_sem_divisao"])
+        self.assertEqual(treino & sem, set())
+
+        response = self._get(divisao=self.divisao_a)
+        treino = set(response.context["exercicios_treino"])
+        sem = set(response.context["exercicios_sem_divisao"])
+        self.assertEqual(treino & sem, set())
+
+
 class LoginNextFlowTests(TestCase):
     def setUp(self):
         self.user_model = get_user_model()
@@ -865,3 +1181,182 @@ class TreinoSharingFlowTests(TestCase):
         self.assertIn('data-link="', conteudo)
         self.assertIn(str(self.treino.token), conteudo)
         self.assertIn("https://wa.me", conteudo)
+
+
+class TestDivisaoCrudTests(TestCase):
+    """Verifica o CRUD completo de divisões: criar, editar e excluir."""
+
+    def setUp(self):
+        self.user_model = get_user_model()
+        self.personal = self.user_model.objects.create_user(
+            username="personal-crud@example.com",
+            email="personal-crud@example.com",
+            password="Senha123",
+            tipo_usuario="PERSONAL",
+        )
+        self.aluno_user = self.user_model.objects.create_user(
+            username="aluno-crud@example.com",
+            email="aluno-crud@example.com",
+            password="Senha123",
+            tipo_usuario="ALUNO",
+        )
+        self.aluno = Aluno.objects.create(
+            personal=self.personal,
+            user=self.aluno_user,
+            nome="Aluno CRUD",
+            data_nascimento="2000-01-01",
+        )
+        self.treino = Treino.objects.create(
+            aluno=self.aluno,
+            nome="Treino CRUD",
+            descricao="",
+        )
+
+    def test_criar_divisao(self):
+        self.client.force_login(self.personal)
+        resposta = self.client.post(
+            reverse("core:nova_divisao", args=[self.treino.id]),
+            {"nome": "Treino X", "descricao": "Descrição", "ordem": 1},
+        )
+        self.assertEqual(resposta.status_code, 302)
+        self.assertTrue(
+            DivisaoTreino.objects.filter(
+                treino=self.treino, nome="Treino X"
+            ).exists()
+        )
+
+    def test_editar_divisao(self):
+        divisao = DivisaoTreino.objects.create(
+            treino=self.treino, nome="Treino Original", ordem=1
+        )
+        self.client.force_login(self.personal)
+        resposta = self.client.post(
+            reverse("core:editar_divisao", args=[self.treino.id, divisao.id]),
+            {
+                "nome": "Treino Renomeado",
+                "descricao": "Nova descrição",
+                "ordem": 1,
+            },
+        )
+        self.assertEqual(resposta.status_code, 302)
+        divisao.refresh_from_db()
+        self.assertEqual(divisao.nome, "Treino Renomeado")
+
+    def test_excluir_divisao(self):
+        divisao = DivisaoTreino.objects.create(
+            treino=self.treino, nome="Excluir", ordem=1
+        )
+        self.client.force_login(self.personal)
+        resposta = self.client.post(
+            reverse("core:excluir_divisao", args=[self.treino.id, divisao.id])
+        )
+        self.assertEqual(resposta.status_code, 302)
+        self.assertFalse(DivisaoTreino.objects.filter(pk=divisao.pk).exists())
+
+    def test_form_rejeita_divisao_duplicada(self):
+        DivisaoTreino.objects.create(
+            treino=self.treino, nome="Treino Existente", ordem=1
+        )
+        form = DivisaoTreinoForm(
+            data={
+                "nome": "TREINO EXISTENTE",
+                "descricao": "Duplicado",
+                "ordem": 1,
+            },
+            treino=self.treino,
+        )
+        self.assertFalse(form.is_valid())
+        self.assertIn("nome", form.errors)
+
+
+class TestAdicionarExercicioDivisaoTests(TestCase):
+    """Verifica o fluxo de adicionar exercício a uma divisão e a restrição de
+    associar exercício a divisão de outro treino."""
+
+    def setUp(self):
+        self.user_model = get_user_model()
+        self.personal = self.user_model.objects.create_user(
+            username="personal-aderexemplo@example.com",
+            email="personal-aderexemplo@example.com",
+            password="Senha123",
+            tipo_usuario="PERSONAL",
+        )
+        self.aluno = Aluno.objects.create(
+            personal=self.personal,
+            user=self.user_model.objects.create_user(
+                username="aluno-aderexemplo@example.com",
+                email="aluno-aderexemplo@example.com",
+                password="Senha123",
+                tipo_usuario="ALUNO",
+            ),
+            nome="Aluno AddEx",
+            data_nascimento="2000-01-01",
+        )
+        self.treino = Treino.objects.create(
+            aluno=self.aluno,
+            nome="Treino AddEx",
+            descricao="",
+        )
+        self.treino_outro = Treino.objects.create(
+            aluno=self.aluno,
+            nome="Treino Outro",
+            descricao="",
+        )
+        self.grupo = GrupoMuscular.objects.create(nome="Pernas")
+        self.exercicio = VideoExercicio.objects.create(
+            nome="Agachamento",
+            grupo_muscular=self.grupo,
+            gif="",
+        )
+        self.variacao = VariacaoExercicio.objects.create(
+            exercicio=self.exercicio,
+            nome="Musculação",
+            gif="",
+        )
+        self.divisao = DivisaoTreino.objects.create(
+            treino=self.treino, nome="Div A", ordem=1
+        )
+
+    def test_adicionar_exercicio_a_divisao(self):
+        self.client.force_login(self.personal)
+        resposta = self.client.post(
+            reverse("core:adicionar_exercicio", args=[self.treino.id]),
+            {
+                "exercicio": self.exercicio.id,
+                "variacao": self.variacao.id,
+                "divisao": self.divisao.id,
+                "series": 3,
+                "repeticoes": 12,
+                "descanso": 60,
+                "carga": "20kg",
+            },
+        )
+        self.assertEqual(resposta.status_code, 302)
+        self.assertTrue(
+            ExercicioTreino.objects.filter(
+                treino=self.treino,
+                divisao=self.divisao,
+                exercicio=self.exercicio,
+                variacao=self.variacao,
+            ).exists()
+        )
+
+    def test_nao_associar_exercicio_divisao_treino_diferente(self):
+        self.client.force_login(self.personal)
+        self.client.post(
+            reverse("core:adicionar_exercicio", args=[self.treino_outro.id]),
+            {
+                "exercicio": self.exercicio.id,
+                "variacao": self.variacao.id,
+                "divisao": self.divisao.id,
+                "series": 3,
+                "repeticoes": 12,
+                "descanso": 60,
+                "carga": "20kg",
+            },
+        )
+        self.assertFalse(
+            ExercicioTreino.objects.filter(
+                treino=self.treino_outro, divisao=self.divisao
+            ).exists()
+        )

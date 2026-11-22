@@ -87,6 +87,41 @@ urlpatterns = [
     ),
     # Editar treino
     path("treino/<int:treino_id>/editar/", views.editar_treino, name="editar_treino"),
+    # Divisões de treino
+    path(
+        "treino/<int:treino_id>/divisoes/nova/",
+        views.criar_divisao,
+        name="nova_divisao",
+    ),
+    path(
+        "treino/<int:treino_id>/divisoes/<int:divisao_id>/editar/",
+        views.editar_divisao,
+        name="editar_divisao",
+    ),
+    path(
+        "treino/<int:treino_id>/divisoes/<int:divisao_id>/excluir/",
+        views.excluir_divisao,
+        name="excluir_divisao",
+    ),
+    path(
+        "treino/<int:treino_id>/divisoes/reordenar/",
+        views.reordenar_divisoes,
+        name="reordenar_divisoes",
+    ),
+
+    # Adicionar exercício (com suporte a divisão de destino)
+    path(
+        "treino/<int:treino_id>/exercicio/adicionar/",
+        views.adicionar_exercicio,
+        name="adicionar_exercicio",
+    ),
+
+    # Editar exercício de um treino (interface do personal)
+    path(
+        "treino/<int:treino_id>/exercicios/<int:exercicio_id>/editar/",
+        views.editar_exercicio,
+        name="editar_exercicio",
+    ),
 
 
     # Webhook Asaas

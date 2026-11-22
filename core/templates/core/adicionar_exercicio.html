@@ -39,7 +39,7 @@
 
                             <div class="ff-muscle-grid">
                                 {% for grupo in grupos %}
-                                
+
                                 <button
                                     type="button"
                                     class="ff-muscle-chip"
@@ -54,8 +54,9 @@
                                 type="hidden"
                                 id="grupo"
                                 name="grupo">
-                            
+
                             </div>
+                        </div>
 
                         <div class="fitflix-field-group">
                             <label for="exercicio">Exercício</label>
@@ -129,10 +130,21 @@
                                     <label for="carga">Carga</label>
                                     <input type="text" name="carga" id="carga" class="form-control" placeholder="Ex: 20kg">
                                 </div>
+                                <div class="fitflix-field-group">
+                                    <label for="divisao">Divisão de destino</label>
+                                    <select name="divisao" id="divisao" class="form-control">
+                                        <option value="">Sem divisão</option>
+                                        {% for divisao in divisoes %}
+                                        <option value="{{ divisao.id }}" {% if divisao_selecionada and divisao_selecionada.id == divisao.id %}selected{% endif %}>
+                                            {{ divisao.nome }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                             </div>
 
                             <p class="ff-config-copy">
-                                Ajuste a carga e o tempo para manter o treino fluido e profissional.
+                                Ajuste a carga e o tempo para manter o treino fluído e profissional.
                             </p>
                         </section>
                     </div>
@@ -212,22 +224,37 @@ chips.forEach(chip => {
             return;
         }
 
+        let variacoes = [];
         try {
             const response = await fetch(`/api/variacoes/${exercicioId}/`);
-            const variacoes = await response.json();
-
-            variacaoSelect.innerHTML = '<option value="">Selecione</option>';
-            variacoes.forEach((variacao) => {
-                const option = document.createElement("option");
-                option.value = variacao.id;
-                option.textContent = variacao.nome;
-                option.dataset.gif = variacao.gif;
-                variacaoSelect.appendChild(option);
-            });
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            variacoes = await response.json();
         } catch (error) {
             variacaoSelect.innerHTML = '<option value="">Erro ao carregar</option>';
             console.error(error);
+            return;
         }
+
+        variacaoSelect.innerHTML = '<option value="">Selecione</option>';
+        if (variacoes.length === 0) {
+            // Nenhuma variação disponível
+            const option = document.createElement("option");
+            option.value = "";
+            option.textContent = "Nenhuma variação disponível";
+            option.disabled = true;
+            variacaoSelect.appendChild(option);
+            return;
+        }
+
+        variacoes.forEach((variacao) => {
+            const option = document.createElement("option");
+            option.value = variacao.id;
+            option.textContent = variacao.nome;
+            option.dataset.gif = variacao.gif || "";
+            variacaoSelect.appendChild(option);
+        });
     });
 
     variacaoSelect.addEventListener("change", function () {

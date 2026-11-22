@@ -1,63 +1,139 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-
 <div class="fitflix-header-page">
-    <h2>{{ treino.nome }}</h2>
-    <p><strong>Gerenciar os exercicios do treino</strong></p>
+    <div>
+        <h2>{{ treino.nome }}</h2>
+        <p class="fitflix-header-subtitle">Organize o treino em divisões e seus exercícios</p>
+    </div>
+    <div class="fitflix-header-actions">
+        <button type="button" id="copiar-link" class="btn btn-sm" data-link="{{ treino_url }}">
+            <i data-lucide="link"></i> Copiar link
+        </button>
+        <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
+            <i data-lucide="message-circle"></i> WhatsApp
+        </a>
+    </div>
 </div>
 
 <div class="card-treino-editor">
-    <div class="treino-info">
-        <p><strong>Aluno:</strong> {{ treino.aluno.nome }}</p>
-        <p><strong>Link do treino:</strong> <a href="{{ treino_url }}" target="_blank" rel="noopener noreferrer">{{ treino_url }}</a></p>
-    </div>
+    <div class="treino-layout">
+        <aside class="sidebar-divisoes">
+            <h3>Divisões</h3>
+            <div class="divisoes-list">
+                {% for divisao in divisoes %}
+                <div class="divisao-item {% if divisao.id == divisao_selecionada.id %}ativo{% endif %}">
+                    <div class="divisao-item-top">
+                        <span class="divisao-badge">{{ divisao.nome }}</span>
+                        <span class="divisao-order">{{ divisao.ordem }}</span>
+                    </div>
+                    {% if divisao.descricao %}
+                    <p class="divisao-desc">{{ divisao.descricao }}</p>
+                    {% endif %}
+                    <div class="divisao-actions">
+                        <a href="?divisao={{ divisao.id }}" class="btn-icon" aria-label="Ver">
+                            <i data-lucide="eye"></i>
+                        </a>
+                        <a href="{% url 'core:editar_divisao' treino.id divisao.id %}" class="btn-icon" aria-label="Editar">
+                            <i data-lucide="pencil"></i>
+                        </a>
+                        <form method="post" action="{% url 'core:excluir_divisao' treino.id divisao.id %}" onsubmit="return confirm('Excluir a divisão {{ divisao.nome }}?')">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-icon btn-icon-danger" aria-label="Excluir">
+                                <i data-lucide="trash-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="divisao-vazio">Nenhuma divisão ainda. Crie uma para organizar os exercícios.</p>
+                {% endfor %}
+            </div>
 
-    <hr>
+            <div class="divisao-criar">
+                <form method="post" action="{% url 'core:nova_divisao' treino.id %}">
+                    {% csrf_token %}
+                    <input type="text" name="divisao-nome" placeholder="Nome (ex: Treino A)" required>
+                    <input type="text" name="divisao-descricao" placeholder="Descrição">
+                    <button type="submit" class="btn-sm btn-primary">Criar divisão</button>
+                </form>
+            </div>
+        </aside>
 
-    <div class="exercicios-lista">
-        <h3>Exercicios</h3>
+        <section class="main-panel">
+            <h3>Exercícios <span class="divisao-acre">{{ divisao_selecionada.nome|default:"—" }}</span></h3>
 
-        {% if exercicios_treino %}
-        <ul>
-            {% for item in exercicios_treino %}
-            <li>
-                <p>{{ item.exercicio.nome }}</p>
-                <p>GIF: {{ item.variacao.gif }}</p>
+            {% if exercicios_treino %}
+            <div class="exercicio-grid">
+                {% for item in exercicios_treino %}
+                <div class="exercicio-card">
+                    <div class="exercicio-card-body">
+                        <h4>{{ item.exercicio.nome }}</h4>
+                        {% if item.variacao.gif %}
+                        <img src="{{ item.variacao.gif.url }}" alt="{{ item.variacao.nome }}" class="exercicio-gif">
+                        {% elif item.exercicio.gif %}
+                        <img src="{{ item.exercicio.gif.url }}" alt="{{ item.exercicio.nome }}" class="exercicio-gif">
+                        {% endif %}
+                        {% if item.variacao.nome %}<p>{{ item.variacao.nome }}</p>{% endif %}
+                        <p>Série {{ item.series }} | Rep {{ item.repeticoes }} | Descanso {{ item.descanso }}s</p>
+                        {% if item.carga %}<p>Carga: {{ item.carga }}</p>{% endif %}
+                    </div>
+                    <a href="{% url 'core:editar_exercicio' treino.id item.id %}" class="btn-editar" aria-label="Editar exercício">
+                        <i data-lucide="pencil"></i>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="vide">Nenhum exercício nesta divisão.</p>
+            {% endif %}
 
-                {% if item.exercicio.gif %}
-                <img src="{{ item.exercicio.gif.url }}" width="200" alt="{{ item.exercicio.nome }}">
+            <div class="exercicio-section sem-divisao">
+                <h4>Sem divisão</h4>
+                {% if exercicios_sem_divisao %}
+                <div class="exercicio-grid">
+                    {% for item in exercicios_sem_divisao %}
+                    <div class="exercicio-card">
+                        <div class="exercicio-card-body">
+                            <h4>{{ item.exercicio.nome }}</h4>
+                            {% if item.variacao.gif %}
+                            <img src="{{ item.variacao.gif.url }}" alt="{{ item.variacao.nome }}" class="exercicio-gif">
+                            {% elif item.exercicio.gif %}
+                            <img src="{{ item.exercicio.gif.url }}" alt="{{ item.exercicio.nome }}" class="exercicio-gif">
+                            {% endif %}
+                            {% if item.variacao.nome %}<p>{{ item.variacao.nome }}</p>{% endif %}
+                            <p>Série {{ item.series }} | Rep {{ item.repeticoes }} | Descanso {{ item.descanso }}s</p>
+                            {% if item.carga %}<p>Carga: {{ item.carga }}</p>{% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p>Nenhum exercício sem divisão.</p>
                 {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>Nenhum exercicio adicionado ainda</p>
-        {% endif %}
+            </div>
+        </section>
     </div>
-
-    <hr>
 
     <div class="acoes">
-        <a href="{% url 'core:adicionar_exercicio' treino.id %}" class="btn">Adicionar exercicio</a>
-        <a href="{% url 'core:home' %}" class="btn">Voltar</a>
-        <button type="button" class="btn" id="copiar-link" data-link="{{ treino_url }}">Copiar link</button>
-        <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn">
-            WhatsApp
+        <a href="{% url 'core:adicionar_exercicio' treino.id %}?divisao=" class="btn btn-ghost">
+            <i data-lucide="plus"></i> Adicionar à sem divisão
         </a>
+        {% if divisao_selecionada %}
+        <a href="{% url 'core:adicionar_exercicio' treino.id %}?divisao={{ divisao_selecionada.id }}" class="btn btn-primary">
+            <i data-lucide="plus"></i> Adicionar à {{ divisao_selecionada.nome }}
+        </a>
+        {% endif %}
+        <a href="{% url 'core:home' %}" class="btn btn-ghost">Voltar</a>
     </div>
-
 </div>
-
 {% endblock %}
 
 <script>
 (function () {
   var btn = document.getElementById("copiar-link");
   var msg = document.getElementById("copiar-link-msg");
-  if (!btn) {
-    return;
-  }
+  if (!btn) { return; }
   if (!msg) {
     msg = document.createElement("p");
     msg.id = "copiar-link-msg";
@@ -66,71 +142,147 @@
   }
   btn.addEventListener("click", function () {
     var link = btn.getAttribute("data-link");
-    copyText(link);
-  });
-
-  function copyText(text) {
-    var onOk = function () {
-      msg.textContent = "Link copiado!";
-      flashSuccess(btn);
-    };
-    var onFail = function () {
-      msg.textContent = "Não foi possível copiar o link.";
-      flashError(btn);
-    };
+    var onOk = function () { msg.textContent = "Link copiado!"; };
+    var onFail = function () { msg.textContent = "Não foi possível copiar."; };
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(onOk).catch(onFail);
+      navigator.clipboard.writeText(link).then(onOk).catch(onFail);
     } else {
-      fallbackCopy(text, onOk, onFail);
+      var ta = document.createElement("textarea");
+      ta.value = link;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        if (document.execCommand("copy")) {
+          onOk();
+        } else {
+          onFail();
+        }
+      } catch (e) {
+        onFail();
+      } finally {
+        document.body.removeChild(ta);
+      }
     }
-  }
-
-  function fallbackCopy(text, ok, fail) {
-    var textarea = document.createElement("textarea");
-    textarea.value = text;
-    textarea.setAttribute("readonly", "");
-    textarea.style.position = "fixed";
-    textarea.style.left = "-9999px";
-    document.body.appendChild(textarea);
-    textarea.select();
-    try {
-      document.execCommand("copy");
-      ok();
-    } catch (err) {
-      fail();
-    }
-    document.body.removeChild(textarea);
-  }
-
-  function flashSuccess(el) {
-    if (!el) {
-      return;
-    }
-    el.classList.add("copiado");
-    setTimeout(function () {
-      el.classList.remove("copiado");
-    }, 1200);
-  }
-
-  function flashError(el) {
-    if (!el) {
-      return;
-    }
-    el.classList.add("erro");
-    setTimeout(function () {
-      el.classList.remove("erro");
-    }, 1200);
-  }
+  });
 })();
 </script>
 
 <style>
-#copiar-link.copiado {
-  background-color: #198754;
-  color: #ffffff;
+:root {
+  --verde: #00ff88;
+  --bg: #0a0a0a;
+  --card: #111;
 }
-#copiar-link.erro {
-  background-color: #dc3545;
-  color: #ffffff;
+.treino-layout { display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
+.sidebar-divisoes {
+  background: var(--bg);
+  border: 1px solid var(--fitflix-border);
+  border-radius: 14px;
+  padding: 18px;
+  position: sticky;
+  top: 18px;
+  height: fit-content;
+  max-height: calc(100vh - 36px);
+  overflow-y: auto;
 }
+.sidebar-divisoes h3 {
+  margin-bottom: 16px;
+  font-size: 0.8rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #888;
+}
+.divisoes-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+.divisao-item {
+  background: var(--bg);
+  border: 1px solid var(--fitflix-border);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.divisao-item:hover { border-color: var(--verde); }
+.divisao-item.ativo { border-color: var(--verde); box-shadow: 0 0 0 1px rgba(0, 255, 136, .25); }
+.divisao-item-top { display: flex; justify-content: space-between; align-items: center; }
+.divisao-badge {
+  background: rgba(0, 255, 136, .12);
+  color: var(--verde);
+  border: 1px solid rgba(0, 255, 136, .3);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: .8rem;
+  font-weight: 800;
+}
+.divisao-order { color: #666; font-size: .75rem; font-weight: 700; }
+.divisao-desc { font-size: .82rem; color: #bbb; margin-top: 6px; line-height: 1.3; }
+.divisao-actions { display: flex; gap: 6px; margin-top: 10px; }
+.btn-icon {
+  background: rgba(255, 255, 255, .06);
+  color: #bbb;
+  border: none;
+  border-radius: 8px;
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.btn-icon:hover { background: rgba(0, 255, 136, .18); color: var(--verde); }
+.btn-icon-danger { background: rgba(220, 53, 45, .18); color: #f87171; }
+.btn-icon-danger:hover { background: rgba(220, 53, 45, .3); }
+.divisao-vazio {
+  color: #666; font-size: .85rem; text-align: center; padding: 12px 0;
+}
+.divisao-criar {
+  border-top: 1px solid var(--fitflix-border);
+  padding-top: 14px;
+}
+.divisao-criar input {
+  width: 100%; margin-bottom: 8px;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .12);
+  color: #fff; border-radius: 8px; padding: 10px;
+}
+.divisao-criar input::placeholder { color: #555; }
+.divisao-criar button { width: 100%; }
+.main-panel { min-width: 0; }
+.main-panel h3 {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 1.1rem;
+}
+.divisao-acre { color: var(--verde); font-weight: 800; }
+.exercicio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+.exercicio-card {
+  background: var(--card);
+  border: 1px solid var(--fitflix-border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.exercicio-card h4 { margin: 0 0 4px; color: #fff; }
+.exercicio-card p { margin: 4px 0; color: #bbb; font-size: .85rem; }
+.exercicio-card .btn-editar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .05);
+    color: rgba(255, 255, 255, .4);
+    cursor: pointer;
+    transition: background .2s, color .2s;
+    margin-top: 12px;
+}
+.exercicio-card .btn-editar:hover {
+    background: rgba(0, 255, 136, .15);
+    color: var(--verde);
+}
+.exercicio-gif { width: 100%; height: auto; border-radius: 6px; display: block; margin-top: 8px; }
+.vide { color: #777; font-style: italic; }
+.acoes { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn-sm { font-size: .8rem; padding: 6px 12px; }
+.btn-ghost { background: transparent; border: 1px solid var(--fitflix-border); color: #fff; }
 </style>

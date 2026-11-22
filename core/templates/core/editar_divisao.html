@@ -1,0 +1,97 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ divisao|yesno:"Editar divisão,Criar divisão" }} | {{ treino.nome }} | FitFlix{% endblock %}
+
+{% block content %}
+<section class="fitflix-form-page">
+    <div class="fitflix-form-container">
+        <div class="fitflix-form-shell">
+            <div class="fitflix-form-heading">
+                <p class="fitflix-eyebrow" style="color: var(--color-primary); font-weight: var(--font-weight-bold); font-size: 1.2rem;">01</p>
+                <h1 class="fitflix-page-title">
+                    {% if divisao %}
+                        Editar divisão
+                    {% else %}
+                        Criar divisão
+                    {% endif %}
+                </h1>
+                <p class="fitflix-page-subtitle">
+                    {% if divisao %}
+                        Altere o nome, a descrição ou a ordem exibida desta divisão.
+                    {% else %}
+                        Crie uma nova divisão para organizar os exercícios deste treino.
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="fitflix-form-card">
+                <form method="post" class="fitflix-premium-form">
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-error">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="fitflix-form-grid">
+                        <div class="fitflix-field-group">
+                            <label for="nome">Nome da divisão</label>
+                            <input
+                                type="text"
+                                name="nome"
+                                id="nome"
+                                value="{{ form.nome.value|default:'' }}"
+                                class="input-field"
+                                required
+                            >
+                            {{ form.nome.errors }}
+                        </div>
+
+                        <div class="fitflix-field-group">
+                            <label for="ordem">Ordem de exibição</label>
+                            <input
+                                type="number"
+                                name="ordem"
+                                id="ordem"
+                                value="{{ form.ordem.value|default_if_none:'' }}"
+                                min="1"
+                                class="input-field"
+                                required
+                            >
+                            {{ form.ordem.errors }}
+                        </div>
+                    </div>
+
+                    <div class="fitflix-field-group">
+                        <label for="descricao">Descrição</label>
+                        <input
+                            type="text"
+                            name="descricao"
+                            id="descricao"
+                            value="{{ form.descricao.value|default:'' }}"
+                            class="input-field"
+                        >
+                        {{ form.descricao.errors }}
+                    </div>
+
+                    <div class="fitflix-button-group">
+                        <button type="submit" class="btn btn-primary fitflix-btn-primary">
+                            {% if divisao %}
+                                Salvar mudanças
+                            {% else %}
+                                Criar divisão
+                            {% endif %}
+                        </button>
+                        <a href="{% url 'core:editar_treino' treino.id %}" class="btn btn-secondary">
+                            Voltar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
