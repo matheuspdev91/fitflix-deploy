@@ -310,6 +310,7 @@ class IsolamentoMultiTenantTests(TestCase):
         self.assertTrue(AvaliacaoFisica.objects.filter(pk=self.avaliacao_b.pk).exists())
 
     def test_token_inexistente_nao_revela_treino(self):
+        self.client.force_login(self.personal_a)
         response = self.client.get(
             reverse("core:ver_treino", args=["00000000-0000-0000-0000-000000000000"])
         )
@@ -608,7 +609,7 @@ class IsolamentoMultiTenantTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "core/treino_publico.html")
         self.assertEqual(response.context["treino"], self.treino_b)
-        self.assertContains(response, "Treino Público")
+        self.assertContains(response, self.treino_b.nome)
 
     def test_ver_treino_aluno_diferente_retorna_404(self):
         aluno_a_user = self.user_model.objects.create_user(
@@ -692,7 +693,7 @@ class IsolamentoMultiTenantTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "core/treino_publico.html")
         self.assertEqual(response.context["treino"], self.treino_b)
-        self.assertContains(response, "Treino Público")
+        self.assertContains(response, self.treino_b.nome)
 
     def test_ver_treino_aluno_outro_personal_retorna_404(self):
         aluno_a_user = self.user_model.objects.create_user(
@@ -707,14 +708,9 @@ class IsolamentoMultiTenantTests(TestCase):
             nome="Aluno A (outro personal)",
             data_nascimento="2000-01-01",
         )
-        treino_a = Treino.objects.create(
-            aluno=aluno_a,
-            nome="Treino A (outro personal)",
-            descricao="",
-        )
         self.client.force_login(aluno_a_user)
         response = self.client.get(
-            reverse("core:ver_treino", args=[treino_a.token])
+            reverse("core:ver_treino", args=[self.treino_b.token])
         )
         self.assertEqual(response.status_code, 404)
 
