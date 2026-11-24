@@ -346,6 +346,257 @@ class WebhookTests(TestCase):
         )
 
 
+    @patch.dict('os.environ', {'ASAAS_WEBHOOK_TOKEN': 'whsec_token123'})
+    def test_payment_received_para_assinatura_cancelada_nao_reativa(self):
+        assinatura = Assinatura.objects.create(
+            usuario=self.user,
+            asaas_subscription_id="sub_123",
+            status="CANCELLED",
+        )
+        payload = {
+            "id": "evt_018",
+            "event": "PAYMENT_RECEIVED",
+            "payment": {
+                "id": "pay_018",
+                "customer": "cus_12345",
+                "subscription": "sub_123",
+                "value": 60.00,
+            }
+        }
+        resp = self.post_webhook(payload, token=self.valid_token)
+        self.assertEqual(resp.status_code, 200)
+        assinatura.refresh_from_db()
+        # Pagamento RECEIVED está registrado, mas assinatura não retorna
+        # para ACTIVE.
+        self.assertEqual(assinatura.status, "CANCELLED")
+        pagamento = PagamentoAsaas.objects.get(asaas_payment_id="pay_018")
+        self.assertEqual(pagamento.status, "RECEIVED")
+
+    @patch.dict('os.environ', {'ASAAS_WEBHOOK_TOKEN': 'whsec_token123'})
+    def test_evento_duplicado_idem_nao_duplica_lados(self):
+        # Assinatura e pagamento são criados apenas uma vez mesmo
+        # enviando o mesmo webhook duas vezes.
+        Assinatura.objects.create(
+            usuario=self.user,
+            asaas_subscription_id="sub_005",
+            status="ACTIVE",
+        )
+        payload = {
+            "id": "evt_019",
+            "event": "PAYMENT_CONFIRMED",
+            "payment": {
+                "id": "pay_019",
+                "customer": "cus_12345",
+                "subscription": "sub_005",
+                "value": 99.90,
+                "dueDate": "2026-08-20",
+            }
+        }
+        # Envia duas vezes
+        self.post_webhook(payload, token=self.valid_token)
+        self.post_webhook(payload, token=self.valid_token)
+        # Apenas 1 WebhookEvent
+        self.assertEqual(WebhookEvent.objects.filter(
+            event_id="evt_019"
+        ).count(), 1)
+        # Pagamento não duplicado
+        self.assertEqual(PagamentoAsaas.objects.filter(
+            asaas_payment_id="pay_019"
+        ).count(), 1)
+        # Assinatura não alterada duas vezes
+        assinatura = Assinatura.objects.get(usuario=self.user)
+        self.assertEqual(assinatura.status, "ACTIVE")
+
+
+    @patch.dict('os.environ', {'ASAAS_WEBHOOK_TOKEN': 'whsec_token123'})
+    def test_subscription_valido_com_customer_correspondente_ativa_assinatura(self):
+        assinatura = Assinatura.objects.create(
+            usuario=self.user,
+            asaas_subscription_id="sub_123",
+            status="PENDING",
+        )
+        payload = {
+            "id": "evt_010",
+            "event": "PAYMENT_RECEIVED",
+            "payment": {
+                "id": "pay_010",
+                "customer": "cus_12345",
+                "subscription": "sub_123",
+                "value": 60.00,
+                "dueDate": "2026-08-20",
+                "paymentDate": "2026-08-21",
+            }
+        }
+        resp = self.post_webhook(payload, token=self.valid_token)
+        self.assertEqual(resp.status_code, 200)
+        assinatura.refresh_from_db()
+        self.assertEqual(assinatura.status, "ACTIVE")
+        pagamento = PagamentoAsaas.objects.get(asaas_payment_id="pay_010")
+        self.assertEqual(pagamento.status, "RECEIVED")
+
+    @patch.dict('os.environ', {'ASAAS_WEBHOOK_TOKEN': 'whsec_token123'})
+    def test_subscription_valido_com_customer_divergente_ignora(self):
+        # Assinatura de outro usuário
+        outra_assinatura = Assinatura.objects.create(
+            usuario=User.objects.create_user(
+                username="outro@example.com",
+                email="outro@example.com",
+                asaas_customer_id="cus_outro",
+            ),
+            asaas_subscription_id="sub_delinquente",
+            status="PENDING",
+        )
+        payload = {
+            "id": "evt_011",
+            "event": "PAYMENT_RECEIVED",
+            "payment": {
+                "id": "pay_011",
+                "customer": "cus_12345",
+                "subscription": "sub_delinquente",
+                "value": 60.00,
+            }
+        }
+        resp = self.post_webhook(payload, token=self.valid_token)
+        self.assertEqual(resp.status_code, 200)
+        outra_assinatura.refresh_from_db()
+        self.assertNotEqual(outra_assinatura.status, "ACTIVE")
+        pagamento = PagamentoAsaas.objects.filter(
+            asaas_payment_id="pay_011"
+        ).first()
+        self.assertIsNone(pagamento)
+
+    @patch.dict('os.environ', {'ASAAS_WEBHOOK_TOKEN': 'whsec_token123'})
+    def test_subscription_inexistente_ignora(self):
+        payload = {
+            "id": "evt_012",
+            "event": "PAYMENT_RECEIVED",
+            "payment": {
+                "id": "pay_012",
+                "customer": "cus_12345",
+                "subscription": "sub_inexistente",
+                "value": 60.00,
+            }
+        }
+        resp = self.post_webhook(payload, token=self.valid_token)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(WebhookEvent.objects.count(), 1)
+        evt = WebhookEvent.objects.get(event_id="evt_012")
+        self.assertEqual(evt.status, "IGNORED")
+
+    @patch.dict('os.environ', {'ASAAS_WEBHOOK_TOKEN': 'whsec_token123'})
+    def test_customer_inexistente_ignora(self):
+        assinatura = Assinatura.objects.create(
+            usuario=self.user,
+            asaas_subscription_id="sub_123",
+            status="PENDING",
+        )
+        payload = {
+            "id": "evt_013",
+            "event": "PAYMENT_RECEIVED",
+            "payment": {
+                "id": "pay_013",
+                "customer": "cus_nao_existe",
+                "subscription": "sub_123",
+                "value": 60.00,
+            }
+        }
+        resp = self.post_webhook(payload, token=self.valid_token)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(WebhookEvent.objects.count(), 1)
+        evt = WebhookEvent.objects.get(event_id="evt_013")
+        self.assertEqual(evt.status, "IGNORED")
+
+    @patch.dict('os.environ', {'ASAAS_WEBHOOK_TOKEN': 'whsec_token123'})
+    def test_customer_ausente_sem_subscription_ignora(self):
+        payload = {
+            "id": "evt_014",
+            "event": "PAYMENT_RECEIVED",
+            "payment": {
+                "id": "pay_014",
+                "value": 60.00,
+            }
+        }
+        resp = self.post_webhook(payload, token=self.valid_token)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(WebhookEvent.objects.count(), 1)
+        evt = WebhookEvent.objects.get(event_id="evt_014")
+        self.assertEqual(evt.status, "IGNORED")
+
+    @patch.dict('os.environ', {'ASAAS_WEBHOOK_TOKEN': 'whsec_token123'})
+    def test_subscription_ausente_com_customer_e_assinatura_existe_processa(self):
+        assinatura = Assinatura.objects.create(
+            usuario=self.user,
+            asaas_subscription_id="sub_123",
+            status="PENDING",
+        )
+        payload = {
+            "id": "evt_015",
+            "event": "PAYMENT_RECEIVED",
+            "payment": {
+                "id": "pay_015",
+                "customer": "cus_12345",
+                "value": 60.00,
+            }
+        }
+        resp = self.post_webhook(payload, token=self.valid_token)
+        self.assertEqual(resp.status_code, 200)
+        assinatura.refresh_from_db()
+        self.assertEqual(assinatura.status, "ACTIVE")
+        pagamento = PagamentoAsaas.objects.get(asaas_payment_id="pay_015")
+        self.assertEqual(pagamento.status, "RECEIVED")
+
+    @patch.dict('os.environ', {'ASAAS_WEBHOOK_TOKEN': 'whsec_token123'})
+    def test_subscription_ausente_sem_assinatura_local_ignora(self):
+        payload = {
+            "id": "evt_016",
+            "event": "PAYMENT_RECEIVED",
+            "payment": {
+                "id": "pay_016",
+                "customer": "cus_12345",
+                "value": 60.00,
+            }
+        }
+        resp = self.post_webhook(payload, token=self.valid_token)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(WebhookEvent.objects.count(), 1)
+        evt = WebhookEvent.objects.get(event_id="evt_016")
+        self.assertEqual(evt.status, "IGNORED")
+
+    @patch.dict('os.environ', {'ASAAS_WEBHOOK_TOKEN': 'whsec_token123'})
+    def test_nenhuma_associacao_incorreta_criada(self):
+        # Pagamento para assinatura de outro usuário não deve
+        # associar nenhum pagamento.
+        outra_assinatura = Assinatura.objects.create(
+            usuario=User.objects.create_user(
+                username="outro@example.com",
+                email="outro@example.com",
+                asaas_customer_id="cus_outro",
+            ),
+            asaas_subscription_id="sub_mutacao",
+            status="PENDING",
+        )
+        payload = {
+            "id": "evt_017",
+            "event": "PAYMENT_RECEIVED",
+            "payment": {
+                "id": "pay_017",
+                "customer": "cus_12345",
+                "subscription": "sub_mutacao",
+                "value": 60.00,
+            }
+        }
+        resp = self.post_webhook(payload, token=self.valid_token)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(WebhookEvent.objects.count(), 1)
+        evt = WebhookEvent.objects.get(event_id="evt_017")
+        self.assertEqual(evt.status, "IGNORED")
+        # Nenhum pagamento foi criado.
+        self.assertEqual(PagamentoAsaas.objects.count(), 0)
+        # A assinatura de outro usuário não foi alterada.
+        outra_assinatura.refresh_from_db()
+        self.assertNotEqual(outra_assinatura.status, "ACTIVE")
+
+
 class AsaasClientTests(TestCase):
 
     @patch.dict(

@@ -1,6 +1,6 @@
 import logging
 
-from django.db import transaction
+from django.db import IntegrityError, transaction
 from django.contrib.auth import get_user_model
 
 from core.models import (
@@ -33,27 +33,46 @@ class WebhookHandler:
 
         with transaction.atomic():
 
-            # Idempotência
-            existing_event = (
-                WebhookEvent.objects
-                .select_for_update()
-                .filter(event_id=event_id)
-                .first()
-            )
+            # Idempotência:
+            # Verifica se o evento já foi processado. Usamos
+            # .filter().first() sem select_for_update() para evitar
+            # bloqueios desnecessários em linhas inexistentes.
+            existing_event = WebhookEvent.objects.filter(
+                event_id=event_id
+            ).first()
 
             if existing_event:
                 logger.info(
-                    f"Evento {event_id} já processado anteriormente."
+                    f"Evento {event_id} idempotente."
                 )
                 return True
 
-            event = WebhookEvent.objects.create(
-                event_id=event_id,
-                event_type=event_type,
-                payment_id=payment_id,
-                payload=payload,
-                status="PROCESSED",
-            )
+            # Criar o evento dentro de um savepoint. Se outro processo
+            # criar o mesmo evento simultaneamente, a restrição única
+            # levanta IntegrityError; em seguida revertemos o savepoint
+            # e verificamos se o evento já existe.
+            sid = transaction.savepoint()
+            try:
+                event = WebhookEvent.objects.create(
+                    event_id=event_id,
+                    event_type=event_type,
+                    payment_id=payment_id,
+                    payload=payload,
+                    status="PROCESSED",
+                )
+            except IntegrityError:
+                # Outro processamento criou o evento concorrentemente.
+                transaction.savepoint_rollback(sid)
+                existing_event = WebhookEvent.objects.filter(
+                    event_id=event_id
+                ).first()
+                if existing_event:
+                    logger.info(
+                        f"Evento {event_id} idempotente "
+                        "(criado por outra thread)."
+                    )
+                    return True
+                raise
 
             try:
                 handled = cls._handle_event(
@@ -167,26 +186,42 @@ class WebhookHandler:
     @classmethod
     def _get_assinatura_from_payment(cls, payment):
         subscription_id = payment.get("subscription")
+        customer_id = payment.get("customer")
 
         # Caminho preferencial:
-        # payment.subscription → Assinatura
+        # payment.subscription → Assinatura.
+        # Se subscription está presente e não encontra assinatura,
+        # NÃO há fallback por customer.
         if subscription_id:
             assinatura = (
                 Assinatura.objects
                 .select_for_update()
-                .filter(
-                    asaas_subscription_id=subscription_id
-                )
+                .filter(asaas_subscription_id=subscription_id)
                 .first()
             )
 
             if assinatura:
+                # Se customer também está presente, validar a
+                # correspondência entre o cliente e o proprietário
+                # da assinatura.
+                if customer_id is not None:
+                    usuario = assinatura.usuario
+                    if usuario.asaas_customer_id != customer_id:
+                        logger.warning(
+                            "Inconsistência de cliente: assinatura %s → "
+                            "usuário %s, pagamento.customer=%s",
+                            subscription_id,
+                            usuario.asaas_customer_id,
+                            customer_id,
+                        )
+                        return None
                 return assinatura
 
-        # Fallback para pagamentos antigos ou payloads
-        # que não tragam subscription.
-        customer_id = payment.get("customer")
+            # subscription presente, mas assinatura não encontrada:
+            # não há fallback por customer.
+            return None
 
+        # subscription ausente: fallback para customer.
         if not customer_id:
             return None
 
@@ -203,11 +238,16 @@ class WebhookHandler:
             )
             return None
 
-        assinatura, _ = (
-            Assinatura.objects
-            .select_for_update()
-            .get_or_create(usuario=usuario)
-        )
+        # Não criar assinatura automaticamente durante o processamento
+        # de pagamentos.
+        assinatura = Assinatura.objects.filter(usuario=usuario).first()
+        if assinatura is None:
+            logger.warning(
+                "Nenhuma assinatura local associada ao usuário "
+                f"asaas_customer_id={customer_id}; "
+                f"pagamento {payment.get('id')} não será associado."
+            )
+            return None
 
         return assinatura
 
