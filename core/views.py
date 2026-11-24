@@ -1290,6 +1290,7 @@ def ver_treino(request, token):
 # =====================
 
 
+@login_required
 def buscar_variacoes(request, exercicio_id):
     variacoes = []
 
@@ -1352,6 +1353,8 @@ def asaas_webhook(request):
 # ==========================
 
 @login_required
+@apenas_personal
+@ratelimit(key='ip', rate='5/m', method='POST', block=True)
 def criar_assinatura(request):
     if request.method != "POST":
         return JsonResponse(
@@ -1373,6 +1376,21 @@ def criar_assinatura(request):
     if plano not in {"MENSAL", "ANUAL"}:
         return JsonResponse(
             {"error": "Plano inválido."},
+            status=400,
+        )
+
+    # Validar billing_type (tipo de cobrança) — evitar valores não suportados
+    # Valores aceitos pela API do Asaas para assinaturas (POST /v3/subscriptions):
+    # UNDEFINED, BOLETO, CREDIT_CARD, PIX
+    valid_billing_types = {"UNDEFINED", "BOLETO", "CREDIT_CARD", "PIX"}
+    if billing_type not in valid_billing_types:
+        return JsonResponse(
+            {
+                "error": (
+                    "billing_type inválido. Valores permitidos: UNDEFINED, BOLETO, "
+                    "CREDIT_CARD, PIX."
+                ),
+            },
             status=400,
         )
 

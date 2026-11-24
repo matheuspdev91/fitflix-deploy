@@ -838,13 +838,14 @@ class PagamentoAsaasTests(TestCase):
             )
 
 
-@override_settings(SECURE_SSL_REDIRECT=False)
+@override_settings(SECURE_SSL_REDIRECT=False, RATELIMIT_ENABLE=False)
 class CriarAssinaturaViewTests(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
             username="checkout@example.com",
             email="checkout@example.com",
+            tipo_usuario="PERSONAL",
         )
 
     @patch("core.views.SubscriptionService")
@@ -986,3 +987,230 @@ class CriarAssinaturaViewTests(TestCase):
             billing_type="PIX",
             next_due_date="2026-08-25",
         )
+    @patch("core.views.SubscriptionService")
+    def test_aceita_billing_type_undefined(self, mock_service):
+        self.client.force_login(self.user)
+
+        mock_assinatura = MagicMock()
+        mock_assinatura.id = 1
+        mock_assinatura.asaas_subscription_id = "sub_undefined"
+        mock_assinatura.plano = "MENSAL"
+        mock_assinatura.status = "PENDING"
+
+        mock_service.return_value.create_subscription.return_value = (
+            mock_assinatura,
+            {"id": "sub_undefined", "status": "ACTIVE"},
+        )
+
+        response = self.client.post(
+            "/api/assinatura/criar/",
+            data=json.dumps({
+                "plano": "MENSAL",
+                "billing_type": "UNDEFINED",
+            }),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 201)
+
+    @patch("core.views.SubscriptionService")
+    def test_aceita_billing_type_boleto(self, mock_service):
+        self.client.force_login(self.user)
+
+        mock_assinatura = MagicMock()
+        mock_assinatura.id = 1
+        mock_assinatura.asaas_subscription_id = "sub_boleto"
+        mock_assinatura.plano = "MENSAL"
+        mock_assinatura.status = "PENDING"
+
+        mock_service.return_value.create_subscription.return_value = (
+            mock_assinatura,
+            {"id": "sub_boleto", "status": "ACTIVE"},
+        )
+
+        response = self.client.post(
+            "/api/assinatura/criar/",
+            data=json.dumps({
+                "plano": "MENSAL",
+                "billing_type": "BOLETO",
+            }),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 201)
+
+    @patch("core.views.SubscriptionService")
+    def test_aceita_billing_type_pix(self, mock_service):
+        self.client.force_login(self.user)
+
+        mock_assinatura = MagicMock()
+        mock_assinatura.id = 1
+        mock_assinatura.asaas_subscription_id = "sub_pix"
+        mock_assinatura.plano = "MENSAL"
+        mock_assinatura.status = "PENDING"
+
+        mock_service.return_value.create_subscription.return_value = (
+            mock_assinatura,
+            {"id": "sub_pix", "status": "ACTIVE"},
+        )
+
+        response = self.client.post(
+            "/api/assinatura/criar/",
+            data=json.dumps({
+                "plano": "MENSAL",
+                "billing_type": "PIX",
+            }),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 201)
+
+    @patch("core.views.SubscriptionService")
+    def test_aceita_billing_type_credit_card(self, mock_service):
+        self.client.force_login(self.user)
+
+        mock_assinatura = MagicMock()
+        mock_assinatura.id = 1
+        mock_assinatura.asaas_subscription_id = "sub_cc"
+        mock_assinatura.plano = "MENSAL"
+        mock_assinatura.status = "PENDING"
+
+        mock_service.return_value.create_subscription.return_value = (
+            mock_assinatura,
+            {"id": "sub_cc", "status": "ACTIVE"},
+        )
+
+        response = self.client.post(
+            "/api/assinatura/criar/",
+            data=json.dumps({
+                "plano": "MENSAL",
+                "billing_type": "CREDIT_CARD",
+            }),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 201)
+
+    @patch("core.views.SubscriptionService")
+    def test_rejeita_billing_type_invalido(self, mock_service):
+        self.client.force_login(self.user)
+
+        response = self.client.post(
+            "/api/assinatura/criar/",
+            data=json.dumps({
+                "plano": "MENSAL",
+                "billing_type": "INVALIDO",
+            }),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("billing_type inválido", response.json()["error"])
+
+        mock_service.return_value.create_subscription.assert_not_called()
+
+    @patch("core.views.SubscriptionService")
+    def test_usa_billing_type_padrao_pix_quando_ausente(self, mock_service):
+        self.client.force_login(self.user)
+
+        mock_assinatura = MagicMock()
+        mock_assinatura.id = 1
+        mock_assinatura.asaas_subscription_id = "sub_default"
+        mock_assinatura.plano = "MENSAL"
+        mock_assinatura.status = "PENDING"
+
+        mock_service.return_value.create_subscription.return_value = (
+            mock_assinatura,
+            {"id": "sub_default", "status": "ACTIVE"},
+        )
+
+        response = self.client.post(
+            "/api/assinatura/criar/",
+            data=json.dumps({
+                "plano": "MENSAL",
+            }),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 201)
+
+        call_args = mock_service.return_value.create_subscription.call_args
+        self.assertEqual(call_args[1]["billing_type"], "PIX")
+
+    @patch("core.views.SubscriptionService")
+    def test_rejeita_billing_type_debit_card(self, mock_service):
+        self.client.force_login(self.user)
+
+        mock_assinatura = MagicMock()
+        mock_assinatura.id = 1
+        mock_assinatura.asaas_subscription_id = "sub_dc"
+        mock_assinatura.plano = "MENSAL"
+        mock_assinatura.status = "PENDING"
+
+        mock_service.return_value.create_subscription.return_value = (
+            mock_assinatura,
+            {"id": "sub_dc", "status": "ACTIVE"},
+        )
+
+        response = self.client.post(
+            "/api/assinatura/criar/",
+            data=json.dumps({
+                "plano": "MENSAL",
+                "billing_type": "DEBIT_CARD",
+            }),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 400)
+
+    @patch("core.views.SubscriptionService")
+    def test_rejeita_billing_type_ted(self, mock_service):
+        self.client.force_login(self.user)
+
+        mock_assinatura = MagicMock()
+        mock_assinatura.id = 1
+        mock_assinatura.asaas_subscription_id = "sub_ted"
+        mock_assinatura.plano = "MENSAL"
+        mock_assinatura.status = "PENDING"
+
+        mock_service.return_value.create_subscription.return_value = (
+            mock_assinatura,
+            {"id": "sub_ted", "status": "ACTIVE"},
+        )
+
+        response = self.client.post(
+            "/api/assinatura/criar/",
+            data=json.dumps({
+                "plano": "MENSAL",
+                "billing_type": "TED",
+            }),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 400)
+
+    @patch("core.views.SubscriptionService")
+    def test_rejeita_billing_type_transferencia(self, mock_service):
+        self.client.force_login(self.user)
+
+        mock_assinatura = MagicMock()
+        mock_assinatura.id = 1
+        mock_assinatura.asaas_subscription_id = "sub_tf"
+        mock_assinatura.plano = "MENSAL"
+        mock_assinatura.status = "PENDING"
+
+        mock_service.return_value.create_subscription.return_value = (
+            mock_assinatura,
+            {"id": "sub_tf", "status": "ACTIVE"},
+        )
+
+        response = self.client.post(
+            "/api/assinatura/criar/",
+            data=json.dumps({
+                "plano": "MENSAL",
+                "billing_type": "TRANSFERENCIA",
+            }),
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 400)
