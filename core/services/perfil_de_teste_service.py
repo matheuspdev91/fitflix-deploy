@@ -459,6 +459,81 @@ class PerfilDeTesteService:
         return perfil
 
     # ------------------------------------------------------------------
+    # CONVERSÃO POR PAGAMENTO
+    # ------------------------------------------------------------------
+
+    @transaction.atomic
+    def converter_por_pagamento(self, usuario, agora=None):
+        """
+        Converte o trial do profissional em uma assinatura paga.
+
+        Chamado exclusivamente a partir do fluxo de webhook
+        `PAYMENT_RECEIVED` (ver core/services/asaas/webhook_handler.py).
+
+        Regras de transição:
+
+        - não existe PerfilDeTeste => nada acontece (o trial não é
+          criado por esta via);
+        - status ATIVO e agora < expira_em => status = CONVERTIDO,
+          com `convertido_em` e `finalizado_em` iguais ao instante de
+          referência;
+        - status ATIVO e agora >= expira_em => status = ENCERRADO,
+          com `finalizado_em` igual ao instante de referência e
+          `convertido_em` preservado (não preenchido). O trial não é
+          reaberto;
+        - status ENCERRADO, CANCELADO ou CONVERTIDO => o registro é
+          imutável e nada é alterado.
+
+        O método é idempotente por estado: chamadas repetidas não
+        provocam nova conversão nem alteram os carimbos de tempo.
+
+        Retorna o PerfilDeTeste resultante ou None quando o usuário
+        não possui trial.
+        """
+        agora = self._agora(agora)
+
+        # O PerfilDeTeste é a chave primária (OneToOne): quando existe,
+        # select_for_update serializa conversões concorrentes do mesmo
+        # usuário. Quando não existe, nada é criado.
+        perfil = (
+            self.modelo.objects
+            .select_for_update()
+            .filter(usuario=usuario)
+            .first()
+        )
+
+        if perfil is None:
+            return None
+
+        # Estados terminais são imutáveis.
+        if perfil.status != self.STATUS_ATIVO:
+            return perfil
+
+        if agora < perfil.expira_em:
+            perfil.status = self.STATUS_CONVERTIDO
+            perfil.convertido_em = agora
+            perfil.finalizado_em = agora
+            perfil.save(
+                update_fields=[
+                    "status",
+                    "convertido_em",
+                    "finalizado_em",
+                ]
+            )
+            return perfil
+
+        # Trial vencido: encerra sem converter e sem reabrir.
+        perfil.status = self.STATUS_ENCERRADO
+        perfil.finalizado_em = agora
+        perfil.save(
+            update_fields=[
+                "status",
+                "finalizado_em",
+            ]
+        )
+        return perfil
+
+    # ------------------------------------------------------------------
     # ENCERRAMENTO EM LOTE
     # ------------------------------------------------------------------
 

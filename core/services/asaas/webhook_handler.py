@@ -8,6 +8,7 @@ from core.models import (
     PagamentoAsaas,
     WebhookEvent,
 )
+from core.services.perfil_de_teste_service import PerfilDeTesteService
 
 
 logger = logging.getLogger(__name__)
@@ -178,8 +179,12 @@ class WebhookHandler:
         #
         # OVERDUE, REFUNDED e DELETED são estados da cobrança,
         # não cancelamento automático da assinatura.
+        #
+        # A conversão do trial em assinatura paga ocorre SOMENTE aqui,
+        # dentro do mesmo transaction.atomic() de process().
         if event_type == "PAYMENT_RECEIVED":
             cls._activate_subscription(assinatura)
+            cls._converter_trial(assinatura)
 
         return True
 
@@ -266,6 +271,27 @@ class WebhookHandler:
             ]
         )
 
+    @classmethod
+    def _converter_trial(cls, assinatura):
+        """
+        Converte o trial do profissional em assinatura paga.
+
+        Só ocorre quando a assinatura efetivamente ficou ACTIVE
+        (isto é, o pagamento foi validado). O trial do profissional é
+        atualizado pelo PerfilDeTesteService, que preserva os estados
+        terminais e nunca cria um PerfilDeTeste nesta via.
+
+        A operação é local (sem chamada externa ao Asaas) e ocorre
+        dentro do transaction.atomic() de process().
+        """
+        assinatura.refresh_from_db(fields=["status"])
+
+        if assinatura.status != "ACTIVE":
+            return None
+
+        service = PerfilDeTesteService()
+        return service.converter_por_pagamento(assinatura.usuario)
+
     # ==========================================================
     # ASSINATURAS
     # ==========================================================
@@ -328,19 +354,21 @@ class WebhookHandler:
         ):
             assinatura.status = "CANCELLED"
 
-        # Criação/atualização:
-        # usamos o status informado pelo próprio Asaas,
-        # quando ele existir e for compatível.
+        # Criação/atualização da assinatura:
+        #
+        # SUBSCRIPTION_CREATED / SUBSCRIPTION_UPDATED NÃO concedem
+        # acesso pago. Mesmo quando o payload do Asaas informa status
+        # ACTIVE, a ativação comercial ocorre exclusivamente pelo fluxo
+        # PAYMENT_RECEIVED válido.
         elif event_type in (
             "SUBSCRIPTION_CREATED",
             "SUBSCRIPTION_UPDATED",
         ):
+            # O cancelamento/inativação informada pelo Asaas é
+            # preservado; apenas a promoção para ACTIVE foi removida.
             asaas_status = subscription.get("status")
 
-            if asaas_status == "ACTIVE":
-                assinatura.status = "ACTIVE"
-
-            elif asaas_status in (
+            if asaas_status in (
                 "INACTIVE",
                 "CANCELLED",
             ):

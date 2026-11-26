@@ -448,3 +448,208 @@ class ConcessaoTrialTests(TestCase):
         ):
             lancamento = self.service.lancamento_oficial()
             self.assertTrue(timezone.is_aware(lancamento))
+
+
+@override_settings(FITFLIX_TRIAL_LAUNCH_AT=LAUNCH_AT)
+class ConversaoTrialTests(TestCase):
+    """
+    Transições de estado do trial na conversão por pagamento
+    (Missão 03.6.17).
+    """
+
+    def setUp(self):
+        self.service = PerfilDeTesteService()
+        self.usuario = _criar_usuario(
+            "personal-conversao", date_joined=LAUNCH_AT + timedelta(minutes=5)
+        )
+        self.agora = LAUNCH_AT + timedelta(hours=1)
+
+    def _criar_perfil(self, status="ATIVO", expira_em=None, **extra):
+        expira_em = expira_em or (self.agora + timedelta(days=2))
+        campos = {
+            "usuario": self.usuario,
+            "status": status,
+            "iniciado_em": self.agora - timedelta(days=1),
+            "expira_em": expira_em,
+            "finalizado_em": None,
+            "convertido_em": None,
+        }
+        campos.update(extra)
+        return PerfilDeTeste.objects.create(**campos)
+
+    # ------------------------------------------------------------------
+    # Conversão dentro do prazo
+    # ------------------------------------------------------------------
+
+    def test_trial_ativo_dentro_do_prazo_vira_convertido(self):
+        perfil = self._criar_perfil()
+
+        resultado = self.service.converter_por_pagamento(
+            self.usuario, agora=self.agora
+        )
+
+        self.assertIsNotNone(resultado)
+
+        self.assertIsNotNone(resultado)
+        self.assertEqual(resultado.status, "CONVERTIDO")
+        self.assertEqual(resultado.convertido_em, self.agora)
+        self.assertEqual(resultado.finalizado_em, self.agora)
+
+        perfil.refresh_from_db()
+        self.assertEqual(perfil.status, "CONVERTIDO")
+        self.assertEqual(perfil.convertido_em, self.agora)
+        self.assertEqual(perfil.finalizado_em, self.agora)
+        self.assertTrue(timezone.is_aware(perfil.convertido_em))
+
+    def test_instante_igual_a_expiracao_encerra_sem_converter(self):
+        expira_em = self.agora + timedelta(hours=1)
+        perfil = self._criar_perfil(expira_em=expira_em)
+
+        resultado = self.service.converter_por_pagamento(
+            self.usuario, agora=expira_em
+        )
+
+        self.assertIsNotNone(resultado)
+
+        self.assertEqual(resultado.status, "ENCERRADO")
+        self.assertEqual(resultado.finalizado_em, expira_em)
+        self.assertIsNone(resultado.convertido_em)
+
+        perfil.refresh_from_db()
+        self.assertEqual(perfil.status, "ENCERRADO")
+        self.assertIsNone(perfil.convertido_em)
+
+    # ------------------------------------------------------------------
+    # Trial vencido
+    # ------------------------------------------------------------------
+
+    def test_trial_ativo_vencido_encerra_sem_converter(self):
+        perfil = self._criar_perfil(
+            expira_em=self.agora - timedelta(seconds=1)
+        )
+
+        resultado = self.service.converter_por_pagamento(
+            self.usuario, agora=self.agora
+        )
+
+        self.assertIsNotNone(resultado)
+
+        self.assertEqual(resultado.status, "ENCERRADO")
+        self.assertEqual(resultado.finalizado_em, self.agora)
+        self.assertIsNone(resultado.convertido_em)
+
+        perfil.refresh_from_db()
+        self.assertEqual(perfil.status, "ENCERRADO")
+        self.assertIsNone(perfil.convertido_em)
+        self.assertTrue(timezone.is_aware(perfil.finalizado_em))
+
+    # ------------------------------------------------------------------
+    # Estados terminais imutáveis
+    # ------------------------------------------------------------------
+
+    def test_trial_encerrado_permanece_encerrado(self):
+        finalizado = self.agora - timedelta(days=2)
+        perfil = self._criar_perfil(
+            status="ENCERRADO",
+            expira_em=self.agora - timedelta(days=3),
+            finalizado_em=finalizado,
+        )
+
+        resultado = self.service.converter_por_pagamento(
+            self.usuario, agora=self.agora
+        )
+
+        self.assertIsNotNone(resultado)
+
+        self.assertEqual(resultado.status, "ENCERRADO")
+        self.assertEqual(resultado.finalizado_em, finalizado)
+        self.assertIsNone(resultado.convertido_em)
+
+        perfil.refresh_from_db()
+        self.assertEqual(perfil.finalizado_em, finalizado)
+
+    def test_trial_cancelado_permanece_cancelado(self):
+        perfil = self._criar_perfil(status="CANCELADO")
+
+        resultado = self.service.converter_por_pagamento(
+            self.usuario, agora=self.agora
+        )
+
+        self.assertIsNotNone(resultado)
+
+        self.assertEqual(resultado.status, "CANCELADO")
+        self.assertIsNone(resultado.convertido_em)
+        self.assertIsNone(resultado.finalizado_em)
+
+        perfil.refresh_from_db()
+        self.assertEqual(perfil.status, "CANCELADO")
+
+    def test_trial_ja_convertido_nao_e_alterado(self):
+        convertido = self.agora - timedelta(hours=3)
+        perfil = self._criar_perfil(
+            status="CONVERTIDO",
+            convertido_em=convertido,
+            finalizado_em=convertido,
+        )
+
+        resultado = self.service.converter_por_pagamento(
+            self.usuario, agora=self.agora
+        )
+
+        self.assertIsNotNone(resultado)
+
+        self.assertEqual(resultado.status, "CONVERTIDO")
+        self.assertEqual(resultado.convertido_em, convertido)
+        self.assertEqual(resultado.finalizado_em, convertido)
+
+        perfil.refresh_from_db()
+        self.assertEqual(perfil.convertido_em, convertido)
+        self.assertEqual(perfil.finalizado_em, convertido)
+
+    # ------------------------------------------------------------------
+    # Ausência de trial
+    # ------------------------------------------------------------------
+
+    def test_usuario_sem_trial_nao_cria_perfil(self):
+        resultado = self.service.converter_por_pagamento(
+            self.usuario, agora=self.agora
+        )
+
+        self.assertIsNone(resultado)
+        self.assertFalse(
+            PerfilDeTeste.objects.filter(usuario=self.usuario).exists()
+        )
+
+    # ------------------------------------------------------------------
+    # Idempotência
+    # ------------------------------------------------------------------
+
+    def test_conversao_repetida_e_idempotente(self):
+        self._criar_perfil()
+
+        primeiro = self.service.converter_por_pagamento(
+            self.usuario, agora=self.agora
+        )
+        segundo = self.service.converter_por_pagamento(
+            self.usuario, agora=self.agora + timedelta(hours=2)
+        )
+
+        self.assertEqual(primeiro.status, "CONVERTIDO")
+        self.assertEqual(segundo.status, "CONVERTIDO")
+        self.assertEqual(segundo.convertido_em, primeiro.convertido_em)
+        self.assertEqual(segundo.finalizado_em, primeiro.finalizado_em)
+
+    # ------------------------------------------------------------------
+    # Conversão não altera outros dados do trial
+    # ------------------------------------------------------------------
+
+    def test_conversao_preserva_iniciado_e_expira(self):
+        perfil = self._criar_perfil()
+
+        self.service.converter_por_pagamento(
+            self.usuario, agora=self.agora
+        )
+
+        perfil.refresh_from_db()
+        self.assertEqual(perfil.iniciado_em, self.agora - timedelta(days=1))
+        self.assertEqual(perfil.expira_em, self.agora + timedelta(days=2))
