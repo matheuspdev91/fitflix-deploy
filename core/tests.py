@@ -1,9 +1,10 @@
-from datetime import date
+from datetime import datetime, date
 from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 from django.contrib.messages import get_messages
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from .forms import CriarAlunoForm, DivisaoTreinoForm
@@ -17,7 +18,10 @@ from .models import (
     VideoExercicio,
     DivisaoTreino,
 )
+from .services.perfil_de_teste_service import PerfilDeTesteService
 from .views import gerar_senha_aleatoria
+
+FITFLIX_TRIAL_LAUNCH_AT_FIXED = datetime(2020, 1, 1, 0, 0, tzinfo=timezone.get_fixed_timezone(0))
 
 
 class CriarAlunoFormTests(TestCase):
@@ -161,6 +165,7 @@ class SenhaAleatoriaTests(TestCase):
         self.assertRegex(senha, r"^[A-Za-z0-9]{8}$")
 
 
+@override_settings(FITFLIX_TRIAL_LAUNCH_AT=FITFLIX_TRIAL_LAUNCH_AT_FIXED)
 class IsolamentoMultiTenantTests(TestCase):
     def setUp(self):
         self.user_model = get_user_model()
@@ -168,11 +173,13 @@ class IsolamentoMultiTenantTests(TestCase):
             username="personal-a@example.com",
             email="personal-a@example.com",
             password="Senha123",
+            date_joined=timezone.now(),
         )
         self.personal_b = self.user_model.objects.create_user(
             username="personal-b@example.com",
             email="personal-b@example.com",
             password="Senha123",
+            date_joined=timezone.now(),
         )
 
         self.avaliacao_b = AvaliacaoFisica.objects.create(
@@ -202,6 +209,24 @@ class IsolamentoMultiTenantTests(TestCase):
             descricao="",
         )
 
+        self.aluno_c_user = self.user_model.objects.create_user(
+            username="aluno-c@example.com",
+            email="aluno-c@example.com",
+            password="Senha123",
+            tipo_usuario="ALUNO",
+        )
+        self.aluno_c = Aluno.objects.create(
+            personal=self.personal_b,
+            user=self.aluno_c_user,
+            nome="Aluno C",
+            data_nascimento="2000-01-01",
+        )
+        self.treino_c = Treino.objects.create(
+            aluno=self.aluno_c,
+            nome="Treino C",
+            descricao="",
+        )
+
     def test_avaliacao_de_outro_usuario_retorna_404(self):
         self.client.force_login(self.personal_a)
 
@@ -221,19 +246,110 @@ class IsolamentoMultiTenantTests(TestCase):
                 self.assertEqual(response.status_code, 404)
 
     def test_treino_de_outro_personal_retorna_404(self):
+        # Personal com trial válido, sem assinatura ACTIVE: 404 em treino_detail.
+        from core.services.perfil_de_teste_service import PerfilDeTesteService
         self.client.force_login(self.personal_a)
+        PerfilDeTesteService().iniciar_trial(self.personal_a)
+        response = self.client.get(reverse("core:treino_detail", args=[self.treino_b.id]))
+        self.assertEqual(response.status_code, 404)
 
+        # Outras rotas mantêm a proteção de 404 (editar_treino, adicionar_exercicio, painel_aluno).
+        self.client.force_login(self.personal_a)
         urls = [
-            reverse("core:treino_detail", args=[self.treino_b.id]),
             reverse("core:editar_treino", args=[self.treino_b.id]),
             reverse("core:adicionar_exercicio", args=[self.treino_b.id]),
             reverse("core:painel_aluno", args=[self.aluno_b.id]),
         ]
-
         for url in urls:
-            with self.subTest(url=url):
-                response = self.client.get(url)
-                self.assertEqual(response.status_code, 404)
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, 404)
+
+        # Aluno: acesso ao PRÓPRIO treino permanece liberado,
+        # independente do trial ou assinatura do personal.
+        self.client.force_login(self.aluno_b_user)
+        response = self.client.get(reverse("core:treino_detail", args=[self.treino_b.id]))
+        self.assertEqual(response.status_code, 200)
+
+        # Aluno: acesso a treino de OUTRO aluno (mesmo personal) é bloqueado com 404.
+        self.client.force_login(self.aluno_b_user)
+        response = self.client.get(reverse("core:treino_detail", args=[self.treino_c.id]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_personal_com_trial_acessa_proprio_treino(self):
+        # Personal com trial válido, sem assinatura ACTIVE: acesso ao PROPRIO treino permitido.
+        self.client.force_login(self.personal_a)
+        PerfilDeTesteService().iniciar_trial(self.personal_a)
+
+        aluno_user = self.user_model.objects.create_user(
+            username="aluno-proprio@example.com",
+            email="aluno-proprio@example.com",
+            password="Senha123",
+            tipo_usuario="ALUNO",
+        )
+        aluno = Aluno.objects.create(
+            personal=self.personal_a,
+            user=aluno_user,
+            nome="Aluno Proprio",
+            data_nascimento="2000-01-01",
+        )
+        treino_proprio = Treino.objects.create(
+            aluno=aluno,
+            nome="Treino Proprio",
+            descricao="",
+        )
+
+        response = self.client.get(reverse("core:treino_detail", args=[treino_proprio.id]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_personal_com_assinatura_ativa_acessa_proprio_treino(self):
+        # Personal com assinatura ACTIVE: acesso ao PROPRIO treino permitido.
+        self.client.force_login(self.personal_a)
+        from core.models import Assinatura
+
+        Assinatura.objects.create(
+            usuario=self.personal_a,
+            status="ACTIVE",
+            plano="MENSAL",
+        )
+        aluno_user = self.user_model.objects.create_user(
+            username="aluno-proprio-ativa@example.com",
+            email="aluno-proprio-ativa@example.com",
+            password="Senha123",
+            tipo_usuario="ALUNO",
+        )
+        aluno = Aluno.objects.create(
+            personal=self.personal_a,
+            user=aluno_user,
+            nome="Aluno Proprio Ativa",
+            data_nascimento="2000-01-01",
+        )
+        treino = Treino.objects.create(
+            aluno=aluno,
+            nome="Treino Proprio Ativa",
+            descricao="",
+        )
+        response = self.client.get(reverse("core:treino_detail", args=[treino.id]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_personal_com_assinatura_ativa_nao_acessa_treino_outro(self):
+        # Personal com assinatura ACTIVE: protege o acesso ao treino de
+        # outro profissional (consulta de propriedade, não só o trial).
+        self.client.force_login(self.personal_a)
+        from core.models import Assinatura
+
+        Assinatura.objects.create(
+            usuario=self.personal_a,
+            status="ACTIVE",
+            plano="MENSAL",
+        )
+        response = self.client.get(reverse("core:treino_detail", args=[self.treino_b.id]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_personal_sem_trial_assinatura_nao_acessa_treino_outro(self):
+        # Personal sem trial/assinatura: 403 em treino_detail.
+        self.client.force_login(self.personal_a)
+        response = self.client.get(reverse("core:treino_detail", args=[self.treino_b.id]))
+        self.assertEqual(response.status_code, 403)
 
     def test_form_treino_lista_apenas_alunos_do_personal_logado(self):
         aluno_a_user = self.user_model.objects.create_user(

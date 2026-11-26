@@ -228,6 +228,15 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
 
 # =========================
+# TRIAL GRATUITO
+# =========================
+# Data oficial de lançamento do trial. Quando None, nenhum usuário é
+# elegível automaticamente para receber o trial. Quando definido, deve ser
+# um datetime timezone-aware (ex.: datetime(2026, 1, 1, 0, 0, tzinfo=timezone.utc)).
+# Não configurar esta chave implica: ninguém recebe trial automaticamente.
+FITFLIX_TRIAL_LAUNCH_AT = None
+
+# =========================
 # AUTH USER
 # =========================
 

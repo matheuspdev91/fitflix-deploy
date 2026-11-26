@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.http import Http404, JsonResponse
 from core.services.asaas.subscription_service import SubscriptionService
 from django.shortcuts import render, redirect, get_object_or_404
@@ -56,7 +57,7 @@ from .forms import (
 )
 
 from .email_service import enviar_email_acesso_aluno
-from .decorators import apenas_aluno, apenas_personal
+from .decorators import apenas_personal
 
 User = get_user_model()
 
@@ -147,9 +148,47 @@ def register_view(request):
             messages.error(request, "Usuário já existe")
             return render(request, "core/register.html")
 
-        user = User.objects.create_user(
-            username=username, email=email, password=password
+        # Import local: evita dependência de ordem de importação entre
+        # views, models e services.
+        from core.services.perfil_de_teste_service import (
+            ErroTrial,
+            PerfilDeTesteService,
+            TrialAindaNaoLiberadoError,
         )
+
+        servico_trial = PerfilDeTesteService()
+
+        try:
+            # A criação da conta e a concessão do trial formam uma única
+            # unidade transacional: se a concessão falhar, a conta é
+            # revertida e não fica parcialmente criada.
+            with transaction.atomic():
+                user = User.objects.create_user(
+                    username=username, email=email, password=password
+                )
+
+                # Fail-safe: sem lançamento oficial configurado, nenhum
+                # trial é concedido e o cadastro segue normalmente.
+                if servico_trial.lancamento_oficial() is not None:
+                    # O trial começa após a conclusão do cadastro e
+                    # expira exatamente 7 dias depois.
+                    try:
+                        servico_trial.conceder_trial_novo_cadastro(
+                            user, agora=servico_trial.instante_referencia()
+                        )
+                    except TrialAindaNaoLiberadoError:
+                        # Lançamento oficial ainda não ocorreu: o cadastro
+                        # é permitido e conclui normalmente, mas nenhum trial
+                        # é concedido antes da ativação oficial. O
+                        # profissional receberá o primeiro trial na
+                        # concessão oficial de contas antigas.
+                        pass
+        except ErroTrial:
+            messages.error(
+                request,
+                "Não foi possível concluir o cadastro. Tente novamente.",
+            )
+            return render(request, "core/register.html")
 
         login(request, user)
         return redirect("core:fitflix")
@@ -393,11 +432,38 @@ def fitflix(request):
 
 
 @login_required
-@apenas_aluno
 def painel_aluno(request, aluno_id):
-    aluno = get_object_or_404(Aluno, id=aluno_id, user=request.user)
+    """
+    Painel de treinos de um aluno.
+
+    Caminhos de acesso permitidos:
+    - PERSONAL: apenas alunos vinculados ao próprio profissional
+      (Aluno.personal == request.user);
+    - ALUNO: apenas o próprio painel (Aluno.user == request.user).
+
+    O acesso do ALUNO não depende do trial nem da assinatura do
+    profissional. ADMIN e demais perfis não recebem acesso implícito.
+    Alunos de outros profissionais (ou de outros alunos) resultam em 404,
+    evitando revelar a existência do registro.
+    """
+    user = request.user
+    tipo_usuario = getattr(user, "tipo_usuario", None)
+
+    if tipo_usuario not in ("PERSONAL", "ALUNO"):
+        raise Http404
+
+    if tipo_usuario == "PERSONAL":
+        aluno = get_object_or_404(
+            Aluno, id=aluno_id, personal=user
+        )
+    else:
+        aluno = get_object_or_404(
+            Aluno, id=aluno_id, user=user
+        )
+
     if aluno.personal_id is None:
         raise Http404
+
     treinos = Treino.objects.filter(aluno=aluno)
 
     return render(
@@ -1183,6 +1249,29 @@ def lista_exercicios(request, id):
 
 @login_required
 def treino_detail(request, treino_id):
+    user = request.user
+
+    # Controle explícito de perfil: somente PERSONAL e ALUNO podem prosseguir.
+    if user.tipo_usuario not in ("PERSONAL", "ALUNO"):
+        raise Http404
+
+    # PERSONAL: exige trial válido ou assinatura ACTIVE.
+    # Não depende do trial/assinatura do ALUNO; o credito eh feito na regra
+    # de propriedade abaixo (aluno__personal), preservando o isolamento.
+    if user.tipo_usuario == "PERSONAL":
+        from core.services.perfil_de_teste_service import PerfilDeTesteService
+
+        service = PerfilDeTesteService()
+        if not service.tem_acesso_trial(user):
+            from core.models import Assinatura
+
+            if not Assinatura.objects.filter(usuario=user, status="ACTIVE").exists():
+                raise PermissionDenied
+
+    # Aluno e Personal vêem apenas os treinos próprios.
+    # - Personal: alunos vinculados a ele (aluno__personal).
+    # - Aluno: propriedade do próprio usuário (aluno__user).
+    # Qualquer outro perfil (ADMIN etc.) já foi bloqueado acima com Http404.
     treino = get_object_or_404(
         Treino,
         Q(id=treino_id, aluno__personal=request.user)
@@ -1190,10 +1279,13 @@ def treino_detail(request, treino_id):
     )
 
     itens = treino.exercicios.select_related(
-        "exercicio", "variacao").order_by("ordem")
+        "exercicio", "variacao"
+    ).order_by("ordem")
 
     return render(
-        request, "core/treino_detail.html", {"treino": treino, "itens": itens}
+        request,
+        "core/treino_detail.html",
+        {"treino": treino, "itens": itens},
     )
 
 

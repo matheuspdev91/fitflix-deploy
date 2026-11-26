@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.db import models
 import uuid
+from django.utils import timezone
 
 
 # ========================
@@ -526,3 +527,60 @@ class PagamentoAsaas(models.Model):
 
     def __str__(self):
         return f"{self.asaas_payment_id} - {self.status}"
+
+
+# =======================
+# TESTE GRATUITO
+# =======================
+
+class PerfilDeTeste(models.Model):
+    STATUS_CHOICES = (
+        ("ATIVO", "Ativo"),
+        ("CONVERTIDO", "Convertido"),
+        ("ENCERRADO", "Encerrado"),
+        ("CANCELADO", "Cancelado"),
+    )
+
+    # Chave primária composta: cada Usuario possui, no máximo, um PerfilDeTeste
+    # durante toda a existência da conta. O historico e preservado.
+    usuario = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        primary_key=True,
+        related_name="perfil_de_teste",
+    )
+
+    # Unico estado de verdade do teste. Nenhum campo duplicado (nenhum 'ativo').
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="ATIVO",
+    )
+
+    # Prazo inicial do teste.
+    iniciado_em = models.DateTimeField()
+
+    # Prazo programado: iniciado_em + 7 dias. Usado para consultas e UI.
+    expira_em = models.DateTimeField()
+
+    # Encerramento efetivo (cancelamento, expiracao ou conversao). Nulo ate
+    # o teste ser encerrado.
+    finalizado_em = models.DateTimeField(null=True, blank=True)
+
+    # Conversao para assinatura paga, se ocorrer dentro do prazo.
+    convertido_em = models.DateTimeField(null=True, blank=True)
+
+    # Auditoria.
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Perfil de Teste"
+        verbose_name_plural = "Perfis de Teste"
+
+    def __str__(self):
+        return f"{self.usuario} - {self.get_status_display()}"
+
+    @property
+    def expirado(self):
+        return timezone.now() >= self.expira_em
