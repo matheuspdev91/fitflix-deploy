@@ -229,7 +229,7 @@ def criar_aluno_minimo(nome_aluno, personal):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def criar_aluno(request):
     if request.method == "POST":
         form = CriarAlunoForm(request.POST)
@@ -327,7 +327,7 @@ def detalhe_avaliacao(request, id):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def dashboard(request, id):
     avaliacao = get_object_or_404(AvaliacaoFisica, id=id, usuario=request.user)
 
@@ -398,7 +398,7 @@ def dashboard(request, id):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def fitflix(request):
     grupo_dict = defaultdict(list)
 
@@ -702,16 +702,13 @@ def criar_avaliacao_crianca(request):
 # =====================
 
 
-@login_required
-@apenas_personal
-
 # =====================
 # CRIAR EXERCÍCIO
 # =====================
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def criar_exercicio(request):
     # Tela refatorada para atuar como visualizador do catálogo injetado pela pipeline
     return render(
@@ -730,7 +727,7 @@ def criar_exercicio(request):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def exercicio_detalhe(request, id):
     exercicio = get_object_or_404(VideoExercicio, id=id)
     variacoes = exercicio.variacoes.all()
@@ -748,7 +745,7 @@ def exercicio_detalhe(request, id):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def criar_treino(request):
     if request.method == "POST":
         form = CriarTreinoForm(request.POST, user=request.user)
@@ -786,7 +783,7 @@ def criar_treino(request):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def editar_treino(request, treino_id):
     treino = get_object_or_404(
         Treino, id=treino_id, aluno__personal=request.user)
@@ -869,7 +866,7 @@ def editar_treino(request, treino_id):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def criar_divisao(request, treino_id):
     treino = get_object_or_404(
         Treino, id=treino_id, aluno__personal=request.user
@@ -892,7 +889,7 @@ def criar_divisao(request, treino_id):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def editar_divisao(request, treino_id, divisao_id):
     treino = get_object_or_404(
         Treino, id=treino_id, aluno__personal=request.user
@@ -921,7 +918,7 @@ def editar_divisao(request, treino_id, divisao_id):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 @require_POST
 def excluir_divisao(request, treino_id, divisao_id):
     treino = get_object_or_404(
@@ -936,7 +933,7 @@ def excluir_divisao(request, treino_id, divisao_id):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 @require_POST
 def reordenar_divisoes(request, treino_id):
     treino = get_object_or_404(
@@ -981,7 +978,7 @@ def reordenar_divisoes(request, treino_id):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def adicionar_exercicio(request, treino_id):
     treino = get_object_or_404(
         Treino, id=treino_id, aluno__personal=request.user
@@ -1156,7 +1153,7 @@ def adicionar_exercicio(request, treino_id):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def editar_exercicio(request, treino_id, exercicio_id):
     treino = get_object_or_404(
         Treino, id=treino_id, aluno__personal=request.user
@@ -1219,16 +1216,13 @@ def editar_exercicio(request, treino_id, exercicio_id):
     )
 
 
-@login_required
-
-
-# =====================
-# LISTA DE EXERCÍCIOS
-# =====================
+    # =====================
+    # LISTA DE EXERCÍCIOS
+    # =====================
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def lista_exercicios(request, id):
     grupo = get_object_or_404(GrupoMuscular, id=id)
     exercicios = grupo.exercicios.all()

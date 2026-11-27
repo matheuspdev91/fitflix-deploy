@@ -48,6 +48,7 @@ class CriarAlunoFormTests(TestCase):
         self.assertIn("email", form.errors)
 
 
+@override_settings(FITFLIX_TRIAL_LAUNCH_AT=FITFLIX_TRIAL_LAUNCH_AT_FIXED)
 class CriarAlunoViewTests(TestCase):
     def setUp(self):
         self.user_model = get_user_model()
@@ -56,6 +57,8 @@ class CriarAlunoViewTests(TestCase):
             email="professor@example.com",
             password="Senha123",
         )
+        from core.services.perfil_de_teste_service import PerfilDeTesteService
+        PerfilDeTesteService().iniciar_trial(self.professor)
 
     def test_view_exige_login(self):
         response = self.client.get(reverse("core:criar_aluno"))
@@ -183,6 +186,8 @@ class IsolamentoMultiTenantTests(TestCase):
             password="Senha123",
             date_joined=timezone.now(),
         )
+        from core.services.perfil_de_teste_service import PerfilDeTesteService
+        PerfilDeTesteService().iniciar_trial(self.personal_b)
 
         self.avaliacao_b = AvaliacaoFisica.objects.create(
             usuario=self.personal_b,
@@ -265,9 +270,35 @@ class IsolamentoMultiTenantTests(TestCase):
                 self.assertEqual(response.status_code, 404)
 
             # ALUNO: acesso ao PRÓPRIO treino depende da regra comercial do personal.
-            # Personal B não tem trial válido nem assinatura ACTIVE -> 403.
-            self.client.force_login(self.aluno_b_user)
-            response = self.client.get(reverse("core:treino_detail", args=[self.treino_b.id]))
+            # Cria personal SEM acesso comercial para testar 403.
+            user_model = get_user_model()
+            personal_sem_acesso = user_model.objects.create_user(
+                username="personal-sem-acesso@example.com",
+                email="personal-sem-acesso@example.com",
+                password="Senha123",
+                tipo_usuario="PERSONAL",
+                date_joined=timezone.now(),
+            )
+            aluno_sem_acesso_user = user_model.objects.create_user(
+                username="aluno-sem-acesso@example.com",
+                email="aluno-sem-acesso@example.com",
+                password="Senha123",
+                tipo_usuario="ALUNO",
+            )
+            aluno_sem_acesso = Aluno.objects.create(
+                personal=personal_sem_acesso,
+                user=aluno_sem_acesso_user,
+                nome="Aluno Sem Acesso",
+                data_nascimento="2000-01-01",
+            )
+            treino_sem_acesso = Treino.objects.create(
+                aluno=aluno_sem_acesso,
+                nome="Treino Sem Acesso",
+                descricao="",
+            )
+
+            self.client.force_login(aluno_sem_acesso_user)
+            response = self.client.get(reverse("core:treino_detail", args=[treino_sem_acesso.id]))
             self.assertEqual(response.status_code, 403)
 
             # ALUNO: acesso a treino de OUTRO aluno (mesmo personal) é bloqueado com 404.
@@ -428,8 +459,6 @@ class IsolamentoMultiTenantTests(TestCase):
         self.assertEqual(self.treino_b.nome, "Treino B")
 
     def test_get_nao_exclui_avaliacao(self):
-            from core.services.perfil_de_teste_service import PerfilDeTesteService
-            PerfilDeTesteService().iniciar_trial(self.personal_b)
             self.client.force_login(self.personal_b)
 
             response = self.client.get(
@@ -850,6 +879,7 @@ class IsolamentoMultiTenantTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "core/criar_treino.html")
 
+@override_settings(FITFLIX_TRIAL_LAUNCH_AT=FITFLIX_TRIAL_LAUNCH_AT_FIXED)
 class EditarTreinoDivisaoTests(TestCase):
     """Verifica a navegação e o contexto da view editar_treino com divisões."""
 
@@ -861,6 +891,8 @@ class EditarTreinoDivisaoTests(TestCase):
             password="Senha123",
             tipo_usuario="PERSONAL",
         )
+        from core.services.perfil_de_teste_service import PerfilDeTesteService
+        PerfilDeTesteService().iniciar_trial(self.personal)
         self.aluno_user = self.user_model.objects.create_user(
             username="aluno-divisao@example.com",
             email="aluno-divisao@example.com",
@@ -1029,6 +1061,7 @@ class EditarTreinoDivisaoTests(TestCase):
             transform=lambda e: e,
         )
 
+@override_settings(FITFLIX_TRIAL_LAUNCH_AT=FITFLIX_TRIAL_LAUNCH_AT_FIXED)
 class TestEditarTreinoSemDuplicacaoExercicio(TestCase):
     """Verifica que os conjuntos exercicios_treino e exercicios_sem_divisao são
     disjuntos, respeitando o comportamento esperado conforme divisão selecionada."""
@@ -1041,6 +1074,8 @@ class TestEditarTreinoSemDuplicacaoExercicio(TestCase):
             password="Senha123",
             tipo_usuario="PERSONAL",
         )
+        from core.services.perfil_de_teste_service import PerfilDeTesteService
+        PerfilDeTesteService().iniciar_trial(self.personal)
         self.aluno_user = self.user_model.objects.create_user(
             username="aluno-duplicacao@example.com",
             email="aluno-duplicacao@example.com",
@@ -1253,6 +1288,7 @@ class LoginNextFlowTests(TestCase):
         self.assertIn("Email ou senha inválidos", mensagens)
 
 
+@override_settings(FITFLIX_TRIAL_LAUNCH_AT=FITFLIX_TRIAL_LAUNCH_AT_FIXED)
 class TreinoSharingFlowTests(TestCase):
     def setUp(self):
         self.user_model = get_user_model()
@@ -1262,6 +1298,8 @@ class TreinoSharingFlowTests(TestCase):
             password="Senha123",
             tipo_usuario="PERSONAL",
         )
+        from core.services.perfil_de_teste_service import PerfilDeTesteService
+        PerfilDeTesteService().iniciar_trial(self.personal)
         self.aluno_user = self.user_model.objects.create_user(
             username="aluno@example.com",
             email="aluno@example.com",
@@ -1312,6 +1350,7 @@ class TreinoSharingFlowTests(TestCase):
         self.assertIn("https://wa.me", conteudo)
 
 
+@override_settings(FITFLIX_TRIAL_LAUNCH_AT=FITFLIX_TRIAL_LAUNCH_AT_FIXED)
 class TestDivisaoCrudTests(TestCase):
     """Verifica o CRUD completo de divisões: criar, editar e excluir."""
 
@@ -1323,6 +1362,8 @@ class TestDivisaoCrudTests(TestCase):
             password="Senha123",
             tipo_usuario="PERSONAL",
         )
+        from core.services.perfil_de_teste_service import PerfilDeTesteService
+        PerfilDeTesteService().iniciar_trial(self.personal)
         self.aluno_user = self.user_model.objects.create_user(
             username="aluno-crud@example.com",
             email="aluno-crud@example.com",
@@ -1398,6 +1439,7 @@ class TestDivisaoCrudTests(TestCase):
         self.assertIn("nome", form.errors)
 
 
+@override_settings(FITFLIX_TRIAL_LAUNCH_AT=FITFLIX_TRIAL_LAUNCH_AT_FIXED)
 class TestAdicionarExercicioDivisaoTests(TestCase):
     """Verifica o fluxo de adicionar exercício a uma divisão e a restrição de
     associar exercício a divisão de outro treino."""
@@ -1410,6 +1452,8 @@ class TestAdicionarExercicioDivisaoTests(TestCase):
             password="Senha123",
             tipo_usuario="PERSONAL",
         )
+        from core.services.perfil_de_teste_service import PerfilDeTesteService
+        PerfilDeTesteService().iniciar_trial(self.personal)
         self.aluno = Aluno.objects.create(
             personal=self.personal,
             user=self.user_model.objects.create_user(
