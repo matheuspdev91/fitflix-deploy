@@ -135,7 +135,7 @@ class TreinoDetailAccessControlTests(TestCase):
     def test_aluno_acessa_proprio_treino_mesmo_sem_assinatura(self):
         self._logar(self.aluno_a_user)
         response = self.client.get(reverse("core:treino_detail", args=[self.treino_owns.id]))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 403)
 
     def test_aluno_acessa_proprio_treino_mesmo_trial_profissional_expirado(self):
         perfil = PerfilDeTesteService().iniciar_trial(self.personal_a)
@@ -144,12 +144,79 @@ class TreinoDetailAccessControlTests(TestCase):
 
         self._logar(self.aluno_a_user)
         response = self.client.get(reverse("core:treino_detail", args=[self.treino_owns.id]))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 403)
 
     def test_aluno_nao_acessa_treino_de_outro_aluno(self):
         # Aluno A tenta acessar o treino de Aluno B -> deve retornar 404.
         self._logar(self.aluno_a_user)
         response = self.client.get(reverse("core:treino_detail", args=[self.treino_outro_aluno.id]))
+        self.assertEqual(response.status_code, 404)
+
+    # PERSONAL — sem trial e sem assinatura -> bloqueado
+    def test_personal_sem_trial_e_sem_assinatura_nao_acessa_treino(self):
+        User = get_user_model()
+        personal_sem_acesso = User.objects.create_user(
+            username="personal-sem-acesso-treino@example.com",
+            email="personal-sem-acesso-treino@example.com",
+            password="SenhaTeste123",
+            tipo_usuario="PERSONAL",
+            is_active=True,
+        )
+        self._logar(personal_sem_acesso)
+
+        response = self.client.get(
+            reverse("core:treino_detail", args=[self.treino_owns.id])
+        )
+
+        self.assertEqual(response.status_code, 403)
+
+    # PERSONAL — assinatura PENDING sem trial -> bloqueado
+    def test_personal_assinatura_pending_sem_trial_nao_acessa_treino(self):
+        User = get_user_model()
+        personal_pending = User.objects.create_user(
+            username="personal-pending-treino@example.com",
+            email="personal-pending-treino@example.com",
+            password="SenhaTeste123",
+            tipo_usuario="PERSONAL",
+            is_active=True,
+        )
+        Assinatura.objects.create(
+            usuario=personal_pending,
+            asaas_subscription_id="sub-pending-treino",
+            plano="MENSAL",
+            status="PENDING",
+        )
+        self._logar(personal_pending)
+
+        response = self.client.get(
+            reverse("core:treino_detail", args=[self.treino_owns.id])
+        )
+
+        self.assertEqual(response.status_code, 403)
+
+    # ALUNO sem personal_id vinculado -> 404
+    def test_aluno_sem_personal_id_nao_acessa_treino(self):
+        User = get_user_model()
+        aluno_sem_personal_user = User.objects.create_user(
+            username="aluno-sem-personal-treino@example.com",
+            email="aluno-sem-personal-treino@example.com",
+            password="SenhaTeste123",
+            tipo_usuario="ALUNO",
+            is_active=True,
+        )
+        aluno_sem_personal = Aluno.objects.create(
+            personal=None,
+            user=aluno_sem_personal_user,
+            nome="Sem Personal",
+            data_nascimento="2000-01-01",
+        )
+
+        self._logar(aluno_sem_personal_user)
+
+        response = self.client.get(
+            reverse("core:treino_detail", args=[self.treino_owns.id])
+        )
+
         self.assertEqual(response.status_code, 404)
 
     def test_usuario_nao_autenticado_redireciona_para_login(self):
@@ -167,4 +234,64 @@ class TreinoDetailAccessControlTests(TestCase):
         )
         self._logar(admin)
         response = self.client.get(reverse("core:treino_detail", args=[self.treino_owns.id]))
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 403)
+
+    # ALUNO — personal com acesso comercial
+    def test_aluno_com_personal_trial_valido_acessa_proprio_treino(self):
+        PerfilDeTesteService().iniciar_trial(self.personal_a)
+
+        self._logar(self.aluno_a_user)
+        response = self.client.get(reverse("core:treino_detail", args=[self.treino_owns.id]))
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_aluno_com_personal_assinatura_active_acessa_proprio_treino(self):
+        Assinatura.objects.create(
+            usuario=self.personal_a,
+            asaas_subscription_id="sub-aluno-03622",
+            plano="MENSAL",
+            status="ACTIVE",
+        )
+
+        self._logar(self.aluno_a_user)
+        response = self.client.get(reverse("core:treino_detail", args=[self.treino_owns.id]))
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_aluno_com_personal_assinatura_pending_nao_acessa_proprio_treino(self):
+        # Personal A sem trial; apenas assinatura PENDING -> não tem acesso comercial.
+        Assinatura.objects.create(
+            usuario=self.personal_a,
+            asaas_subscription_id="sub-pending-03622",
+            plano="MENSAL",
+            status="PENDING",
+        )
+
+        self._logar(self.aluno_a_user)
+        response = self.client.get(reverse("core:treino_detail", args=[self.treino_owns.id]))
+
+        self.assertEqual(response.status_code, 403)
+
+    def test_aluno_recupera_acesso_apos_regularizacao_comercial(self):
+        # Personal A: inicia trial e o expira.
+        PerfilDeTesteService().iniciar_trial(self.personal_a)
+        perfil = PerfilDeTeste.objects.get(usuario=self.personal_a)
+        perfil.expira_em = self.now - timedelta(hours=1)
+        perfil.save(update_fields=["expira_em"])
+
+        # ALUNO não consegue visualizar o treino enquanto personal está sem acesso comercial.
+        self._logar(self.aluno_a_user)
+        response = self.client.get(reverse("core:treino_detail", args=[self.treino_owns.id]))
+        self.assertEqual(response.status_code, 403)
+
+        # Regularização: assinatura ACTIVE para o personal.
+        Assinatura.objects.create(
+            usuario=self.personal_a,
+            asaas_subscription_id="sub-regularizado-03622",
+            plano="MENSAL",
+            status="ACTIVE",
+        )
+
+        # ALUNO recupera o acesso ao treino.
+        response = self.client.get(reverse("core:treino_detail", args=[self.treino_owns.id]))
+        self.assertEqual(response.status_code, 200)

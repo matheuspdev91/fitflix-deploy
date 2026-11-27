@@ -57,7 +57,7 @@ from .forms import (
 )
 
 from .email_service import enviar_email_acesso_aluno
-from .decorators import apenas_personal
+from .decorators import apenas_personal, acesso_profissional_ou_aluno, _profissional_tem_acesso_comercial, precisa_acesso_profissional
 
 User = get_user_model()
 
@@ -280,7 +280,7 @@ def criar_aluno(request):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def avaliacoes(request):
 
     avaliacoes = AvaliacaoFisica.objects.filter(
@@ -300,7 +300,7 @@ def avaliacoes(request):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def detalhe_avaliacao(request, id):
     avaliacao = get_object_or_404(AvaliacaoFisica, id=id, usuario=request.user)
 
@@ -432,6 +432,7 @@ def fitflix(request):
 
 
 @login_required
+@acesso_profissional_ou_aluno
 def painel_aluno(request, aluno_id):
     """
     Painel de treinos de um aluno.
@@ -448,9 +449,6 @@ def painel_aluno(request, aluno_id):
     """
     user = request.user
     tipo_usuario = getattr(user, "tipo_usuario", None)
-
-    if tipo_usuario not in ("PERSONAL", "ALUNO"):
-        raise Http404
 
     if tipo_usuario == "PERSONAL":
         aluno = get_object_or_404(
@@ -517,7 +515,7 @@ def calcular_composicao(avaliacao):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def criar_avaliacao(request):
     if request.method == "POST":
         avaliacao_form = AvaliacaoFisicaForm(request.POST, user=request.user)
@@ -568,7 +566,7 @@ def criar_avaliacao(request):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 @require_POST
 def excluir_avaliacao(request, id):
     avaliacao = get_object_or_404(AvaliacaoFisica, id=id, usuario=request.user)
@@ -582,7 +580,7 @@ def excluir_avaliacao(request, id):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def editar_avaliacao(request, id):
     avaliacao = get_object_or_404(AvaliacaoFisica, id=id, usuario=request.user)
 
@@ -606,7 +604,7 @@ def editar_avaliacao(request, id):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def escolher_tipo(request):
     return render(request, "core/escolher_tipo.html")
 
@@ -617,7 +615,7 @@ def escolher_tipo(request):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def criar_avaliacao_idoso(request):
     avaliacao_form = AvaliacaoFisicaForm(request.POST or None, user=request.user)
     circ_form = CircunferenciaIdosoForm(request.POST or None)
@@ -664,7 +662,7 @@ def criar_avaliacao_idoso(request):
 
 
 @login_required
-@apenas_personal
+@precisa_acesso_profissional
 def criar_avaliacao_crianca(request):
     avaliacao_form = AvaliacaoFisicaForm(request.POST or None, user=request.user)
     form = AvaliacaoCriancaForm(request.POST or None)
@@ -1248,35 +1246,34 @@ def lista_exercicios(request, id):
 
 
 @login_required
+@acesso_profissional_ou_aluno
 def treino_detail(request, treino_id):
-    user = request.user
-
-    # Controle explícito de perfil: somente PERSONAL e ALUNO podem prosseguir.
-    if user.tipo_usuario not in ("PERSONAL", "ALUNO"):
-        raise Http404
-
-    # PERSONAL: exige trial válido ou assinatura ACTIVE.
-    # Não depende do trial/assinatura do ALUNO; o credito eh feito na regra
-    # de propriedade abaixo (aluno__personal), preservando o isolamento.
-    if user.tipo_usuario == "PERSONAL":
-        from core.services.perfil_de_teste_service import PerfilDeTesteService
-
-        service = PerfilDeTesteService()
-        if not service.tem_acesso_trial(user):
-            from core.models import Assinatura
-
-            if not Assinatura.objects.filter(usuario=user, status="ACTIVE").exists():
-                raise PermissionDenied
-
-    # Aluno e Personal vêem apenas os treinos próprios.
-    # - Personal: alunos vinculados a ele (aluno__personal).
-    # - Aluno: propriedade do próprio usuário (aluno__user).
-    # Qualquer outro perfil (ADMIN etc.) já foi bloqueado acima com Http404.
+    # O decorator @acesso_profissional_ou_aluno garante que apenas
+    # PERSONAL com acesso comercial válido (trial ATIVO ou assinatura ACTIVE)
+    # ou ALUNO podem prosseguir; ADMIN/OUTROS são bloqueados (PermissionDenied).
+    #
+    # A validação de propriedade segue abaixo:
+    # - PERSONAL vê apenas treinos de seus próprios alunos (aluno__personal);
+    # - ALUNO vê apenas treinos vinculados à sua conta (aluno__user).
+    # - Aluno/profissional de outro é bloqueado com 404.
     treino = get_object_or_404(
         Treino,
         Q(id=treino_id, aluno__personal=request.user)
         | Q(id=treino_id, aluno__user=request.user),
     )
+
+    aluno = treino.aluno
+    # PERSONAL já teve o acesso comercial validado pelo decorator;
+    # ALUNO deve verificar o acesso comercial do personal vinculado.
+    if aluno.user == request.user:
+        # O aluno deve possuir vínculo válido com um personal.
+        if aluno.personal is None:
+            raise Http404
+
+        # O personal responsável precisa ter trial válido ou assinatura ACTIVE.
+        # Caso contrário, nega a visualização do treino (403).
+        if not _profissional_tem_acesso_comercial(aluno.personal):
+            raise PermissionDenied
 
     itens = treino.exercicios.select_related(
         "exercicio", "variacao"

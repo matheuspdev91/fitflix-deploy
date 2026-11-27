@@ -175,6 +175,8 @@ class IsolamentoMultiTenantTests(TestCase):
             password="Senha123",
             date_joined=timezone.now(),
         )
+        from core.services.perfil_de_teste_service import PerfilDeTesteService
+        PerfilDeTesteService().iniciar_trial(self.personal_a)
         self.personal_b = self.user_model.objects.create_user(
             username="personal-b@example.com",
             email="personal-b@example.com",
@@ -246,60 +248,58 @@ class IsolamentoMultiTenantTests(TestCase):
                 self.assertEqual(response.status_code, 404)
 
     def test_treino_de_outro_personal_retorna_404(self):
-        # Personal com trial válido, sem assinatura ACTIVE: 404 em treino_detail.
-        from core.services.perfil_de_teste_service import PerfilDeTesteService
-        self.client.force_login(self.personal_a)
-        PerfilDeTesteService().iniciar_trial(self.personal_a)
-        response = self.client.get(reverse("core:treino_detail", args=[self.treino_b.id]))
-        self.assertEqual(response.status_code, 404)
-
-        # Outras rotas mantêm a proteção de 404 (editar_treino, adicionar_exercicio, painel_aluno).
-        self.client.force_login(self.personal_a)
-        urls = [
-            reverse("core:editar_treino", args=[self.treino_b.id]),
-            reverse("core:adicionar_exercicio", args=[self.treino_b.id]),
-            reverse("core:painel_aluno", args=[self.aluno_b.id]),
-        ]
-        for url in urls:
-            response = self.client.get(url)
+            # Personal com trial válido, sem assinatura ACTIVE: 404 em treino_detail.
+            self.client.force_login(self.personal_a)
+            response = self.client.get(reverse("core:treino_detail", args=[self.treino_b.id]))
             self.assertEqual(response.status_code, 404)
 
-        # Aluno: acesso ao PRÓPRIO treino permanece liberado,
-        # independente do trial ou assinatura do personal.
-        self.client.force_login(self.aluno_b_user)
-        response = self.client.get(reverse("core:treino_detail", args=[self.treino_b.id]))
-        self.assertEqual(response.status_code, 200)
+            # Outras rotas mantêm a proteção de 404 (editar_treino, adicionar_exercicio, painel_aluno).
+            self.client.force_login(self.personal_a)
+            urls = [
+                reverse("core:editar_treino", args=[self.treino_b.id]),
+                reverse("core:adicionar_exercicio", args=[self.treino_b.id]),
+                reverse("core:painel_aluno", args=[self.aluno_b.id]),
+            ]
+            for url in urls:
+                response = self.client.get(url)
+                self.assertEqual(response.status_code, 404)
 
-        # Aluno: acesso a treino de OUTRO aluno (mesmo personal) é bloqueado com 404.
-        self.client.force_login(self.aluno_b_user)
-        response = self.client.get(reverse("core:treino_detail", args=[self.treino_c.id]))
-        self.assertEqual(response.status_code, 404)
+            # ALUNO: acesso ao PRÓPRIO treino depende da regra comercial do personal.
+            # Personal B não tem trial válido nem assinatura ACTIVE -> 403.
+            self.client.force_login(self.aluno_b_user)
+            response = self.client.get(reverse("core:treino_detail", args=[self.treino_b.id]))
+            self.assertEqual(response.status_code, 403)
+
+            # ALUNO: acesso a treino de OUTRO aluno (mesmo personal) é bloqueado com 404.
+            self.client.force_login(self.aluno_b_user)
+            response = self.client.get(reverse("core:treino_detail", args=[self.treino_c.id]))
+            self.assertEqual(response.status_code, 404)
 
     def test_personal_com_trial_acessa_proprio_treino(self):
-        # Personal com trial válido, sem assinatura ACTIVE: acesso ao PROPRIO treino permitido.
-        self.client.force_login(self.personal_a)
-        PerfilDeTesteService().iniciar_trial(self.personal_a)
+            # Personal com trial válido, sem assinatura ACTIVE: acesso ao PROPRIO treino permitido.
+            # personal_a já tem trial do setUp()
+            self.client.force_login(self.personal_a)
 
-        aluno_user = self.user_model.objects.create_user(
-            username="aluno-proprio@example.com",
-            email="aluno-proprio@example.com",
-            password="Senha123",
-            tipo_usuario="ALUNO",
-        )
-        aluno = Aluno.objects.create(
-            personal=self.personal_a,
-            user=aluno_user,
-            nome="Aluno Proprio",
-            data_nascimento="2000-01-01",
-        )
-        treino_proprio = Treino.objects.create(
-            aluno=aluno,
-            nome="Treino Proprio",
-            descricao="",
-        )
+            aluno_user = self.user_model.objects.create_user(
+                username="aluno-proprio@example.com",
+                email="aluno-proprio@example.com",
+                password="Senha123",
+                tipo_usuario="ALUNO",
+            )
+            aluno = Aluno.objects.create(
+                personal=self.personal_a,
+                user=aluno_user,
+                nome="Aluno Proprio",
+                data_nascimento="2000-01-01",
+            )
+            treino_proprio = Treino.objects.create(
+                aluno=aluno,
+                nome="Treino Proprio",
+                descricao="",
+            )
 
-        response = self.client.get(reverse("core:treino_detail", args=[treino_proprio.id]))
-        self.assertEqual(response.status_code, 200)
+            response = self.client.get(reverse("core:treino_detail", args=[treino_proprio.id]))
+            self.assertEqual(response.status_code, 200)
 
     def test_personal_com_assinatura_ativa_acessa_proprio_treino(self):
         # Personal com assinatura ACTIVE: acesso ao PROPRIO treino permitido.
@@ -346,10 +346,21 @@ class IsolamentoMultiTenantTests(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_personal_sem_trial_assinatura_nao_acessa_treino_outro(self):
-        # Personal sem trial/assinatura: 403 em treino_detail.
-        self.client.force_login(self.personal_a)
-        response = self.client.get(reverse("core:treino_detail", args=[self.treino_b.id]))
-        self.assertEqual(response.status_code, 403)
+            # Personal sem trial/assinatura: 403 em treino_detail.
+            user_model = get_user_model()
+            personal_sem_acesso = user_model.objects.create_user(
+                username="personal-sem-acesso-treino@example.com",
+                email="personal-sem-acesso-treino@example.com",
+                password="Senha123",
+                date_joined=timezone.now(),
+            )
+            self.client.force_login(personal_sem_acesso)
+
+            response = self.client.get(
+                reverse("core:treino_detail", args=[self.treino_b.id])
+            )
+
+            self.assertEqual(response.status_code, 403)
 
     def test_form_treino_lista_apenas_alunos_do_personal_logado(self):
         aluno_a_user = self.user_model.objects.create_user(
@@ -417,14 +428,16 @@ class IsolamentoMultiTenantTests(TestCase):
         self.assertEqual(self.treino_b.nome, "Treino B")
 
     def test_get_nao_exclui_avaliacao(self):
-        self.client.force_login(self.personal_b)
+            from core.services.perfil_de_teste_service import PerfilDeTesteService
+            PerfilDeTesteService().iniciar_trial(self.personal_b)
+            self.client.force_login(self.personal_b)
 
-        response = self.client.get(
-            reverse("core:excluir_avaliacao", args=[self.avaliacao_b.id])
-        )
+            response = self.client.get(
+                reverse("core:excluir_avaliacao", args=[self.avaliacao_b.id])
+            )
 
-        self.assertEqual(response.status_code, 405)
-        self.assertTrue(AvaliacaoFisica.objects.filter(pk=self.avaliacao_b.pk).exists())
+            self.assertEqual(response.status_code, 405)
+            self.assertTrue(AvaliacaoFisica.objects.filter(pk=self.avaliacao_b.pk).exists())
 
     def test_token_inexistente_nao_revela_treino(self):
         self.client.force_login(self.personal_a)
